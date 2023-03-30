@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -13,15 +12,16 @@ class Palace extends StatefulWidget {
 class _PalaceState extends State<Palace> {
   final TextEditingController stemController = TextEditingController();
   final TextEditingController rootController = TextEditingController();
-  StemLabel? selectedStem;
-  RootLabel? selectedRoot;
 
+  SelectedNotifier selected = SelectedNotifier();
   ResultNotifier result = ResultNotifier();
 
   @override
   void dispose() {
     stemController.dispose();
     rootController.dispose();
+    selected.dispose();
+    result.dispose();
     super.dispose();
   }
 
@@ -56,10 +56,7 @@ class _PalaceState extends State<Palace> {
                   label: const Text('天干'),
                   dropdownMenuEntries: stemEntries,
                   onSelected: (StemLabel? stem) {
-                    setState(() {
-                      selectedStem = stem;
-                      // getPalace(stem!, selectedRoot!);
-                    });
+                    selected.selectedStem.value = stem;
                   },
                 ),
                 const SizedBox(width: 20),
@@ -73,26 +70,23 @@ class _PalaceState extends State<Palace> {
                   // inputDecorationTheme:
                   //     const InputDecorationTheme(filled: true),
                   onSelected: (RootLabel? root) {
-                    setState(() {
-                      selectedRoot = root;
-                      // getPalace(selectedStem!, root!);
-                    });
+                    selected.selectedRoot.value = root;
                   },
                 ),
+                const SizedBox(width: 20),
+                ValueListenableBuilder(
+                    valueListenable: selected.selectedStem,
+                    builder: (builder, stem, child) {
+                      return ValueListenableBuilder(
+                          valueListenable: selected.selectedRoot,
+                          builder: (context, root, child) {
+                            return Text(getPalace(stem!, root!));
+                          });
+                    }),
               ],
             ),
           ),
-          if (selectedStem != null && selectedRoot != null)
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                    '${selectedStem?.label} ${selectedRoot?.label}: ${getPalace(selectedStem!, selectedRoot!)}'),
-              ],
-            )
-          else
-            const Text('Please select a color and an icon.'),
-          // training(result),
+          training(result),
         ],
       )),
     );
@@ -113,10 +107,11 @@ class _PalaceState extends State<Palace> {
   Widget training(result) {
     var rng = Random();
     final entries = []; // List<Map<String, dynamic>>();
-    for (int i = 0; i < 1; ++i) {
+    for (int i = 0; i < 4; ++i) {
       entries.add({
         'stem': StemLabel.values[rng.nextInt(10)],
-        'root': RootLabel.values[rng.nextInt(10)]
+        'root': RootLabel.values[rng.nextInt(10)],
+        'result': ResultNotifier(),
       });
     }
     final List<DropdownMenuEntry<PalaceLabel>> palaceEntries =
@@ -125,8 +120,6 @@ class _PalaceState extends State<Palace> {
       palaceEntries.add(
           DropdownMenuEntry<PalaceLabel>(value: palace, label: palace.label));
     }
-
-    
 
     return Column(children: [
       for (final entry in entries)
@@ -144,19 +137,19 @@ class _PalaceState extends State<Palace> {
               //     const InputDecorationTheme(filled: true),
               onSelected: (PalaceLabel? palace) {
                 // setState(() {
-                result.result = ValueNotifier(verify(entry, palace));
+                entry['result'].result.value = verify(entry, palace);
                 // });
               },
             ),
             ValueListenableBuilder<bool?>(
-                valueListenable: result.result,
+                valueListenable: entry['result'].result,
                 builder: (context, result, _) {
                   return result != null
                       ? result
                           ? const Icon(Icons.check, color: Colors.green)
                           : const Icon(Icons.close, color: Colors.red)
                       : const SizedBox();
-                })
+                }),
           ],
         )
     ]);
@@ -229,5 +222,12 @@ enum PalaceLabel {
 }
 
 class ResultNotifier with ChangeNotifier {
-  ValueNotifier<bool?> result = ValueNotifier(null);
+  ValueNotifier<bool?> result = ValueNotifier<bool?>(null);
+}
+
+class SelectedNotifier with ChangeNotifier {
+  ValueNotifier<StemLabel?> selectedStem =
+      ValueNotifier<StemLabel?>(StemLabel.jia);
+  ValueNotifier<RootLabel?> selectedRoot =
+      ValueNotifier<RootLabel?>(RootLabel.zi);
 }
