@@ -49,9 +49,9 @@ class _PalaceState extends State<Palace> {
       drawer: const NavigationDrawerBuilder(),
       body: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Column(
-                  children: <Widget>[
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
+          children: <Widget>[
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -65,6 +65,7 @@ class _PalaceState extends State<Palace> {
                     labelText: '天干',
                     border: OutlineInputBorder(),
                     constraints: BoxConstraints(maxWidth: 100),
+                    isDense: true
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -78,6 +79,7 @@ class _PalaceState extends State<Palace> {
                     labelText: '地支',
                     border: OutlineInputBorder(),
                     constraints: BoxConstraints(maxWidth: 100),
+                    isDense: true
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -92,7 +94,9 @@ class _PalaceState extends State<Palace> {
                               decoration: InputDecoration(
                                 labelText: getPalace(stem!, root!),
                                 border: const OutlineInputBorder(),
-                                constraints: const BoxConstraints(maxWidth: 100),
+                                constraints:
+                                    const BoxConstraints(maxWidth: 100),
+                                    isDense: true
                               ),
                             );
                           });
@@ -100,10 +104,17 @@ class _PalaceState extends State<Palace> {
               ],
             ),
             const SizedBox(height: 12),
+            FilledButton(
+              onPressed: () {
+                setState(() {
+                });
+              },
+               child: const Text('刷新题目')
+            ),
             training(result),
-                  ],
-                ),
-          )),
+          ],
+        ),
+      )),
     );
   }
 
@@ -122,7 +133,7 @@ class _PalaceState extends State<Palace> {
   Widget training(result) {
     var rng = Random();
     final entries = []; // List<Map<String, dynamic>>();
-    for (int i = 0; i < 8; ++i) {
+    for (int i = 0; i < 5; ++i) {
       entries.add({
         'stem': StemLabel.values[rng.nextInt(10)],
         'root': RootLabel.values[rng.nextInt(10)],
@@ -132,8 +143,8 @@ class _PalaceState extends State<Palace> {
     final List<DropdownMenuItem<PalaceLabel>> palaceEntries =
         <DropdownMenuItem<PalaceLabel>>[];
     for (final PalaceLabel palace in PalaceLabel.values) {
-      palaceEntries.add(
-          DropdownMenuItem<PalaceLabel>(value: palace, child: Text(palace.label)));
+      palaceEntries.add(DropdownMenuItem<PalaceLabel>(
+          value: palace, child: Text(palace.label)));
     }
 
     return Column(children: [
@@ -159,10 +170,11 @@ class _PalaceState extends State<Palace> {
                   // });
                 },
                 decoration: const InputDecoration(
-                      labelText: '长生宫',
-                      border: OutlineInputBorder(),
-                      constraints: BoxConstraints(maxWidth: 100),
-                    ),
+                  labelText: '长生宫',
+                  border: OutlineInputBorder(),
+                  constraints: BoxConstraints(maxWidth: 100),
+                  isDense: true
+                ),
               ),
               ValueListenableBuilder<bool?>(
                   valueListenable: entry['result'].result,
