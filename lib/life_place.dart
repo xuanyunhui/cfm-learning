@@ -90,7 +90,7 @@ class _PalaceState extends State<Palace> {
                           valueListenable: selected.selectedRoot,
                           builder: (context, root, child) {
                             return TextField(
-                              enabled: false,
+                              readOnly: true,
                               decoration: InputDecoration(
                                 labelText: getPalace(stem!, root!),
                                 border: const OutlineInputBorder(),

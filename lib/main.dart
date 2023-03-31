@@ -1,3 +1,4 @@
+import 'package:cfm_learning/qimen.dart';
 import 'package:flutter/material.dart';
 
 import 'drawerbuilder.dart';
@@ -8,13 +9,11 @@ void main() {
 }
 
 class Routes {
-  /// Use [MyHomePage]
-  /// to check all package [GroupingType]'s in one place
   static const homePage = '/';
 
-  /// Use [SearchPage]
-  /// to check all package style's configuration
   static const palacePage = '/lifepalace';
+
+  static const qimenPage = '/qimen';
 }
 
 class MyApp extends StatelessWidget {
@@ -31,6 +30,7 @@ class MyApp extends StatelessWidget {
       routes: {
         Routes.homePage: (context) => const MyHomePage(title: 'Home Page'),
         Routes.palacePage: (context) => const Palace(),
+        Routes.qimenPage: (context) => QiMenContent(),
       },
     );
   }

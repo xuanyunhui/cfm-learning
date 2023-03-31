@@ -36,6 +36,11 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   lunar: ^1.3.2
+  qimen:
+    git: 
+      url: https://github.com/bestheme/qimen-dart.git
+      ref: a375a92d30849209f20e63a27de349be1885b052
+  intl: ^0.18.0
 
 dev_dependencies:
   flutter_test:

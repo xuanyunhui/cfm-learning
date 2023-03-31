@@ -59,6 +59,16 @@ class NavigationDrawerBuilder extends StatelessWidget {
               const Divider(color: Colors.black54),
               ListTile(
                   leading: const Icon(Icons.settings_outlined),
+                  title: const Text('奇门'),
+                  onTap: () {
+                    //close navigation drawer before
+                    Navigator.pop(context);
+
+                    Navigator.pushReplacementNamed(context, '/qimen');
+                  }),
+              const Divider(color: Colors.black54),
+              ListTile(
+                  leading: const Icon(Icons.settings_outlined),
                   title: const Text('长生宫'),
                   onTap: () {
                     //close navigation drawer before
