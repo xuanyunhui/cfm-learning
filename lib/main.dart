@@ -1,8 +1,20 @@
-import 'package:cfm_learning/life_place.dart';
 import 'package:flutter/material.dart';
+
+import 'drawerbuilder.dart';
+import 'life_place.dart';
 
 void main() {
   runApp(const MyApp());
+}
+
+class Routes {
+  /// Use [MyHomePage]
+  /// to check all package [GroupingType]'s in one place
+  static const homePage = '/';
+
+  /// Use [SearchPage]
+  /// to check all package style's configuration
+  static const palacePage = '/lifepalace';
 }
 
 class MyApp extends StatelessWidget {
@@ -14,7 +26,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(useMaterial3: true, colorSchemeSeed: Colors.green),
-      home: const Palace(),
+      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      initialRoute: Routes.homePage,
+      routes: {
+        Routes.homePage: (context) => const MyHomePage(title: 'Home Page'),
+        Routes.palacePage: (context) => const Palace(),
+      },
     );
   }
 }
@@ -115,30 +132,7 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
-      drawer: NavigationDrawer(
-        onDestinationSelected: handleScreenChanged,
-        selectedIndex: screenIndex,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.fromLTRB(28, 16, 16, 10),
-            child: Text(
-              'Header',
-              style: Theme.of(context).textTheme.titleSmall,
-            ),
-          ),
-          ...destinations.map((ExampleDestination destination) {
-            return NavigationDrawerDestination(
-              label: Text(destination.label),
-              icon: destination.icon,
-              selectedIcon: destination.selectedIcon,
-            );
-          }),
-          const Padding(
-            padding: EdgeInsets.fromLTRB(28, 16, 28, 10),
-            child: Divider(),
-          ),
-        ],
-      ),
+      drawer: const NavigationDrawerBuilder(),
     );
   }
 }

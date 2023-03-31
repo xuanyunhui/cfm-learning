@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+import 'drawerbuilder.dart';
+
 class Palace extends StatefulWidget {
   const Palace({super.key});
 
@@ -10,16 +12,14 @@ class Palace extends StatefulWidget {
 }
 
 class _PalaceState extends State<Palace> {
-  final TextEditingController stemController = TextEditingController();
-  final TextEditingController rootController = TextEditingController();
+  final TextEditingController palaceController = TextEditingController();
 
   SelectedNotifier selected = SelectedNotifier();
   ResultNotifier result = ResultNotifier();
 
   @override
   void dispose() {
-    stemController.dispose();
-    rootController.dispose();
+    palaceController.dispose();
     selected.dispose();
     result.dispose();
     super.dispose();
@@ -27,68 +27,83 @@ class _PalaceState extends State<Palace> {
 
   @override
   Widget build(BuildContext context) {
-    final List<DropdownMenuEntry<StemLabel>> stemEntries =
-        <DropdownMenuEntry<StemLabel>>[];
+    final List<DropdownMenuItem<StemLabel>> stemEntries =
+        <DropdownMenuItem<StemLabel>>[];
     for (final StemLabel stem in StemLabel.values) {
-      stemEntries
-          .add(DropdownMenuEntry<StemLabel>(value: stem, label: stem.label));
+      stemEntries.add(
+          DropdownMenuItem<StemLabel>(value: stem, child: Text(stem.label)));
     }
 
-    final List<DropdownMenuEntry<RootLabel>> rootEntries =
-        <DropdownMenuEntry<RootLabel>>[];
+    final List<DropdownMenuItem<RootLabel>> rootEntries =
+        <DropdownMenuItem<RootLabel>>[];
     for (final RootLabel root in RootLabel.values) {
-      rootEntries
-          .add(DropdownMenuEntry<RootLabel>(value: root, label: root.label));
+      rootEntries.add(
+          DropdownMenuItem<RootLabel>(value: root, child: Text(root.label)));
     }
 
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('长生宫'),
+        centerTitle: true,
+      ),
+      drawer: const NavigationDrawerBuilder(),
       body: SafeArea(
-          child: Column(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20),
-            child: Row(
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+                  children: <Widget>[
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                DropdownMenu<StemLabel>(
-                  initialSelection: StemLabel.jia,
-                  controller: stemController,
-                  label: const Text('天干'),
-                  dropdownMenuEntries: stemEntries,
-                  onSelected: (StemLabel? stem) {
+              children: [
+                DropdownButtonFormField<StemLabel>(
+                  value: selected.selectedStem.value,
+                  items: stemEntries,
+                  onChanged: (StemLabel? stem) {
                     selected.selectedStem.value = stem;
                   },
+                  decoration: const InputDecoration(
+                    labelText: '天干',
+                    border: OutlineInputBorder(),
+                    constraints: BoxConstraints(maxWidth: 100),
+                  ),
                 ),
-                const SizedBox(width: 20),
-                DropdownMenu<RootLabel>(
-                  initialSelection: RootLabel.zi,
-                  controller: rootController,
-                  // enableFilter: true,
-                  // leadingIcon: const Icon(Icons.search),
-                  label: const Text('地支'),
-                  dropdownMenuEntries: rootEntries,
-                  // inputDecorationTheme:
-                  //     const InputDecorationTheme(filled: true),
-                  onSelected: (RootLabel? root) {
+                const SizedBox(width: 8),
+                DropdownButtonFormField<RootLabel>(
+                  value: selected.selectedRoot.value,
+                  items: rootEntries,
+                  onChanged: (RootLabel? root) {
                     selected.selectedRoot.value = root;
                   },
+                  decoration: const InputDecoration(
+                    labelText: '地支',
+                    border: OutlineInputBorder(),
+                    constraints: BoxConstraints(maxWidth: 100),
+                  ),
                 ),
-                const SizedBox(width: 20),
+                const SizedBox(width: 8),
                 ValueListenableBuilder(
                     valueListenable: selected.selectedStem,
                     builder: (builder, stem, child) {
                       return ValueListenableBuilder(
                           valueListenable: selected.selectedRoot,
                           builder: (context, root, child) {
-                            return Text(getPalace(stem!, root!));
+                            return TextField(
+                              enabled: false,
+                              decoration: InputDecoration(
+                                labelText: getPalace(stem!, root!),
+                                border: const OutlineInputBorder(),
+                                constraints: const BoxConstraints(maxWidth: 100),
+                              ),
+                            );
                           });
                     }),
               ],
             ),
-          ),
-          training(result),
-        ],
-      )),
+            const SizedBox(height: 12),
+            training(result),
+                  ],
+                ),
+          )),
     );
   }
 
@@ -107,50 +122,59 @@ class _PalaceState extends State<Palace> {
   Widget training(result) {
     var rng = Random();
     final entries = []; // List<Map<String, dynamic>>();
-    for (int i = 0; i < 4; ++i) {
+    for (int i = 0; i < 8; ++i) {
       entries.add({
         'stem': StemLabel.values[rng.nextInt(10)],
         'root': RootLabel.values[rng.nextInt(10)],
         'result': ResultNotifier(),
       });
     }
-    final List<DropdownMenuEntry<PalaceLabel>> palaceEntries =
-        <DropdownMenuEntry<PalaceLabel>>[];
+    final List<DropdownMenuItem<PalaceLabel>> palaceEntries =
+        <DropdownMenuItem<PalaceLabel>>[];
     for (final PalaceLabel palace in PalaceLabel.values) {
       palaceEntries.add(
-          DropdownMenuEntry<PalaceLabel>(value: palace, label: palace.label));
+          DropdownMenuItem<PalaceLabel>(value: palace, child: Text(palace.label)));
     }
 
     return Column(children: [
       for (final entry in entries)
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text('${entry['stem'].label} ${entry['root'].label}'),
-            DropdownMenu<PalaceLabel>(
-              // controller: pala,
-              // enableFilter: true,
-              // leadingIcon: const Icon(Icons.search),
-              label: const Text('长生宫'),
-              dropdownMenuEntries: palaceEntries,
-              // inputDecorationTheme:
-              //     const InputDecorationTheme(filled: true),
-              onSelected: (PalaceLabel? palace) {
-                // setState(() {
-                entry['result'].result.value = verify(entry, palace);
-                // });
-              },
-            ),
-            ValueListenableBuilder<bool?>(
-                valueListenable: entry['result'].result,
-                builder: (context, result, _) {
-                  return result != null
-                      ? result
-                          ? const Icon(Icons.check, color: Colors.green)
-                          : const Icon(Icons.close, color: Colors.red)
-                      : const SizedBox();
-                }),
-          ],
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text('${entry['stem'].label} ${entry['root'].label}'),
+              const SizedBox(width: 8),
+              DropdownButtonFormField<PalaceLabel>(
+                // controller: pala,
+                // enableFilter: true,
+                // leadingIcon: const Icon(Icons.search),
+                value: null,
+                items: palaceEntries,
+                // inputDecorationTheme:
+                //     const InputDecorationTheme(filled: true),
+                onChanged: (PalaceLabel? palace) {
+                  // setState(() {
+                  entry['result'].result.value = verify(entry, palace);
+                  // });
+                },
+                decoration: const InputDecoration(
+                      labelText: '长生宫',
+                      border: OutlineInputBorder(),
+                      constraints: BoxConstraints(maxWidth: 100),
+                    ),
+              ),
+              ValueListenableBuilder<bool?>(
+                  valueListenable: entry['result'].result,
+                  builder: (context, result, _) {
+                    return result != null
+                        ? result
+                            ? const Icon(Icons.check, color: Colors.green)
+                            : const Icon(Icons.close, color: Colors.red)
+                        : const SizedBox(width: 24);
+                  }),
+            ],
+          ),
         )
     ]);
   }
