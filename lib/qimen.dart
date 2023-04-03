@@ -1,5 +1,6 @@
 import 'dart:math';
 
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 // import 'package:intl/intl.dart';
@@ -7,8 +8,8 @@ import 'package:lunar/lunar.dart';
 import 'package:qimen/qimen.dart';
 
 import 'drawerbuilder.dart';
+import '../extensions/datetime_extensions.dart';
 
-import 'datetime_extensions.dart';
 
 class QiMenContent extends StatefulWidget {
   const QiMenContent({Key? key}) : super(key: key);
@@ -109,8 +110,7 @@ class _QiMenContentState extends State<QiMenContent>
                             initialTime: TimeOfDay.now(),
                           );
                           if (pickedTime != null) {
-                            timeController.text =
-                                pickedTime.format(context).toString();
+                            timeController.text = "${pickedTime.hour}:${pickedTime.minute}";
                             setState(() {
                               lunar = lunar.setTimeOfDay(pickedTime);
                               qimen = QiMen(lunar);

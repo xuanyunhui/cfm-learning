@@ -61,9 +61,7 @@ class NavigationDrawerBuilder extends StatelessWidget {
                   leading: const Icon(Icons.settings_outlined),
                   title: const Text('奇门'),
                   onTap: () {
-                    //close navigation drawer before
                     Navigator.pop(context);
-
                     Navigator.pushReplacementNamed(context, '/qimen');
                   }),
               const Divider(color: Colors.black54),
@@ -71,10 +69,16 @@ class NavigationDrawerBuilder extends StatelessWidget {
                   leading: const Icon(Icons.settings_outlined),
                   title: const Text('长生宫'),
                   onTap: () {
-                    //close navigation drawer before
                     Navigator.pop(context);
-
                     Navigator.pushReplacementNamed(context, '/lifepalace');
+                  }),
+                const Divider(color: Colors.black54),
+              ListTile(
+                  leading: const Icon(Icons.settings_outlined),
+                  title: const Text('真太阳时'),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.pushReplacementNamed(context, '/solartime');
                   }),
               const Divider(color: Colors.black54),
               ListTile(

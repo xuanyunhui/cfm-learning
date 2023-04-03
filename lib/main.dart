@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'drawerbuilder.dart';
 import 'life_place.dart';
+import 'true_solar_time.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,6 +15,8 @@ class Routes {
   static const palacePage = '/lifepalace';
 
   static const qimenPage = '/qimen';
+
+  static const solarTimePage = '/solartime';
 }
 
 class MyApp extends StatelessWidget {
@@ -30,7 +33,8 @@ class MyApp extends StatelessWidget {
       routes: {
         Routes.homePage: (context) => const MyHomePage(title: 'Home Page'),
         Routes.palacePage: (context) => const Palace(),
-        Routes.qimenPage: (context) => QiMenContent(),
+        Routes.qimenPage: (context) => const QiMenContent(),
+        Routes.solarTimePage: (context) => const SolarTimeScreen(),
       },
     );
   }
