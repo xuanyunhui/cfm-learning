@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:geolocator/geolocator.dart';
@@ -112,12 +114,28 @@ class _SolarTimeState extends State<SolarTimeScreen> {
               tooltip: 'Get current location',
               child: const Icon(Icons.my_location),
             ),
+            const SizedBox(
+              height: 10,
+            ),
             FloatingActionButton.extended(
               onPressed: () {
+                if (_latitudeController.text.isEmpty ||
+                    _longitudeController.text.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('请输入经纬度'),
+                    ),
+                  );
+                  return;
+                }
                 location.solartime.value = SolarTime(
-                    TZDateTime(location.location.value!, pickedDateTime.year,
-                        pickedDateTime.month, pickedDateTime.day,
-                        pickedDateTime.hour, pickedDateTime.minute),
+                    TZDateTime(
+                        location.location.value!,
+                        pickedDateTime.year,
+                        pickedDateTime.month,
+                        pickedDateTime.day,
+                        pickedDateTime.hour,
+                        pickedDateTime.minute),
                     double.parse(_latitudeController.text),
                     double.parse(_longitudeController.text));
               },
@@ -179,7 +197,8 @@ class _SolarTimeState extends State<SolarTimeScreen> {
                             timeController.text =
                                 "${pickedTime.hour}:${pickedTime.minute}";
                             // setState(() {
-                            pickedDateTime = pickedDateTime.setTimeOfDay(pickedTime);
+                            pickedDateTime =
+                                pickedDateTime.setTimeOfDay(pickedTime);
                             // });
                           }
                         }),
@@ -271,10 +290,36 @@ class _SolarTimeState extends State<SolarTimeScreen> {
                 child: ValueListenableBuilder<SolarTime?>(
                   valueListenable: location.solartime,
                   builder: (context, SolarTime? value, Widget? child) {
+                    Lunar? lunar;
+                    if (value != null) {
+                      lunar = Solar.fromDate(value.localSolarTime).getLunar();
+                    }
+                    return Column(
+                      children: [
+                        ListTile(
+                          leading: const Text('农历:'),
+                          title: lunar != null
+                              ? Text(lunar.toString())
+                              : const Text(""),
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
+              Card(
+                elevation: 0,
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 0.0, vertical: 10.0),
+                color: Theme.of(context).colorScheme.surfaceVariant,
+                child: ValueListenableBuilder<SolarTime?>(
+                  valueListenable: location.solartime,
+                  builder: (context, SolarTime? value, Widget? child) {
                     EightChar? timeset;
                     if (value != null) {
-                      timeset =
-                          Solar.fromDate(value.localSolarTime).getLunar().getEightChar();
+                      timeset = Solar.fromDate(value.localSolarTime)
+                          .getLunar()
+                          .getEightChar();
                       timeset.setSect(1);
                     }
                     return Column(
