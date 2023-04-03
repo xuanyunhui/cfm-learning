@@ -90,6 +90,7 @@ class _SolarTimeState extends State<SolarTimeScreen> {
     DateTime pickedDateTime = DateTime.now();
 
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: const Text("真太阳时"),
           centerTitle: true,
@@ -114,7 +115,9 @@ class _SolarTimeState extends State<SolarTimeScreen> {
             FloatingActionButton.extended(
               onPressed: () {
                 location.solartime.value = SolarTime(
-                    TZDateTime.from(pickedDateTime, location.location.value!),
+                    TZDateTime(location.location.value!, pickedDateTime.year,
+                        pickedDateTime.month, pickedDateTime.day,
+                        pickedDateTime.hour, pickedDateTime.minute),
                     double.parse(_latitudeController.text),
                     double.parse(_longitudeController.text));
               },
@@ -176,8 +179,7 @@ class _SolarTimeState extends State<SolarTimeScreen> {
                             timeController.text =
                                 "${pickedTime.hour}:${pickedTime.minute}";
                             // setState(() {
-                            pickedDateTime =
-                                pickedDateTime.setTimeOfDay(pickedTime);
+                            pickedDateTime = pickedDateTime.setTimeOfDay(pickedTime);
                             // });
                           }
                         }),
@@ -251,7 +253,7 @@ class _SolarTimeState extends State<SolarTimeScreen> {
                         ListTile(
                           leading: const Text('真太阳时：'),
                           title: Text(value != null
-                              ? DateFormat('y/MM/dd hh:mm:ss')
+                              ? DateFormat('y/MM/dd HH:mm:ss')
                                   .format(value.localSolarTime)
                               : ""),
                           // subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
