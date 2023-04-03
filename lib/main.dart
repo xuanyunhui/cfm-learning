@@ -1,6 +1,7 @@
 import 'package:cfm_learning/qimen.dart';
 import 'package:flutter/material.dart';
 
+import 'cycle_hex_decades.dart';
 import 'drawerbuilder.dart';
 import 'life_place.dart';
 import 'true_solar_time.dart';
@@ -17,6 +18,8 @@ class Routes {
   static const qimenPage = '/qimen';
 
   static const solarTimePage = '/solartime';
+
+  static const cycleHexDecades = '/cyclehexdecades';
 }
 
 class MyApp extends StatelessWidget {
@@ -35,6 +38,7 @@ class MyApp extends StatelessWidget {
         Routes.palacePage: (context) => const Palace(),
         Routes.qimenPage: (context) => const QiMenContent(),
         Routes.solarTimePage: (context) => const SolarTimeScreen(),
+        Routes.cycleHexDecades: (context) => const CycleHexDecades(),
       },
     );
   }

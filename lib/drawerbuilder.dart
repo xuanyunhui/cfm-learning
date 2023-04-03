@@ -72,7 +72,15 @@ class NavigationDrawerBuilder extends StatelessWidget {
                     Navigator.pop(context);
                     Navigator.pushReplacementNamed(context, '/lifepalace');
                   }),
-                const Divider(color: Colors.black54),
+              const Divider(color: Colors.black54),
+              ListTile(
+                  leading: const Icon(Icons.settings_outlined),
+                  title: const Text('六十甲子'),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.pushReplacementNamed(context, '/cyclehexdecades');
+                  }),
+              const Divider(color: Colors.black54),
               ListTile(
                   leading: const Icon(Icons.settings_outlined),
                   title: const Text('真太阳时'),
