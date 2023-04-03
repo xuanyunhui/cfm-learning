@@ -42,6 +42,12 @@ class SolarTime {
         microseconds: _calculateEquationOfTime().inMicroseconds +
             _calculateLongitudeOffset().inMicroseconds);
 
+    if (_date.timeZone.isDst) {
+      deltaT = Duration(
+          microseconds: deltaT.inMicroseconds +
+              dayLightSavingTimeOffset.inMicroseconds);
+    }
+
     return TZDateTime.from(_date.add(deltaT), _date.location).toLocal();
   }
 
@@ -67,5 +73,4 @@ class SolarTime {
   Duration _calculateLongitudeOffset() {
     return Duration(seconds: (longitude * 4 * 60).floor());
   }
-
 }

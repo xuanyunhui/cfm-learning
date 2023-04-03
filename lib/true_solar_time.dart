@@ -1,13 +1,15 @@
-import 'package:cfm_learning/extensions/datetime_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
+import 'package:lunar/lunar.dart';
 import 'package:timezone/data/latest.dart';
 
 import 'package:timezone/timezone.dart';
 // import 'package:timezone/data/latest.dart' as tz;
 
+import 'extensions/datetime_extensions.dart';
+import 'timeset_widget.dart';
 import 'drawerbuilder.dart';
 import 'solar_time.dart';
 // import 'package:timezone/browser.dart' as tz;
@@ -242,15 +244,14 @@ class _SolarTimeState extends State<SolarTimeScreen> {
                         ),
                         ListTile(
                           leading: const Text('地理时差：'),
-                          title:
-                              Text(value != null
+                          title: Text(value != null
                               ? formatDuration(value.geoTimeDifference)
                               : ""),
                         ),
                         ListTile(
                           leading: const Text('真太阳时：'),
                           title: Text(value != null
-                              ? DateFormat('y/M/d h:m:s')
+                              ? DateFormat('y/MM/dd hh:mm:ss')
                                   .format(value.localSolarTime)
                               : ""),
                           // subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
@@ -260,6 +261,34 @@ class _SolarTimeState extends State<SolarTimeScreen> {
                   },
                 ),
               ),
+              Card(
+                elevation: 0,
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 0.0, vertical: 10.0),
+                color: Theme.of(context).colorScheme.surfaceVariant,
+                child: ValueListenableBuilder<SolarTime?>(
+                  valueListenable: location.solartime,
+                  builder: (context, SolarTime? value, Widget? child) {
+                    EightChar? timeset;
+                    if (value != null) {
+                      timeset =
+                          Lunar.fromDate(value.localSolarTime).getEightChar();
+                      timeset.setSect(1);
+                    }
+                    return Column(
+                      children: [
+                        ListTile(
+                          title: const Text('时间局'),
+                          subtitle: timeset != null
+                              ? TimesetWidget(timeset: timeset)
+                              : const Text(""),
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
+              const Spacer()
             ],
           ),
         ));
