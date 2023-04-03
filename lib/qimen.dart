@@ -258,19 +258,18 @@ class _QiMenContentState extends State<QiMenContent>
   }
 
   Widget magicSquareUnit(BuildContext context, int palace) {
-    const TextStyle boxTextStyle =
-        TextStyle(color: Colors.white70, fontSize: 15);
+    TextStyle boxTextStyle =
+        TextStyle(color: Theme.of(context).colorScheme.inverseSurface, fontSize: 15);
     const double PALACESIZE = 120;
     const double RADIUSSIZE = 5;
-    const Color boxColor = Color.fromRGBO(210, 92, 120, 1);
     const double OUTER = 4.0;
     const double INNER = 4.0;
     const palaceName = ["坎1", "坤2", "震3", "巽4", "中5", "乾6", "兑7", "艮8", "离9"];
 
     return Container(
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(RADIUSSIZE)),
-        color: boxColor,
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.all(Radius.circular(RADIUSSIZE)),
+        color: Theme.of(context).colorScheme.surfaceVariant,
       ),
       // margin: const EdgeInsets.fromLTRB(OUTER, OUTER, OUTER, OUTER),
       width: PALACESIZE,
@@ -280,7 +279,7 @@ class _QiMenContentState extends State<QiMenContent>
           Expanded(
             child: Row(
               children: [
-                const Expanded(
+                Expanded(
                   child: Center(
                       child: Text(
                     "",
@@ -328,7 +327,7 @@ class _QiMenContentState extends State<QiMenContent>
           Expanded(
             child: Row(
               children: [
-                const Expanded(
+                Expanded(
                   child: Center(
                       child: Text(
                     "",

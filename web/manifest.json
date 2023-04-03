@@ -1,13 +1,14 @@
 {
-    "name": "cfm_learning",
-    "short_name": "cfm_learning",
+    "name": "五行学习工具",
+    "short_name": "五行学习",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
     "description": "这是一个晨植五行学习工具",
-    "orientation": "portrait-primary",
+    "orientation": "portrait",
     "prefer_related_applications": false,
+    "applicationVersion": "1.0.3",
     "icons": [
         {
             "src": "icons/android-icon-36x36.png",
