@@ -39,3 +39,15 @@ extension LunarExtension on Lunar {
         getYear(), getMonth(), getDay(), time.hour, time.minute, getSecond());
   }
 }
+
+extension SolarExtension on Solar {
+  Solar setDate(DateTime date) {
+    return Solar.fromYmdHms(
+        date.year, date.month, date.day, getHour(), getMinute(), getSecond());
+  }
+
+  Solar setTimeOfDay(TimeOfDay time) {
+    return Solar.fromYmdHms(
+        getYear(), getMonth(), getDay(), time.hour, time.minute, getSecond());
+  }
+}

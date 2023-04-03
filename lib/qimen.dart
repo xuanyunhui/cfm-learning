@@ -1,6 +1,5 @@
 import 'dart:math';
 
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 // import 'package:intl/intl.dart';
@@ -9,7 +8,6 @@ import 'package:qimen/qimen.dart';
 
 import 'drawerbuilder.dart';
 import '../extensions/datetime_extensions.dart';
-
 
 class QiMenContent extends StatefulWidget {
   const QiMenContent({Key? key}) : super(key: key);
@@ -34,12 +32,14 @@ class _QiMenContentState extends State<QiMenContent>
   TextEditingController timeController = TextEditingController();
 
   // DateTime _dateTime = DateTime.now();
+  late Solar solar;
   late Lunar lunar;
   late QiMen qimen;
 
   @override
   void initState() {
-    lunar = Lunar.fromDate(DateTime.now());
+    solar = Solar.fromDate(DateTime.now());
+    lunar = solar.getLunar();
     qimen = QiMen(lunar);
     super.initState();
   }
@@ -83,13 +83,14 @@ class _QiMenContentState extends State<QiMenContent>
                               context: context,
                               initialDate: DateTime.now(), //get today's date
                               firstDate: DateTime(
-                                  2000), //DateTime.now() - not to allow to choose before today.
-                              lastDate: DateTime(2101));
+                                  1900), //DateTime.now() - not to allow to choose before today.
+                              lastDate: DateTime(2301));
                           if (pickedDate != null) {
                             dateController.text =
                                 DateFormat.yMMMMd().format(pickedDate);
                             setState(() {
-                              lunar = lunar.setDate(pickedDate);
+                              solar = solar.setDate(pickedDate);
+                              lunar = solar.getLunar();
                               qimen = QiMen(lunar);
                             });
                           }
@@ -110,9 +111,11 @@ class _QiMenContentState extends State<QiMenContent>
                             initialTime: TimeOfDay.now(),
                           );
                           if (pickedTime != null) {
-                            timeController.text = "${pickedTime.hour}:${pickedTime.minute}";
+                            timeController.text =
+                                "${pickedTime.hour}:${pickedTime.minute}";
                             setState(() {
-                              lunar = lunar.setTimeOfDay(pickedTime);
+                              solar = solar.setTimeOfDay(pickedTime);
+                              lunar = solar.getLunar();
                               qimen = QiMen(lunar);
                             });
                           }
@@ -258,8 +261,8 @@ class _QiMenContentState extends State<QiMenContent>
   }
 
   Widget magicSquareUnit(BuildContext context, int palace) {
-    TextStyle boxTextStyle =
-        TextStyle(color: Theme.of(context).colorScheme.inverseSurface, fontSize: 15);
+    TextStyle boxTextStyle = TextStyle(
+        color: Theme.of(context).colorScheme.inverseSurface, fontSize: 15);
     const double PALACESIZE = 120;
     const double RADIUSSIZE = 5;
     const double OUTER = 4.0;

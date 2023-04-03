@@ -8,7 +8,7 @@
     "description": "这是一个晨植五行学习工具",
     "orientation": "portrait",
     "prefer_related_applications": false,
-    "applicationVersion": "1.0.3",
+    "applicationVersion": "1.0.6",
     "icons": [
         {
             "src": "icons/android-icon-36x36.png",

@@ -274,7 +274,7 @@ class _SolarTimeState extends State<SolarTimeScreen> {
                     EightChar? timeset;
                     if (value != null) {
                       timeset =
-                          Lunar.fromDate(value.localSolarTime).getEightChar();
+                          Solar.fromDate(value.localSolarTime).getLunar().getEightChar();
                       timeset.setSect(1);
                     }
                     return Column(
