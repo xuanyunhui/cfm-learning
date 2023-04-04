@@ -5,6 +5,7 @@ import 'cycle_hex_decades.dart';
 import 'drawerbuilder.dart';
 import 'life_place.dart';
 import 'true_solar_time.dart';
+import 'timeset_calendar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,6 +21,8 @@ class Routes {
   static const solarTimePage = '/solartime';
 
   static const cycleHexDecades = '/cyclehexdecades';
+
+  static const timesetCalendar = '/timesetcalendar';
 }
 
 class MyApp extends StatelessWidget {
@@ -30,7 +33,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(useMaterial3: true, colorSchemeSeed: Colors.green),
+      theme: ThemeData(useMaterial3: true, colorSchemeSeed: const Color(0xffbe3455)),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
       initialRoute: Routes.homePage,
       routes: {
@@ -39,6 +42,7 @@ class MyApp extends StatelessWidget {
         Routes.qimenPage: (context) => const QiMenContent(),
         Routes.solarTimePage: (context) => const SolarTimeScreen(),
         Routes.cycleHexDecades: (context) => const CycleHexDecades(),
+        Routes.timesetCalendar: (context) => const TimesetCalendar(),
       },
     );
   }
