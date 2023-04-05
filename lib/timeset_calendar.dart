@@ -58,6 +58,25 @@ class _TimesetCalendarState extends State<TimesetCalendar> {
       rootEntries.add(DropdownMenuItem<String>(value: root, child: Text(root)));
     }
 
+    final List<DropdownMenuItem<String>> rootYangEntries = dropdownMenuItemBuilder([
+      '子',
+      '寅',
+      '辰',
+      '午',
+      '申',
+      '戌'
+    ]);
+    final List<DropdownMenuItem<String>> rootYinEntries = dropdownMenuItemBuilder([
+      '丑',
+      '卯',
+      '巳',
+      '未',
+      '酉',
+      '亥'
+    ]);
+        
+
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('天干地支'),
@@ -150,8 +169,8 @@ class _TimesetCalendarState extends State<TimesetCalendar> {
                     child: Consumer<TimesetModel>(
                         builder: (context, timeset, child) {
                       return DropdownButtonFormField<String>(
-                        value: timeset.yearRoot,
-                        items: rootEntries,
+                        value: dropdownMenuItemBuilder(rootsBuilder(timeset.yearStem)).first.value,
+                        items: dropdownMenuItemBuilder(rootsBuilder(timeset.yearStem)),
                         onChanged: (String? root) {
                           timeset.yearRoot = root!;
                         },
@@ -184,8 +203,8 @@ class _TimesetCalendarState extends State<TimesetCalendar> {
                     child: Consumer<TimesetModel>(
                         builder: (context, timeset, child) {
                       return DropdownButtonFormField<String>(
-                        value: timeset.dayRoot,
-                        items: rootEntries,
+                        value: dropdownMenuItemBuilder(rootsBuilder(timeset.dayStem)).first.value,
+                        items: dropdownMenuItemBuilder(rootsBuilder(timeset.dayStem)),
                         onChanged: (String? root) {
                           timeset.dayRoot = root!;
                         },
@@ -236,7 +255,7 @@ class _TimesetCalendarState extends State<TimesetCalendar> {
                         for (final solar in solars) 
                           ListTile(
                             leading: const Text('公历:'),
-                            title: Text(solar.toString()),
+                            title: Text(solar.toYmdHms()),
                           ),
                     ],
                     );
