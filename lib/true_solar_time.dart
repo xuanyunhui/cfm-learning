@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:cfm_learning/qimen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:geolocator/geolocator.dart';
@@ -162,6 +165,7 @@ class _SolarTimeState extends State<SolarTimeScreen> {
                         readOnly: true, // when true user cannot edit text
                         onTap: () async {
                           DateTime? pickedDate = await showDatePicker(
+                              locale: const Locale('zh'),
                               context: context,
                               initialDate: DateTime.now(), //get today's date
                               firstDate: DateTime(
@@ -268,13 +272,41 @@ class _SolarTimeState extends State<SolarTimeScreen> {
                               : ""),
                         ),
                         ListTile(
-                          leading: const Text('真太阳时：'),
-                          title: Text(value != null
-                              ? DateFormat('y/MM/dd HH:mm:ss')
-                                  .format(value.localSolarTime)
-                              : ""),
-                          // subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
-                        ),
+                            leading: const Text('真太阳时：'),
+                            title: Text(value != null
+                                ? DateFormat('y/MM/dd HH:mm:ss')
+                                    .format(value.localSolarTime)
+                                : ""),
+                            trailing: value != null
+                                ? IconButton(
+                                    icon: randomEighthNoteIcon(),
+                                    onPressed: () {
+                                      Navigator.push(context,
+                                          MaterialPageRoute(builder: (context) {
+                                        return QiMenContent(
+                                          date: value.localSolarTime,
+                                        );
+                                      }));
+                                    },
+                                    style: IconButton.styleFrom(
+                                      foregroundColor:
+                                          colors.onSecondaryContainer,
+                                      backgroundColor:
+                                          colors.secondaryContainer,
+                                      disabledBackgroundColor:
+                                          colors.onSurface.withOpacity(0.12),
+                                      hoverColor: colors.onSecondaryContainer
+                                          .withOpacity(0.08),
+                                      focusColor: colors.onSecondaryContainer
+                                          .withOpacity(0.12),
+                                      highlightColor: colors
+                                          .onSecondaryContainer
+                                          .withOpacity(0.12),
+                                    ),
+                                  )
+                                : const Text("")
+                            // subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
+                            ),
                       ],
                     );
                   },
@@ -383,6 +415,31 @@ class _SolarTimeState extends State<SolarTimeScreen> {
   String formatDuration(Duration duration) {
     String twoDigitSeconds = duration.toString().split(".")[0];
     return twoDigitSeconds;
+  }
+
+  Widget randomEighthNoteIcon() {
+    final random = Random();
+    final note = random.nextInt(8);
+    switch (note) {
+      case 0:
+        return const Icon(IconData(0x2630, fontFamily: 'MaterialIcons'));
+      case 1:
+        return const Icon(IconData(0x2631, fontFamily: 'MaterialIcons'));
+      case 2:
+        return const Icon(IconData(0x2632, fontFamily: 'MaterialIcons'));
+      case 3:
+        return const Icon(IconData(0x2633, fontFamily: 'MaterialIcons'));
+      case 4:
+        return const Icon(IconData(0x2634, fontFamily: 'MaterialIcons'));
+      case 5:
+        return const Icon(IconData(0x2635, fontFamily: 'MaterialIcons'));
+      case 6:
+        return const Icon(IconData(0x2636, fontFamily: 'MaterialIcons'));
+      case 7:
+        return const Icon(IconData(0x2637, fontFamily: 'MaterialIcons'));
+      default:
+        return const Icon(IconData(0x2630, fontFamily: 'MaterialIcons'));
+    }
   }
 }
 

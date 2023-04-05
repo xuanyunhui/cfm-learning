@@ -10,9 +10,9 @@ import 'drawerbuilder.dart';
 import '../extensions/datetime_extensions.dart';
 
 class QiMenContent extends StatefulWidget {
-  const QiMenContent({Key? key}) : super(key: key);
+  final DateTime? date;
 
-  // final Lunar lunar;
+  const QiMenContent({Key? key, this.date}) : super(key: key);
 
   @override
   State<QiMenContent> createState() => _QiMenContentState();
@@ -38,9 +38,15 @@ class _QiMenContentState extends State<QiMenContent>
 
   @override
   void initState() {
-    solar = Solar.fromDate(DateTime.now());
+    if (widget.date == null) {
+      solar = Solar.fromDate(DateTime.now());
+    } else {
+      solar = Solar.fromDate(widget.date!);
+    }
     lunar = solar.getLunar();
     qimen = QiMen(lunar);
+    dateController.text = solar.toYmd();
+    timeController.text = solar.toHM();
     super.initState();
   }
 

@@ -50,4 +50,8 @@ extension SolarExtension on Solar {
     return Solar.fromYmdHms(
         getYear(), getMonth(), getDay(), time.hour, time.minute, getSecond());
   }
+
+  String toHM() {
+    return '${getHour()}:${getMinute()}';
+  }
 }

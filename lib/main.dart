@@ -1,11 +1,12 @@
-import 'package:cfm_learning/qimen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'cycle_hex_decades.dart';
 import 'drawerbuilder.dart';
 import 'life_place.dart';
 import 'true_solar_time.dart';
 import 'timeset_calendar.dart';
+import 'qimen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,6 +33,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('zh', 'CN'), // Chinese
+        Locale('ms', 'MY'), // Malay (Malaysia)
+        Locale('en', 'US'), // English
+        Locale('id', 'ID'), // Indonesian
+        Locale('ru', 'RU'), // Russian
+        Locale('th', 'TH'), // Thai
+        Locale('de', 'DE'), // German
+      ],
       title: 'Flutter Demo',
       theme: ThemeData(useMaterial3: true, colorSchemeSeed: const Color(0xffbe3455)),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
