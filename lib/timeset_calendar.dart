@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lunar/lunar.dart';
 import 'package:provider/provider.dart';
 
 import 'drawerbuilder.dart';
@@ -21,17 +22,40 @@ class _TimesetCalendarState extends State<TimesetCalendar> {
     //       DropdownMenuItem<RootLabel>(value: root, child: Text(root.label)));
     // }
 
-    final List<DropdownMenuItem<String>> stemEntries = <DropdownMenuItem<String>>[];
-    final List<DropdownMenuItem<String>> rootEntries = <DropdownMenuItem<String>>[];
+    final List<DropdownMenuItem<String>> stemEntries =
+        <DropdownMenuItem<String>>[];
+    final List<DropdownMenuItem<String>> rootEntries =
+        <DropdownMenuItem<String>>[];
 
-
-     for (final String stem in ['甲', '乙', '丙', '丁', '戊', '己', '庚', '辛', '壬', '癸']) {
-      stemEntries.add(
-          DropdownMenuItem<String>(value: stem, child: Text(stem)));
+    for (final String stem in [
+      '甲',
+      '乙',
+      '丙',
+      '丁',
+      '戊',
+      '己',
+      '庚',
+      '辛',
+      '壬',
+      '癸'
+    ]) {
+      stemEntries.add(DropdownMenuItem<String>(value: stem, child: Text(stem)));
     }
-    for (final String root in ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥']) {
-      rootEntries.add(
-          DropdownMenuItem<String>(value: root, child: Text(root)));
+    for (final String root in [
+      '子',
+      '丑',
+      '寅',
+      '卯',
+      '辰',
+      '巳',
+      '午',
+      '未',
+      '申',
+      '酉',
+      '戌',
+      '亥'
+    ]) {
+      rootEntries.add(DropdownMenuItem<String>(value: root, child: Text(root)));
     }
 
     return Scaffold(
@@ -72,8 +96,8 @@ class _TimesetCalendarState extends State<TimesetCalendar> {
                     child: Consumer<TimesetModel>(
                         builder: (context, timeset, child) {
                       return TextField(
-                        controller: TextEditingController(
-                            text: timeset.monthStem),
+                        controller:
+                            TextEditingController(text: timeset.monthStem),
                         readOnly: true,
                         decoration: const InputDecoration(
                             labelText: '月干',
@@ -85,28 +109,27 @@ class _TimesetCalendarState extends State<TimesetCalendar> {
                   const SizedBox(width: 8),
                   Expanded(
                     child: Consumer<TimesetModel>(
-                      builder: (context, timeset, child) {
-                        return DropdownButtonFormField<String>(
-                          value: timeset.dayStem,
-                          items: stemEntries,
-                          onChanged: (String? stem) {
-                            timeset.dayStem = stem!;
-                          },
-                          decoration: const InputDecoration(
-                              labelText: '日干',
-                              border: OutlineInputBorder(),
-                              isDense: true),
-                        );
-                      }
-                    ),
+                        builder: (context, timeset, child) {
+                      return DropdownButtonFormField<String>(
+                        value: timeset.dayStem,
+                        items: stemEntries,
+                        onChanged: (String? stem) {
+                          timeset.dayStem = stem!;
+                        },
+                        decoration: const InputDecoration(
+                            labelText: '日干',
+                            border: OutlineInputBorder(),
+                            isDense: true),
+                      );
+                    }),
                   ),
                   const SizedBox(width: 8),
                   Expanded(
                     child: Consumer<TimesetModel>(
                         builder: (context, timeset, child) {
                       return TextField(
-                        controller: TextEditingController(
-                            text: timeset.hourStem),
+                        controller:
+                            TextEditingController(text: timeset.hourStem),
                         readOnly: true,
                         decoration: const InputDecoration(
                             labelText: '时干',
@@ -193,6 +216,33 @@ class _TimesetCalendarState extends State<TimesetCalendar> {
                 ],
               ),
               const SizedBox(height: 12),
+              Card(
+                elevation: 0,
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 0.0, vertical: 10.0),
+                color: Theme.of(context).colorScheme.surfaceVariant,
+                child: Consumer<TimesetModel?>(
+                  builder: (context, timeset, child) {
+                    List<Solar> solars = Solar.fromBaZi(
+                        timeset!.yearStem + timeset.yearRoot,
+                        timeset.monthStem + timeset.monthRoot,
+                        timeset.dayStem + timeset.dayRoot,
+                        timeset.hourStem + timeset.hourRoot);
+                    // if (solar != null) {
+                    //   lunar = Solar.fromDate(value.localSolarTime).getLunar();
+                    // }
+                    return Column(
+                      children: [
+                        for (final solar in solars) 
+                          ListTile(
+                            leading: const Text('公历:'),
+                            title: Text(solar.toString()),
+                          ),
+                    ],
+                    );
+                  },
+                ),
+              ),
               // FilledButton(
               //   onPressed: () {
               //     setState(() {
@@ -214,6 +264,27 @@ class _TimesetCalendarState extends State<TimesetCalendar> {
       entries.add(DropdownMenuItem<String>(value: item, child: Text(item)));
     }
     return entries;
+  }
+
+  List<String> rootsBuilder(String stem) {
+    List<String> roots = [];
+    switch (stem) {
+      case '甲':
+      case '丙':
+      case '戊':
+      case '庚':
+      case '壬':
+        roots = ['子', '寅', '辰', '午', '申', '戌'];
+        break;
+      case '乙':
+      case '丁':
+      case '己':
+      case '辛':
+      case '癸':
+        roots = ['丑', '卯', '巳', '未', '酉', '亥'];
+        break;
+    }
+    return roots;
   }
 }
 
