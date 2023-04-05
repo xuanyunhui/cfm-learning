@@ -58,25 +58,6 @@ class _TimesetCalendarState extends State<TimesetCalendar> {
       rootEntries.add(DropdownMenuItem<String>(value: root, child: Text(root)));
     }
 
-    final List<DropdownMenuItem<String>> rootYangEntries = dropdownMenuItemBuilder([
-      '子',
-      '寅',
-      '辰',
-      '午',
-      '申',
-      '戌'
-    ]);
-    final List<DropdownMenuItem<String>> rootYinEntries = dropdownMenuItemBuilder([
-      '丑',
-      '卯',
-      '巳',
-      '未',
-      '酉',
-      '亥'
-    ]);
-        
-
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('天干地支'),

@@ -68,8 +68,8 @@ class _SolarTimeState extends State<SolarTimeScreen> {
       debugPrint(error.toString());
     });
 
-    dateController.text = DateFormat.yMMMMd().format(DateTime.now());
-    timeController.text = DateFormat.Hm().format(DateTime.now());
+    dateController.text = DateFormat.yMMMMd('zh').format(DateTime.now());
+    timeController.text = DateFormat.Hm('zh').format(DateTime.now());
     location.location.value = getLocation(currentTimeZone);
 
     if (mounted) {
@@ -80,6 +80,9 @@ class _SolarTimeState extends State<SolarTimeScreen> {
   @override
   Widget build(BuildContext context) {
     final ColorScheme colors = Theme.of(context).colorScheme;
+    final Locale locale = Localizations.localeOf(context);
+    final String? countryCode = Localizations.localeOf(context).countryCode;
+    final String languageCode = Localizations.localeOf(context).languageCode;
 
     final List<DropdownMenuItem<Location>> locations =
         <DropdownMenuItem<Location>>[];
@@ -140,7 +143,7 @@ class _SolarTimeState extends State<SolarTimeScreen> {
                     double.parse(_latitudeController.text),
                     double.parse(_longitudeController.text));
               },
-              tooltip: 'Get current location',
+              tooltip: '计算真太阳时',
               label: const Text('计算'),
               icon: const Icon(Icons.calculate),
               heroTag: null,
@@ -165,7 +168,7 @@ class _SolarTimeState extends State<SolarTimeScreen> {
                         readOnly: true, // when true user cannot edit text
                         onTap: () async {
                           DateTime? pickedDate = await showDatePicker(
-                              locale: const Locale('zh'),
+                              locale: locale,
                               context: context,
                               initialDate: DateTime.now(), //get today's date
                               firstDate: DateTime(
@@ -173,7 +176,7 @@ class _SolarTimeState extends State<SolarTimeScreen> {
                               lastDate: DateTime(2101));
                           if (pickedDate != null) {
                             dateController.text =
-                                DateFormat.yMMMMd().format(pickedDate);
+                                DateFormat.yMMMMd(languageCode).format(pickedDate);
                             // setState(() {
                             pickedDateTime = pickedDateTime.setDate(pickedDate);
                             // });

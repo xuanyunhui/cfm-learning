@@ -61,6 +61,10 @@ class _QiMenContentState extends State<QiMenContent>
 
   @override
   Widget build(BuildContext context) {
+    final Locale locale = Localizations.localeOf(context);
+    final String? countryCode = Localizations.localeOf(context).countryCode;
+    final String languageCode = Localizations.localeOf(context).languageCode;
+
     return Scaffold(
         appBar: AppBar(
           title: const Text("奇门"),
@@ -86,6 +90,7 @@ class _QiMenContentState extends State<QiMenContent>
                         readOnly: true, // when true user cannot edit text
                         onTap: () async {
                           DateTime? pickedDate = await showDatePicker(
+                              locale: locale,
                               context: context,
                               initialDate: DateTime.now(), //get today's date
                               firstDate: DateTime(
@@ -93,7 +98,8 @@ class _QiMenContentState extends State<QiMenContent>
                               lastDate: DateTime(2301));
                           if (pickedDate != null) {
                             dateController.text =
-                                DateFormat.yMMMMd().format(pickedDate);
+                                DateFormat.yMMMMd(languageCode)
+                                    .format(pickedDate);
                             setState(() {
                               solar = solar.setDate(pickedDate);
                               lunar = solar.getLunar();
