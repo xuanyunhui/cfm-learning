@@ -172,7 +172,7 @@ class _SolarTimeState extends State<SolarTimeScreen> {
                               context: context,
                               initialDate: DateTime.now(), //get today's date
                               firstDate: DateTime(
-                                  2000), //DateTime.now() - not to allow to choose before today.
+                                  1800), //DateTime.now() - not to allow to choose before today.
                               lastDate: DateTime(2101));
                           if (pickedDate != null) {
                             dateController.text =
