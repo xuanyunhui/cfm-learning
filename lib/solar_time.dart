@@ -17,7 +17,6 @@ class SolarTime {
   /// (exclusive) to +180 (inclusive).
   final double longitude;
 
-  DateTime? _meanSolarTime;
 
   SolarTime(this._date, this.latitude, this.longitude);
 
@@ -27,26 +26,11 @@ class SolarTime {
 
   Duration get geoTimeDifference => _geoTimeDifference();
 
-  DateTime _calculateMeanSolarTime() {
-    double offsetInMicroseconds = longitude * degreeInMicroseconds -
-        _date.timeZoneOffset.inMicroseconds;
-
-    Duration deltaT = Duration(microseconds: offsetInMicroseconds.round());
-
-    return _date.add(deltaT);
-  }
-
   TZDateTime get localSolarTime {
 
     Duration deltaT = Duration(
         microseconds: _calculateEquationOfTime().inMicroseconds +
             _calculateLongitudeOffset().inMicroseconds);
-
-    if (_date.timeZone.isDst) {
-      deltaT = Duration(
-          microseconds: deltaT.inMicroseconds +
-              dayLightSavingTimeOffset.inMicroseconds);
-    }
 
     return TZDateTime.from(_date.add(deltaT), _date.location).toLocal();
   }

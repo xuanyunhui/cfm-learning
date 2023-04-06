@@ -1,7 +1,9 @@
+import 'package:cfm_learning/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'cycle_hex_decades.dart';
+import 'extensions/enum_type.dart';
 import 'home.dart';
 import 'life_place.dart';
 import 'true_solar_time.dart';
@@ -24,6 +26,8 @@ class Routes {
   static const cycleHexDecades = '/cyclehexdecades';
 
   static const timesetCalendar = '/timesetcalendar';
+
+  static const settings = '/settings';
 }
 
 class MyApp extends StatelessWidget {
@@ -49,7 +53,7 @@ class MyApp extends StatelessWidget {
       ],
       title: 'Flutter Demo',
       theme: ThemeData(
-          useMaterial3: true, colorSchemeSeed: const Color(0xffbe3455)),
+          useMaterial3: true, colorSchemeSeed: getRandomColor()),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
       initialRoute: Routes.homePage,
       routes: {
@@ -59,6 +63,7 @@ class MyApp extends StatelessWidget {
         Routes.solarTimePage: (context) => const SolarTimeScreen(),
         Routes.cycleHexDecades: (context) => const CycleHexDecades(),
         Routes.timesetCalendar: (context) => const TimesetCalendar(),
+        Routes.settings:(context) => const Settings()
       },
     );
   }

@@ -56,7 +56,7 @@ class NavigationDrawerBuilder extends StatelessWidget {
 
                     Navigator.pushReplacementNamed(context, '/');
                   }),
-              const Divider(color: Colors.black54),
+              const Divider(),
               ListTile(
                   leading: const Icon(Icons.settings_outlined),
                   title: const Text('奇门'),
@@ -64,7 +64,7 @@ class NavigationDrawerBuilder extends StatelessWidget {
                     Navigator.pop(context);
                     Navigator.pushReplacementNamed(context, '/qimen');
                   }),
-              const Divider(color: Colors.black54),
+              const Divider(),
               ListTile(
                   leading: const Icon(Icons.settings_outlined),
                   title: const Text('长生宫'),
@@ -72,7 +72,7 @@ class NavigationDrawerBuilder extends StatelessWidget {
                     Navigator.pop(context);
                     Navigator.pushReplacementNamed(context, '/lifepalace');
                   }),
-              const Divider(color: Colors.black54),
+              const Divider(),
               ListTile(
                   leading: const Icon(Icons.settings_outlined),
                   title: const Text('六十甲子'),
@@ -80,7 +80,7 @@ class NavigationDrawerBuilder extends StatelessWidget {
                     Navigator.pop(context);
                     Navigator.pushReplacementNamed(context, '/cyclehexdecades');
                   }),
-              const Divider(color: Colors.black54),
+              const Divider(),
               ListTile(
                   leading: const Icon(Icons.settings_outlined),
                   title: const Text('真太阳时'),
@@ -88,7 +88,7 @@ class NavigationDrawerBuilder extends StatelessWidget {
                     Navigator.pop(context);
                     Navigator.pushReplacementNamed(context, '/solartime');
                   }),
-              const Divider(color: Colors.black54),
+              const Divider(),
               ListTile(
                   leading: const Icon(Icons.settings_outlined),
                   title: const Text('天干地支历'),
@@ -96,7 +96,15 @@ class NavigationDrawerBuilder extends StatelessWidget {
                     // Navigator.pop(context);
                     Navigator.pushReplacementNamed(context, '/timesetcalendar');
                   }),
-              const Divider(color: Colors.black54),
+              const Divider(),
+              ListTile(
+                  leading: const Icon(Icons.settings_outlined),
+                  title: const Text('设置'),
+                  onTap: () {
+                    // Navigator.pop(context);
+                    Navigator.pushReplacementNamed(context, '/settings');
+                  }),
+              const Divider(),
               ListTile(
                 leading: const Icon(Icons.info_outline),
                 title: const Text('关于'),
