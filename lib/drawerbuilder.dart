@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'generated/l10n.dart';
+
 class NavigationDrawerBuilder extends StatelessWidget {
   const NavigationDrawerBuilder({Key? key}) : super(key: key);
 
@@ -49,7 +51,7 @@ class NavigationDrawerBuilder extends StatelessWidget {
             children: [
               ListTile(
                   leading: const Icon(Icons.home_outlined),
-                  title: const Text('首页'),
+                  title: Text(S.of(context).homeTitle),
                   onTap: () {
                     //close navigation drawer before
                     Navigator.pop(context);
@@ -59,7 +61,7 @@ class NavigationDrawerBuilder extends StatelessWidget {
               const Divider(),
               ListTile(
                   leading: const Icon(Icons.settings_outlined),
-                  title: const Text('奇门'),
+                  title: Text(S.of(context).qimenTitle),
                   onTap: () {
                     Navigator.pop(context);
                     Navigator.pushReplacementNamed(context, '/qimen');
@@ -67,7 +69,7 @@ class NavigationDrawerBuilder extends StatelessWidget {
               const Divider(),
               ListTile(
                   leading: const Icon(Icons.settings_outlined),
-                  title: const Text('长生宫'),
+                  title: Text(S.of(context).lifePalaceTitle),
                   onTap: () {
                     Navigator.pop(context);
                     Navigator.pushReplacementNamed(context, '/lifepalace');
@@ -75,7 +77,7 @@ class NavigationDrawerBuilder extends StatelessWidget {
               const Divider(),
               ListTile(
                   leading: const Icon(Icons.settings_outlined),
-                  title: const Text('六十甲子'),
+                  title: Text(S.of(context).cycleTitle),
                   onTap: () {
                     Navigator.pop(context);
                     Navigator.pushReplacementNamed(context, '/cyclehexdecades');
@@ -83,7 +85,7 @@ class NavigationDrawerBuilder extends StatelessWidget {
               const Divider(),
               ListTile(
                   leading: const Icon(Icons.settings_outlined),
-                  title: const Text('真太阳时'),
+                  title: Text(S.of(context).solarTimeTitle),
                   onTap: () {
                     Navigator.pop(context);
                     Navigator.pushReplacementNamed(context, '/solartime');
@@ -91,7 +93,7 @@ class NavigationDrawerBuilder extends StatelessWidget {
               const Divider(),
               ListTile(
                   leading: const Icon(Icons.settings_outlined),
-                  title: const Text('天干地支历'),
+                  title: Text(S.of(context).timesetTitle),
                   onTap: () {
                     // Navigator.pop(context);
                     Navigator.pushReplacementNamed(context, '/timesetcalendar');
@@ -99,7 +101,7 @@ class NavigationDrawerBuilder extends StatelessWidget {
               const Divider(),
               ListTile(
                   leading: const Icon(Icons.settings_outlined),
-                  title: const Text('设置'),
+                  title: Text(S.of(context).settingTitle),
                   onTap: () {
                     // Navigator.pop(context);
                     Navigator.pushReplacementNamed(context, '/settings');
@@ -107,7 +109,7 @@ class NavigationDrawerBuilder extends StatelessWidget {
               const Divider(),
               ListTile(
                 leading: const Icon(Icons.info_outline),
-                title: const Text('关于'),
+                title: Text(S.of(context).aboutTitle),
                 onTap: () {
                   showAboutDialog(
                     context: context,

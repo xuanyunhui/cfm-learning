@@ -8,6 +8,7 @@ import 'package:qimen/qimen.dart';
 
 import 'drawerbuilder.dart';
 import '../extensions/datetime_extensions.dart';
+import 'generated/l10n.dart';
 
 class QiMenContent extends StatefulWidget {
   final DateTime? date;
@@ -67,7 +68,7 @@ class _QiMenContentState extends State<QiMenContent>
 
     return Scaffold(
         appBar: AppBar(
-          title: const Text("奇门"),
+          title: Text(S.of(context).qimenTitle),
           centerTitle: true,
           backgroundColor: Theme.of(context).primaryColor,
         ),
@@ -83,9 +84,9 @@ class _QiMenContentState extends State<QiMenContent>
                     child: TextField(
                         controller:
                             dateController, //editing controller of this TextField
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: "日期",
+                        decoration: InputDecoration(
+                          border: const OutlineInputBorder(),
+                          labelText: S.of(context).date,
                           isDense: true,
                         ),
                         readOnly: true, // when true user cannot edit text
@@ -113,9 +114,9 @@ class _QiMenContentState extends State<QiMenContent>
                     child: TextField(
                         controller:
                             timeController, //editing controller of this TextField
-                        decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: "时间",
+                        decoration: InputDecoration(
+                            border: const OutlineInputBorder(),
+                            labelText: S.of(context).time,
                             isDense: true),
                         readOnly: true, // when true user cannot edit text
                         onTap: () async {

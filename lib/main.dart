@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'cycle_hex_decades.dart';
+import 'generated/l10n.dart';
 import 'home.dart';
 import 'life_place.dart';
 import 'provider/theme_settings.dart';
@@ -51,19 +51,12 @@ class MyApp extends StatelessWidget {
           final settings = Provider.of<ThemeSettings>(context);
           return MaterialApp(
             localizationsDelegates: const [
+              S.delegate,
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
-            supportedLocales: const [
-              Locale('zh', 'CN'), // Chinese
-              Locale('ms', 'MY'), // Malay (Malaysia)
-              Locale('en', 'US'), // English
-              Locale('id', 'ID'), // Indonesian
-              Locale('ru', 'RU'), // Russian
-              Locale('th', 'TH'), // Thai
-              Locale('de', 'DE'), // German
-            ],
+            supportedLocales: S.delegate.supportedLocales,
             title: 'Flutter Demo',
             theme: ThemeData(
               useMaterial3: true,
@@ -78,7 +71,7 @@ class MyApp extends StatelessWidget {
             initialRoute: Routes.homePage,
             routes: {
               Routes.homePage: (context) =>
-                  const MyHomePage(title: 'Home Page'),
+                  const MyHomePage(),
               Routes.palacePage: (context) => const Palace(),
               Routes.qimenPage: (context) => const QiMenContent(),
               Routes.solarTimePage: (context) => const SolarTimeScreen(),
@@ -90,22 +83,3 @@ class MyApp extends StatelessWidget {
         });
   }
 }
-
-class ExampleDestination {
-  const ExampleDestination(this.label, this.icon, this.selectedIcon);
-
-  final String label;
-  final Widget icon;
-  final Widget selectedIcon;
-}
-
-const List<ExampleDestination> destinations = <ExampleDestination>[
-  ExampleDestination(
-      'page 0', Icon(Icons.widgets_outlined), Icon(Icons.widgets)),
-  ExampleDestination(
-      'page 1', Icon(Icons.format_paint_outlined), Icon(Icons.format_paint)),
-  ExampleDestination(
-      'page 2', Icon(Icons.text_snippet_outlined), Icon(Icons.text_snippet)),
-  ExampleDestination(
-      'page 3', Icon(Icons.invert_colors_on_outlined), Icon(Icons.opacity)),
-];

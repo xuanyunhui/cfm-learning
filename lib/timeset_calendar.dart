@@ -3,6 +3,7 @@ import 'package:lunar/lunar.dart';
 import 'package:provider/provider.dart';
 
 import 'drawerbuilder.dart';
+import 'generated/l10n.dart';
 import 'models/exam.dart';
 
 class TimesetCalendar extends StatefulWidget {
@@ -60,7 +61,7 @@ class _TimesetCalendarState extends State<TimesetCalendar> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('天干地支'),
+        title: Text(S.of(context).timesetTitle),
         centerTitle: true,
         backgroundColor: Theme.of(context).primaryColor,
       ),
@@ -85,9 +86,9 @@ class _TimesetCalendarState extends State<TimesetCalendar> {
                         onChanged: (String? stem) {
                           timeset.yearStem = stem!;
                         },
-                        decoration: const InputDecoration(
-                            labelText: '年干',
-                            border: OutlineInputBorder(),
+                        decoration: InputDecoration(
+                            labelText: S.of(context).yearStemText,
+                            border: const OutlineInputBorder(),
                             isDense: true),
                       );
                     }),
@@ -100,9 +101,9 @@ class _TimesetCalendarState extends State<TimesetCalendar> {
                         controller:
                             TextEditingController(text: timeset.monthStem),
                         readOnly: true,
-                        decoration: const InputDecoration(
-                            labelText: '月干',
-                            border: OutlineInputBorder(),
+                        decoration: InputDecoration(
+                            labelText: S.of(context).monthStemText,
+                            border: const OutlineInputBorder(),
                             isDense: true),
                       );
                     }),
@@ -117,9 +118,9 @@ class _TimesetCalendarState extends State<TimesetCalendar> {
                         onChanged: (String? stem) {
                           timeset.dayStem = stem!;
                         },
-                        decoration: const InputDecoration(
-                            labelText: '日干',
-                            border: OutlineInputBorder(),
+                        decoration: InputDecoration(
+                            labelText: S.of(context).dayStemText,
+                            border: const OutlineInputBorder(),
                             isDense: true),
                       );
                     }),
@@ -132,9 +133,9 @@ class _TimesetCalendarState extends State<TimesetCalendar> {
                         controller:
                             TextEditingController(text: timeset.hourStem),
                         readOnly: true,
-                        decoration: const InputDecoration(
-                            labelText: '时干',
-                            border: OutlineInputBorder(),
+                        decoration: InputDecoration(
+                            labelText: S.of(context).hourStemText,
+                            border: const OutlineInputBorder(),
                             isDense: true),
                       );
                     }),
@@ -156,9 +157,9 @@ class _TimesetCalendarState extends State<TimesetCalendar> {
                         onChanged: (String? root) {
                           timeset.yearRoot = root!;
                         },
-                        decoration: const InputDecoration(
-                            labelText: '年支',
-                            border: OutlineInputBorder(),
+                        decoration: InputDecoration(
+                            labelText: S.of(context).yearRootText,
+                            border: const OutlineInputBorder(),
                             isDense: true),
                       );
                     }),
@@ -173,9 +174,9 @@ class _TimesetCalendarState extends State<TimesetCalendar> {
                         onChanged: (String? root) {
                           timeset.monthRoot = root!;
                         },
-                        decoration: const InputDecoration(
-                            labelText: '月支',
-                            border: OutlineInputBorder(),
+                        decoration: InputDecoration(
+                            labelText: S.of(context).monthRootText,
+                            border: const OutlineInputBorder(),
                             isDense: true),
                       );
                     }),
@@ -190,9 +191,9 @@ class _TimesetCalendarState extends State<TimesetCalendar> {
                         onChanged: (String? root) {
                           timeset.dayRoot = root!;
                         },
-                        decoration: const InputDecoration(
-                            labelText: '日支',
-                            border: OutlineInputBorder(),
+                        decoration: InputDecoration(
+                            labelText: S.of(context).dayRootText,
+                            border: const OutlineInputBorder(),
                             isDense: true),
                       );
                     }),
@@ -207,9 +208,9 @@ class _TimesetCalendarState extends State<TimesetCalendar> {
                         onChanged: (String? root) {
                           timeset.hourRoot = root!;
                         },
-                        decoration: const InputDecoration(
-                            labelText: '时支',
-                            border: OutlineInputBorder(),
+                        decoration: InputDecoration(
+                            labelText: S.of(context).hourRootText,
+                            border: const OutlineInputBorder(),
                             isDense: true),
                       );
                     }),
@@ -236,7 +237,7 @@ class _TimesetCalendarState extends State<TimesetCalendar> {
                       children: [
                         for (final solar in solars) 
                           ListTile(
-                            leading: const Text('公历:'),
+                            leading: Text('${S.of(context).gongliText}:'),
                             title: Text(solar.toYmdHms()),
                           ),
                     ],

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'extensions/enum_type.dart';
+import 'generated/l10n.dart';
 
 class Settings extends StatefulWidget {
   const Settings({super.key});
@@ -36,7 +37,7 @@ class _SettingsState extends State<Settings> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('设置'),
+        title: Text(S.of(context).settingTitle),
         centerTitle: true,
         backgroundColor: Theme.of(context).primaryColor,
         ),
@@ -51,8 +52,8 @@ class _SettingsState extends State<Settings> {
               _setTheme(color.index);
             }
           },
-          decoration: const InputDecoration(
-              labelText: 'Theme', border: OutlineInputBorder(), isDense: true),
+          decoration: InputDecoration(
+              labelText: S.of(context).theme, border: const OutlineInputBorder(), isDense: true),
         ),
       ),
     );

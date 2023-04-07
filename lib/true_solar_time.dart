@@ -12,6 +12,7 @@ import 'package:timezone/timezone.dart';
 // import 'package:timezone/data/latest.dart' as tz;
 
 import 'extensions/datetime_extensions.dart';
+import 'generated/l10n.dart';
 import 'timeset_widget.dart';
 import 'drawerbuilder.dart';
 import 'solar_time.dart';
@@ -98,7 +99,7 @@ class _SolarTimeState extends State<SolarTimeScreen> {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          title: const Text("真太阳时"),
+          title: Text(S.of(context).solarTimeTitle),
           centerTitle: true,
           backgroundColor: Theme.of(context).primaryColor,
         ),
@@ -116,7 +117,7 @@ class _SolarTimeState extends State<SolarTimeScreen> {
                   debugPrint(error.toString());
                 });
               },
-              tooltip: 'Get current location',
+              tooltip: S.of(context).tooltipGetLocation,
               child: const Icon(Icons.my_location),
             ),
             const SizedBox(
@@ -127,8 +128,8 @@ class _SolarTimeState extends State<SolarTimeScreen> {
                 if (_latitudeController.text.isEmpty ||
                     _longitudeController.text.isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('请输入经纬度'),
+                    SnackBar(
+                      content: Text(S.of(context).getLocationHint),
                     ),
                   );
                   return;
@@ -145,7 +146,7 @@ class _SolarTimeState extends State<SolarTimeScreen> {
                     double.parse(_longitudeController.text));
               },
               tooltip: '计算真太阳时',
-              label: const Text('计算'),
+              label: Text(S.of(context).calculateButton),
               icon: const Icon(Icons.calculate),
               heroTag: null,
             ),
@@ -161,9 +162,9 @@ class _SolarTimeState extends State<SolarTimeScreen> {
                     child: TextField(
                         controller:
                             dateController, //editing controller of this TextField
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: "日期",
+                        decoration: InputDecoration(
+                          border: const OutlineInputBorder(),
+                          labelText: S.of(context).date,
                           isDense: true,
                         ),
                         readOnly: true, // when true user cannot edit text
@@ -189,9 +190,9 @@ class _SolarTimeState extends State<SolarTimeScreen> {
                     child: TextField(
                         controller:
                             timeController, //editing controller of this TextField
-                        decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: "时间",
+                        decoration: InputDecoration(
+                            border: const OutlineInputBorder(),
+                            labelText: S.of(context).time,
                             isDense: true),
                         readOnly: true, // when true user cannot edit text
                         onTap: () async {
@@ -218,9 +219,9 @@ class _SolarTimeState extends State<SolarTimeScreen> {
                   Expanded(
                     child: TextField(
                       controller: _latitudeController,
-                      decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Latitude',
+                      decoration: InputDecoration(
+                          border: const OutlineInputBorder(),
+                          labelText: S.of(context).latitudeLabel,
                           isDense: true),
                     ),
                   ),
@@ -228,9 +229,9 @@ class _SolarTimeState extends State<SolarTimeScreen> {
                   Expanded(
                     child: TextField(
                       controller: _longitudeController,
-                      decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Longitude',
+                      decoration: InputDecoration(
+                          border: const OutlineInputBorder(),
+                          labelText: S.of(context).longitudeLabel,
                           isDense: true),
                     ),
                   ),
@@ -248,9 +249,9 @@ class _SolarTimeState extends State<SolarTimeScreen> {
                 onChanged: (Location? tLocation) {
                   location.location.value = tLocation!;
                 },
-                decoration: const InputDecoration(
-                    labelText: '时区',
-                    border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                    labelText: S.of(context).timeZoneLabel,
+                    border: const OutlineInputBorder(),
                     isDense: true),
               ),
               Card(
@@ -264,19 +265,19 @@ class _SolarTimeState extends State<SolarTimeScreen> {
                     return Column(
                       children: [
                         ListTile(
-                          leading: const Text('均时差：'),
+                          leading: Text("${S.of(context).equationOfTimeText}:"),
                           title: Text(value != null
                               ? formatDuration(value.equationOfTime)
                               : ""),
                         ),
                         ListTile(
-                          leading: const Text('地理时差：'),
+                          leading: Text("${S.of(context).geographicalTimeDifferenceText}:"),
                           title: Text(value != null
                               ? formatDuration(value.geoTimeDifference)
                               : ""),
                         ),
                         ListTile(
-                            leading: const Text('真太阳时：'),
+                            leading: Text("${S.of(context).solarTimeText}:"),
                             title: Text(value != null
                                 ? DateFormat('y/MM/dd HH:mm:ss')
                                     .format(value.localSolarTime)
@@ -331,7 +332,7 @@ class _SolarTimeState extends State<SolarTimeScreen> {
                     return Column(
                       children: [
                         ListTile(
-                          leading: const Text('农历:'),
+                          leading: Text("${S.of(context).lunarText}:"),
                           title: lunar != null
                               ? Text(lunar.toString())
                               : const Text(""),
@@ -359,7 +360,7 @@ class _SolarTimeState extends State<SolarTimeScreen> {
                     return Column(
                       children: [
                         ListTile(
-                          title: const Text('时间局'),
+                          title: Text("${S.of(context).timesetText}:"),
                           subtitle: timeset != null
                               ? TimesetWidget(timeset: timeset)
                               : const Text(""),

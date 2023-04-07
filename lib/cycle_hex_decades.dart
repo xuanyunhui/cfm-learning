@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lunar/calendar/util/LunarUtil.dart';
 
 import 'drawerbuilder.dart';
+import 'generated/l10n.dart';
 
 class CycleHexDecades extends StatefulWidget {
   const CycleHexDecades({super.key});
@@ -42,7 +43,7 @@ class _CycleHexDecades extends State<CycleHexDecades> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('六十甲子'),
+        title: Text(S.of(context).cycleTitle),
         centerTitle: true,
         backgroundColor: Theme.of(context).primaryColor,
       ),
@@ -61,10 +62,10 @@ class _CycleHexDecades extends State<CycleHexDecades> {
                   onChanged: (StemLabel? stem) {
                     selected.selectedStem.value = stem;
                   },
-                  decoration: const InputDecoration(
-                    labelText: '天干',
-                    border: OutlineInputBorder(),
-                    constraints: BoxConstraints(maxWidth: 100),
+                  decoration: InputDecoration(
+                    labelText: S.of(context).stem,
+                    border: const OutlineInputBorder(),
+                    constraints: const BoxConstraints(maxWidth: 100),
                     isDense: true
                   ),
                 ),
@@ -75,10 +76,10 @@ class _CycleHexDecades extends State<CycleHexDecades> {
                   onChanged: (RootLabel? root) {
                     selected.selectedRoot.value = root;
                   },
-                  decoration: const InputDecoration(
-                    labelText: '地支',
-                    border: OutlineInputBorder(),
-                    constraints: BoxConstraints(maxWidth: 100),
+                  decoration: InputDecoration(
+                    labelText: S.of(context).root,
+                    border: const OutlineInputBorder(),
+                    constraints: const BoxConstraints(maxWidth: 100),
                     isDense: true
                   ),
                 ),

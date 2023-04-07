@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 import 'drawerbuilder.dart';
+import 'generated/l10n.dart';
 
 class Palace extends StatefulWidget {
   const Palace({super.key});
@@ -43,7 +44,7 @@ class _PalaceState extends State<Palace> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('长生宫'),
+        title: Text(S.of(context).lifePalaceTitle),
         centerTitle: true,
         backgroundColor: Theme.of(context).primaryColor,
       ),
@@ -62,10 +63,10 @@ class _PalaceState extends State<Palace> {
                   onChanged: (StemLabel? stem) {
                     selected.selectedStem.value = stem;
                   },
-                  decoration: const InputDecoration(
-                    labelText: '天干',
-                    border: OutlineInputBorder(),
-                    constraints: BoxConstraints(maxWidth: 100),
+                  decoration: InputDecoration(
+                    labelText: S.of(context).stem,
+                    border: const OutlineInputBorder(),
+                    constraints: const BoxConstraints(maxWidth: 100),
                     isDense: true
                   ),
                 ),
@@ -76,10 +77,10 @@ class _PalaceState extends State<Palace> {
                   onChanged: (RootLabel? root) {
                     selected.selectedRoot.value = root;
                   },
-                  decoration: const InputDecoration(
-                    labelText: '地支',
-                    border: OutlineInputBorder(),
-                    constraints: BoxConstraints(maxWidth: 100),
+                  decoration: InputDecoration(
+                    labelText: S.of(context).root,
+                    border: const OutlineInputBorder(),
+                    constraints: const BoxConstraints(maxWidth: 100),
                     isDense: true
                   ),
                 ),
@@ -110,7 +111,7 @@ class _PalaceState extends State<Palace> {
                 setState(() {
                 });
               },
-               child: const Text('刷新题目')
+               child: Text(S.of(context).refreshQuestion)
             ),
             training(result),
           ],
@@ -170,10 +171,10 @@ class _PalaceState extends State<Palace> {
                   entry['result'].result.value = verify(entry, palace);
                   // });
                 },
-                decoration: const InputDecoration(
-                  labelText: '长生宫',
-                  border: OutlineInputBorder(),
-                  constraints: BoxConstraints(maxWidth: 100),
+                decoration: InputDecoration(
+                  labelText: S.of(context).lifePalace,
+                  border: const OutlineInputBorder(),
+                  constraints: const BoxConstraints(maxWidth: 100),
                   isDense: true
                 ),
               ),
