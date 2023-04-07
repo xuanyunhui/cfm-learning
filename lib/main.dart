@@ -1,4 +1,3 @@
-import 'package:cfm_learning/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
@@ -8,17 +7,18 @@ import 'cycle_hex_decades.dart';
 import 'home.dart';
 import 'life_place.dart';
 import 'provider/theme_settings.dart';
-import 'themes/timesets-app/custom_color.g.dart';
+import 'settings.dart';
 import 'true_solar_time.dart';
 import 'timeset_calendar.dart';
 import 'qimen.dart';
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  final int themeindex = sharedPreferences.getInt('theme') ?? 0;
+void main() {
+  // WidgetsFlutterBinding.ensureInitialized();
+  // SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  // final int themeindex = sharedPreferences.getInt('theme') ?? 0;
 
-  runApp(MyApp(themeIndex: themeindex));
+  // ignore: prefer_const_constructors
+  runApp(MyApp());
 }
 
 class Routes {
@@ -38,8 +38,9 @@ class Routes {
 }
 
 class MyApp extends StatelessWidget {
-  final int themeIndex;
-  const MyApp({super.key, required this.themeIndex});
+  // final int themeIndex;
+  const MyApp({super.key});
+  // const MyApp({super.key, required this.themeIndex});
 
   // This widget is the root of your application.
   @override

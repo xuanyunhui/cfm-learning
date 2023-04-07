@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:cfm_learning/extensions/enum_type.dart';
 import 'package:cfm_learning/themes/timesets-app/color_schemes.g.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +10,21 @@ class ThemeSettings extends ChangeNotifier {
 
   int get index => _index;
 
+  ThemeSettings() {
+    persistent();
+  }
+
   set index(int index) {
     _index = index;
+    notifyListeners();
+  }
+
+  void setTheme(int index) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    _index =
+        await sharedPreferences.setInt('theme', index).then((bool success) {
+      return index;
+    });
     notifyListeners();
   }
 
@@ -89,18 +100,15 @@ class ThemeSettings extends ChangeNotifier {
     }
   }
 
-  void setTheme(int index) async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    _index =
-        await sharedPreferences.setInt('theme', index).then((bool success) {
-      return index;
-    });
-    notifyListeners();
-  }
-
   generateColorScheme(Color color, bool isDark) {
     return isDark
         ? ColorScheme.fromSeed(seedColor: color, brightness: Brightness.dark)
         : ColorScheme.fromSeed(seedColor: color, brightness: Brightness.light);
+  }
+
+  persistent() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    _index = sharedPreferences.getInt('theme') ?? 0;
+    notifyListeners();
   }
 }

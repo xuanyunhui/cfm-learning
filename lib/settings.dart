@@ -35,7 +35,11 @@ class _SettingsState extends State<Settings> {
     }
 
     return Scaffold(
-      appBar: AppBar(title: const Text('设置'), centerTitle: true),
+      appBar: AppBar(
+        title: const Text('设置'),
+        centerTitle: true,
+        backgroundColor: Theme.of(context).primaryColor,
+        ),
       drawer: const NavigationDrawerBuilder(),
       body: Padding(
         padding: const EdgeInsets.all(12),

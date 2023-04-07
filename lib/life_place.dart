@@ -45,6 +45,7 @@ class _PalaceState extends State<Palace> {
       appBar: AppBar(
         title: const Text('长生宫'),
         centerTitle: true,
+        backgroundColor: Theme.of(context).primaryColor,
       ),
       drawer: const NavigationDrawerBuilder(),
       body: SafeArea(

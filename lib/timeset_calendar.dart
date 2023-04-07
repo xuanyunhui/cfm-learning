@@ -62,6 +62,7 @@ class _TimesetCalendarState extends State<TimesetCalendar> {
       appBar: AppBar(
         title: const Text('天干地支'),
         centerTitle: true,
+        backgroundColor: Theme.of(context).primaryColor,
       ),
       drawer: const NavigationDrawerBuilder(),
       body: SafeArea(
