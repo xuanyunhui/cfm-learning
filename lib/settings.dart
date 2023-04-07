@@ -29,7 +29,8 @@ class _SettingsState extends State<Settings> {
           value: color,
           child: Text(
             color.displayTitle,
-            style: TextStyle(backgroundColor: color.color()),
+            selectionColor: color.color(),
+            style: TextStyle(color: color.color()),
           )));
     }
 

@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:cfm_learning/extensions/enum_type.dart';
 import 'package:cfm_learning/themes/timesets-app/color_schemes.g.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +31,14 @@ class ThemeSettings extends ChangeNotifier {
         return generateColorScheme(ColorsOfYear.livingCoral.color(), false);
       case 5:
         return generateColorScheme(ColorsOfYear.ultraViolet.color(), false);
+      case 6:
+        return ColorScheme.fromSeed(
+            seedColor: const Color(0xffc59390),
+            primary: const Color(0xffc59390),
+            secondary: const Color(0xffd1b0b2),
+            tertiary: const Color(0xffdbcac0),
+            // background: const Color(0xffe4d4d0),
+            brightness: Brightness.light);
       default:
         return timesetsLightColorScheme;
     }
@@ -48,6 +58,14 @@ class ThemeSettings extends ChangeNotifier {
         return generateColorScheme(ColorsOfYear.livingCoral.color(), true);
       case 5:
         return generateColorScheme(ColorsOfYear.ultraViolet.color(), true);
+      case 6:
+        return ColorScheme.fromSeed(
+            seedColor: const Color(0xffc59390),
+            primary: const Color(0xffc59390),
+            secondary: const Color(0xffd1b0b2),
+            tertiary: const Color(0xffdbcac0),
+            background: const Color(0xffe4d4d0),
+            brightness: Brightness.dark);
       default:
         return timesetsDarkColorScheme;
     }
@@ -82,9 +100,7 @@ class ThemeSettings extends ChangeNotifier {
 
   generateColorScheme(Color color, bool isDark) {
     return isDark
-        ? ColorScheme.fromSeed(
-            seedColor: color, brightness: Brightness.dark)
-        : ColorScheme.fromSeed(
-            seedColor: color, brightness: Brightness.light);
+        ? ColorScheme.fromSeed(seedColor: color, brightness: Brightness.dark)
+        : ColorScheme.fromSeed(seedColor: color, brightness: Brightness.light);
   }
 }
