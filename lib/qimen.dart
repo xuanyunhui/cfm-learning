@@ -69,6 +69,7 @@ class _QiMenContentState extends State<QiMenContent>
         appBar: AppBar(
           title: const Text("奇门"),
           centerTitle: true,
+          backgroundColor: Theme.of(context).primaryColor,
         ),
         drawer: const NavigationDrawerBuilder(),
         body: Container(
