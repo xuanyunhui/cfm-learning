@@ -60,8 +60,8 @@ class MyApp extends StatelessWidget {
             title: 'Flutter Demo',
             theme: ThemeData(
               useMaterial3: true,
-              colorScheme:
-                  settings.getlightColorScheme(), // settings.themeData.light
+              colorScheme: settings.getlightColorScheme(),
+              appBarTheme: const AppBarTheme(elevation: 4)
             ),
             darkTheme: ThemeData(
               useMaterial3: true,
