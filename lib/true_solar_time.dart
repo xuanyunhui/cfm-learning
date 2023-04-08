@@ -101,7 +101,6 @@ class _SolarTimeState extends State<SolarTimeScreen> {
         appBar: AppBar(
           title: Text(S.of(context).solarTimeTitle),
           centerTitle: true,
-          backgroundColor: Theme.of(context).primaryColor,
         ),
         drawer: const NavigationDrawerBuilder(),
         floatingActionButton: Column(

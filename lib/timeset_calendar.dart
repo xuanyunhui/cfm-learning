@@ -63,7 +63,6 @@ class _TimesetCalendarState extends State<TimesetCalendar> {
       appBar: AppBar(
         title: Text(S.of(context).timesetTitle),
         centerTitle: true,
-        backgroundColor: Theme.of(context).primaryColor,
       ),
       drawer: const NavigationDrawerBuilder(),
       body: SafeArea(

@@ -45,7 +45,6 @@ class _CycleHexDecades extends State<CycleHexDecades> {
       appBar: AppBar(
         title: Text(S.of(context).cycleTitle),
         centerTitle: true,
-        backgroundColor: Theme.of(context).primaryColor,
       ),
       drawer: const NavigationDrawerBuilder(),
       body: SafeArea(

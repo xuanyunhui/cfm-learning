@@ -39,7 +39,6 @@ class _SettingsState extends State<Settings> {
       appBar: AppBar(
         title: Text(S.of(context).settingTitle),
         centerTitle: true,
-        backgroundColor: Theme.of(context).primaryColor,
         ),
       drawer: const NavigationDrawerBuilder(),
       body: Padding(

@@ -66,6 +66,7 @@ class MyApp extends StatelessWidget {
             darkTheme: ThemeData(
               useMaterial3: true,
               colorScheme: settings.getdarkColorScheme(),
+              appBarTheme: const AppBarTheme(elevation: 4)
             ),
             // home: const MyHomePage(title: 'Flutter Demo Home Page'),
             initialRoute: Routes.homePage,

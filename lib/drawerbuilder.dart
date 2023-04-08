@@ -11,7 +11,7 @@ class NavigationDrawerBuilder extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              buildHeader(context),
+              // buildHeader(context),
               buildMenuItem(context),
             ],
           ),
@@ -44,8 +44,8 @@ class NavigationDrawerBuilder extends StatelessWidget {
         ),
       );
 
-  buildMenuItem(BuildContext context) => Container(
-        padding: const EdgeInsets.all(24),
+  buildMenuItem(BuildContext context) => Padding(
+        padding: EdgeInsets.fromLTRB(12, 12 + MediaQuery.of(context).padding.top, 12, 24 + MediaQuery.of(context).padding.bottom),
         child: Wrap(
             runSpacing: 0, // vertical spacing
             children: [
@@ -60,7 +60,7 @@ class NavigationDrawerBuilder extends StatelessWidget {
                   }),
               const Divider(),
               ListTile(
-                  leading: const Icon(Icons.settings_outlined),
+                  leading: const Icon(Icons.looks_one),
                   title: Text(S.of(context).qimenTitle),
                   onTap: () {
                     Navigator.pop(context);
@@ -68,7 +68,7 @@ class NavigationDrawerBuilder extends StatelessWidget {
                   }),
               const Divider(),
               ListTile(
-                  leading: const Icon(Icons.settings_outlined),
+                  leading: const Icon(Icons.looks_two),
                   title: Text(S.of(context).lifePalaceTitle),
                   onTap: () {
                     Navigator.pop(context);
@@ -76,7 +76,7 @@ class NavigationDrawerBuilder extends StatelessWidget {
                   }),
               const Divider(),
               ListTile(
-                  leading: const Icon(Icons.settings_outlined),
+                  leading: const Icon(Icons.looks_3),
                   title: Text(S.of(context).cycleTitle),
                   onTap: () {
                     Navigator.pop(context);
@@ -84,7 +84,7 @@ class NavigationDrawerBuilder extends StatelessWidget {
                   }),
               const Divider(),
               ListTile(
-                  leading: const Icon(Icons.settings_outlined),
+                  leading: const Icon(Icons.looks_4),
                   title: Text(S.of(context).solarTimeTitle),
                   onTap: () {
                     Navigator.pop(context);
@@ -92,7 +92,7 @@ class NavigationDrawerBuilder extends StatelessWidget {
                   }),
               const Divider(),
               ListTile(
-                  leading: const Icon(Icons.settings_outlined),
+                  leading: const Icon(Icons.looks_5),
                   title: Text(S.of(context).timesetTitle),
                   onTap: () {
                     // Navigator.pop(context);

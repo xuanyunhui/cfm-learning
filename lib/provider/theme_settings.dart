@@ -43,13 +43,7 @@ class ThemeSettings extends ChangeNotifier {
       case 5:
         return generateColorScheme(ColorsOfYear.ultraViolet.color(), false);
       case 6:
-        return ColorScheme.fromSeed(
-            seedColor: const Color(0xffc59390),
-            primary: const Color(0xffc59390),
-            secondary: const Color(0xffd1b0b2),
-            tertiary: const Color(0xffdbcac0),
-            // background: const Color(0xffe4d4d0),
-            brightness: Brightness.light);
+        return timesetsLightColorScheme;
       default:
         return timesetsLightColorScheme;
     }
@@ -70,13 +64,7 @@ class ThemeSettings extends ChangeNotifier {
       case 5:
         return generateColorScheme(ColorsOfYear.ultraViolet.color(), true);
       case 6:
-        return ColorScheme.fromSeed(
-            seedColor: const Color(0xffc59390),
-            primary: const Color(0xffc59390),
-            secondary: const Color(0xffd1b0b2),
-            tertiary: const Color(0xffdbcac0),
-            background: const Color(0xffe4d4d0),
-            brightness: Brightness.dark);
+        return timesetsDarkColorScheme;
       default:
         return timesetsDarkColorScheme;
     }

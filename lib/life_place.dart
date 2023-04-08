@@ -46,7 +46,6 @@ class _PalaceState extends State<Palace> {
       appBar: AppBar(
         title: Text(S.of(context).lifePalaceTitle),
         centerTitle: true,
-        backgroundColor: Theme.of(context).primaryColor,
       ),
       drawer: const NavigationDrawerBuilder(),
       body: SafeArea(

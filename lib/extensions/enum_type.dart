@@ -10,7 +10,7 @@ enum ColorsOfYear {
   classicBlue,
   livingCoral,
   ultraViolet,
-  customTest;
+  timesets;
 }
 
 extension ColorExtension on ColorsOfYear {
@@ -30,8 +30,8 @@ extension ColorExtension on ColorsOfYear {
         return 'Living Coral';
       case ColorsOfYear.ultraViolet:
         return 'Ultra Violet';
-      case ColorsOfYear.customTest:
-        return 'Ultra Violet';
+      case ColorsOfYear.timesets:
+        return '时间码';
       default:
         return 'Viva Magenta';
     }
@@ -51,8 +51,8 @@ extension ColorExtension on ColorsOfYear {
         return 'Living Coral - Pantone\'s Color of the Year 2019';
       case ColorsOfYear.ultraViolet:
         return 'ULTRA VIOLET - Pantone\'s Color of the Year 2018';
-      case ColorsOfYear.customTest:
-        return 'ULTRA VIOLET - Pantone\'s Color of the Year 2018';
+      case ColorsOfYear.timesets:
+        return '时间码的配色方案生成的Material主题';
       default:
         return 'Viva Magenta - Pantone\'s Color of the Year 2023';
     }
@@ -72,7 +72,7 @@ extension ColorExtension on ColorsOfYear {
         return const Color(0xffff6f61);
       case ColorsOfYear.ultraViolet:
         return const Color(0xff6b5b95);
-      case ColorsOfYear.customTest:
+      case ColorsOfYear.timesets:
         return const Color(0xff6b5b95);
       default:
         return const Color(0xffbe3455);
