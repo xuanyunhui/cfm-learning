@@ -158,15 +158,13 @@ class _QiMenContentState extends State<QiMenContent>
                                   EightChar.fromLunar(lunar).getMonthGan() +
                                   EightChar.fromLunar(lunar).getDayGan() +
                                   EightChar.fromLunar(lunar).getTimeGan(),
-                              style: const TextStyle(
-                                  color: Color.fromRGBO(85, 79, 86, 1))),
+                              style: Theme.of(context).textTheme.bodyLarge),
                           Text(
                               EightChar.fromLunar(lunar).getYearZhi() +
                                   EightChar.fromLunar(lunar).getMonthZhi() +
                                   EightChar.fromLunar(lunar).getDayZhi() +
                                   EightChar.fromLunar(lunar).getTimeZhi(),
-                              style: const TextStyle(
-                                  color: Color.fromRGBO(85, 79, 86, 1))),
+                              style: Theme.of(context).textTheme.bodyLarge),
                         ],
                       ),
                       // const Divider(
@@ -178,45 +176,37 @@ class _QiMenContentState extends State<QiMenContent>
                       // ),
                       Column(
                         children: [
-                          const Text("值使门",
-                              style: TextStyle(
-                                  color: Color.fromRGBO(85, 79, 86, 1))),
+                          Text("值使门",
+                              style: Theme.of(context).textTheme.bodyLarge),
                           Text(
                             qimen.getWatchman(),
-                            style: const TextStyle(
-                                color: Color.fromRGBO(85, 79, 86, 1)),
+                            style: Theme.of(context).textTheme.bodyLarge,
                           )
                         ],
                       ),
                       Column(
                         children: [
-                          const Text("旬首",
-                              style: TextStyle(
-                                  color: Color.fromRGBO(85, 79, 86, 1))),
+                          Text("旬首",
+                              style: Theme.of(context).textTheme.bodyLarge),
                           Text(qimen.getFirstOfTenDays(format: false),
-                              style: const TextStyle(
-                                  color: Color.fromRGBO(85, 79, 86, 1))),
+                              style: Theme.of(context).textTheme.bodyLarge),
                         ],
                       ),
                       Column(
                         children: [
-                          const Text("局数",
-                              style: TextStyle(
-                                  color: Color.fromRGBO(85, 79, 86, 1))),
+                          Text("局数",
+                              style: Theme.of(context).textTheme.bodyLarge),
                           Text(
                               "${qimen.isYang() ? "阳" : "阴"}${qimen.sequence()}局",
-                              style: const TextStyle(
-                                  color: Color.fromRGBO(85, 79, 86, 1))),
+                              style: Theme.of(context).textTheme.bodyLarge),
                         ],
                       ),
                       Column(
                         children: [
-                          const Text("空亡",
-                              style: TextStyle(
-                                  color: Color.fromRGBO(85, 79, 86, 1))),
+                          Text("空亡",
+                              style: Theme.of(context).textTheme.bodyLarge),
                           Text(lunar.getTimeXunKong(),
-                              style: const TextStyle(
-                                  color: Color.fromRGBO(85, 79, 86, 1))),
+                              style: Theme.of(context).textTheme.bodyLarge),
                         ],
                       ),
                     ],
@@ -250,120 +240,77 @@ class _QiMenContentState extends State<QiMenContent>
   }
 
   Widget magicSquareUnit(BuildContext context, int palace) {
-    TextStyle boxTextStyle = TextStyle(
-        color: Theme.of(context).colorScheme.inverseSurface, fontSize: 15);
-    double PALACESIZE = (MediaQuery.of(context).size.width - 100) / 3;
-    const double RADIUSSIZE = 5;
-    const double OUTER = 4.0;
-    const double INNER = 4.0;
+    TextStyle? boxTextStyle = Theme.of(context).textTheme.bodyLarge;
     const palaceName = ["坎1", "坤2", "震3", "巽4", "中5", "乾6", "兑7", "艮8", "离9"];
 
     return Card(
       margin: EdgeInsets.zero,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: SizedBox(
-          // decoration: BoxDecoration(
-          //   borderRadius: const BorderRadius.all(Radius.circular(RADIUSSIZE)),
-          //   color: Theme.of(context).colorScheme.surfaceVariant,
-          // ),
-          // margin: const EdgeInsets.fromLTRB(OUTER, OUTER, OUTER, OUTER),
-          width: PALACESIZE,
-          height: PALACESIZE,
-          child: Column(
-            children: [
-              Expanded(
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Center(
-                          child: Text(
-                        "",
-                        style: boxTextStyle,
-                      )),
-                    ),
-                    Expanded(
-                      child: Center(
-                        child: Text(
-                          (qimen.jiuxing()[palace] == "天芮")
-                              ? "${qimen.jiuxing()[palace]}-禽"
-                              : qimen.jiuxing()[palace],
-                          style: boxTextStyle,
-                        ),
-                      ),
-                    ),
-                  ],
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "",
+                  style: boxTextStyle,
                 ),
-              ),
-              Expanded(
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Center(
-                        child: Text(
-                          (palace == 4)
-                              ? ""
-                              : (qimen.tianpan()[palace] == qimen.dipan()[1])
-                                  ? "${qimen.tianpan()[palace]}-${qimen.dipan()[4]}"
-                                  : qimen.tianpan()[palace],
-                          style: boxTextStyle,
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Center(
-                          child: Text(
-                        qimen.bashen()[palace],
-                        style: boxTextStyle,
-                      )),
-                    ),
-                  ],
+                Text(
+                  (qimen.jiuxing()[palace] == "天芮")
+                      ? "${qimen.jiuxing()[palace]}-禽"
+                      : qimen.jiuxing()[palace],
+                  style: boxTextStyle,
                 ),
-              ),
-              Expanded(
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Center(
-                          child: Text(
-                        "",
-                        style: boxTextStyle,
-                      )),
-                    ),
-                    Expanded(
-                      child: Center(
-                          child: Text(
-                        qimen.bamen()[palace],
-                        style: boxTextStyle,
-                      )),
-                    ),
-                  ],
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  (palace == 4)
+                      ? ""
+                      : (qimen.tianpan()[palace] == qimen.dipan()[1])
+                          ? "${qimen.tianpan()[palace]}-${qimen.dipan()[4]}"
+                          : qimen.tianpan()[palace],
+                  style: boxTextStyle,
                 ),
-              ),
-              Expanded(
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Center(
-                          child: Text(
-                        (qimen.dipan()[palace] == qimen.dipan()[1])
-                            ? "${qimen.dipan()[palace]}-${qimen.dipan()[4]}"
-                            : qimen.dipan()[palace],
-                        style: boxTextStyle,
-                      )),
-                    ),
-                    Expanded(
-                      child: Center(
-                          child: Text(
-                        palaceName[palace],
-                        style: boxTextStyle,
-                      )),
-                    ),
-                  ],
+                Text(
+                  qimen.bashen()[palace],
+                  style: boxTextStyle,
                 ),
-              ),
-            ],
-          ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "",
+                  style: boxTextStyle,
+                ),
+                Text(
+                  qimen.bamen()[palace],
+                  style: boxTextStyle,
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  (qimen.dipan()[palace] == qimen.dipan()[1])
+                  ? "${qimen.dipan()[palace]}-${qimen.dipan()[4]}"
+                  : qimen.dipan()[palace],
+                  style: boxTextStyle,
+                ),
+                Text(
+                  palaceName[palace],
+                  style: boxTextStyle,
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );
