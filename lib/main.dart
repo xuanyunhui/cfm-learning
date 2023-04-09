@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
@@ -13,10 +14,11 @@ import 'timeset_calendar.dart';
 import 'qimen.dart';
 
 void main() {
-  // WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   // SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
   // final int themeindex = sharedPreferences.getInt('theme') ?? 0;
-
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+      overlays: [SystemUiOverlay.top]);
   // ignore: prefer_const_constructors
   runApp(MyApp());
 }
@@ -59,20 +61,17 @@ class MyApp extends StatelessWidget {
             supportedLocales: S.delegate.supportedLocales,
             title: 'Flutter Demo',
             theme: ThemeData(
-              useMaterial3: true,
-              colorScheme: settings.getlightColorScheme(),
-              appBarTheme: const AppBarTheme(elevation: 4)
-            ),
+                useMaterial3: true,
+                colorScheme: settings.getlightColorScheme(),
+                appBarTheme: const AppBarTheme(elevation: 4)),
             darkTheme: ThemeData(
-              useMaterial3: true,
-              colorScheme: settings.getdarkColorScheme(),
-              appBarTheme: const AppBarTheme(elevation: 4)
-            ),
+                useMaterial3: true,
+                colorScheme: settings.getdarkColorScheme(),
+                appBarTheme: const AppBarTheme(elevation: 4)),
             // home: const MyHomePage(title: 'Flutter Demo Home Page'),
             initialRoute: Routes.homePage,
             routes: {
-              Routes.homePage: (context) =>
-                  const MyHomePage(),
+              Routes.homePage: (context) => const MyHomePage(),
               Routes.palacePage: (context) => const Palace(),
               Routes.qimenPage: (context) => const QiMenContent(),
               Routes.solarTimePage: (context) => const SolarTimeScreen(),

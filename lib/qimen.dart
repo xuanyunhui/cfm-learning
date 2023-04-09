@@ -72,7 +72,7 @@ class _QiMenContentState extends State<QiMenContent>
           centerTitle: true,
         ),
         drawer: const NavigationDrawerBuilder(),
-        body: Container(
+        body: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
             // mainAxisSize: MainAxisSize.min,
@@ -109,6 +109,7 @@ class _QiMenContentState extends State<QiMenContent>
                           }
                         }),
                   ),
+                  const SizedBox(width: 10),
                   Expanded(
                     child: TextField(
                         controller:
@@ -139,15 +140,18 @@ class _QiMenContentState extends State<QiMenContent>
               const SizedBox(
                 height: 10,
               ),
-              Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                    border: Border.all(width: sqrt1_2),
-                    borderRadius: BorderRadius.circular(5)),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Column(
+              Card(
+                // padding: const EdgeInsets.all(8),
+                // decoration: BoxDecoration(
+                //     border: Border.all(width: sqrt1_2),
+                //     borderRadius: BorderRadius.circular(5)),
+                margin: EdgeInsets.zero,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Column(
                         children: [
                           Text(
                               EightChar.fromLunar(lunar).getYearGan() +
@@ -165,16 +169,14 @@ class _QiMenContentState extends State<QiMenContent>
                                   color: Color.fromRGBO(85, 79, 86, 1))),
                         ],
                       ),
-                    ),
-                    const Divider(
-                      color: Color.fromARGB(255, 115, 10, 10),
-                      thickness: 1,
-                      height: 20,
-                      indent: 0,
-                      endIndent: 0,
-                    ),
-                    Expanded(
-                      child: Column(
+                      // const Divider(
+                      //   color: Color.fromARGB(255, 9, 9, 9),
+                      //   thickness: 1,
+                      //   height: 20,
+                      //   indent: 0,
+                      //   endIndent: 0,
+                      // ),
+                      Column(
                         children: [
                           const Text("值使门",
                               style: TextStyle(
@@ -186,9 +188,7 @@ class _QiMenContentState extends State<QiMenContent>
                           )
                         ],
                       ),
-                    ),
-                    Expanded(
-                      child: Column(
+                      Column(
                         children: [
                           const Text("旬首",
                               style: TextStyle(
@@ -198,9 +198,7 @@ class _QiMenContentState extends State<QiMenContent>
                                   color: Color.fromRGBO(85, 79, 86, 1))),
                         ],
                       ),
-                    ),
-                    Expanded(
-                      child: Column(
+                      Column(
                         children: [
                           const Text("局数",
                               style: TextStyle(
@@ -211,9 +209,7 @@ class _QiMenContentState extends State<QiMenContent>
                                   color: Color.fromRGBO(85, 79, 86, 1))),
                         ],
                       ),
-                    ),
-                    Expanded(
-                      child: Column(
+                      Column(
                         children: [
                           const Text("空亡",
                               style: TextStyle(
@@ -223,51 +219,31 @@ class _QiMenContentState extends State<QiMenContent>
                                   color: Color.fromRGBO(85, 79, 86, 1))),
                         ],
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               const Divider(
                 height: 24,
                 thickness: 1,
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      magicSquareUnit(context, 3),
-                      const SizedBox(width: sqrt2),
-                      magicSquareUnit(context, 8),
-                      const SizedBox(width: sqrt2),
-                      magicSquareUnit(context, 1),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      magicSquareUnit(context, 2),
-                      const SizedBox(width: sqrt2),
-                      magicSquareUnit(context, 4),
-                      const SizedBox(width: sqrt2),
-                      magicSquareUnit(context, 6),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      magicSquareUnit(context, 7),
-                      const SizedBox(width: sqrt2),
-                      magicSquareUnit(context, 0),
-                      const SizedBox(width: sqrt2),
-                      magicSquareUnit(context, 5)
-                    ],
-                  )
-                ],
-              ),
+              GridView.count(
+                  primary: false,
+                  crossAxisSpacing: 8,
+                  mainAxisSpacing: 8,
+                  crossAxisCount: 3,
+                  shrinkWrap: true,
+                  children: [
+                    magicSquareUnit(context, 3),
+                    magicSquareUnit(context, 8),
+                    magicSquareUnit(context, 1),
+                    magicSquareUnit(context, 2),
+                    magicSquareUnit(context, 4),
+                    magicSquareUnit(context, 6),
+                    magicSquareUnit(context, 7),
+                    magicSquareUnit(context, 0),
+                    magicSquareUnit(context, 5),
+                  ]),
             ],
           ),
         ));
@@ -276,113 +252,119 @@ class _QiMenContentState extends State<QiMenContent>
   Widget magicSquareUnit(BuildContext context, int palace) {
     TextStyle boxTextStyle = TextStyle(
         color: Theme.of(context).colorScheme.inverseSurface, fontSize: 15);
-    const double PALACESIZE = 120;
+    double PALACESIZE = (MediaQuery.of(context).size.width - 100) / 3;
     const double RADIUSSIZE = 5;
     const double OUTER = 4.0;
     const double INNER = 4.0;
     const palaceName = ["坎1", "坤2", "震3", "巽4", "中5", "乾6", "兑7", "艮8", "离9"];
 
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.all(Radius.circular(RADIUSSIZE)),
-        color: Theme.of(context).colorScheme.surfaceVariant,
-      ),
-      // margin: const EdgeInsets.fromLTRB(OUTER, OUTER, OUTER, OUTER),
-      width: PALACESIZE,
-      height: PALACESIZE,
-      child: Column(
-        children: [
-          Expanded(
-            child: Row(
-              children: [
-                Expanded(
-                  child: Center(
-                      child: Text(
-                    "",
-                    style: boxTextStyle,
-                  )),
-                ),
-                Expanded(
-                  child: Center(
-                    child: Text(
-                      (qimen.jiuxing()[palace] == "天芮")
-                          ? "${qimen.jiuxing()[palace]}-禽"
-                          : qimen.jiuxing()[palace],
-                      style: boxTextStyle,
+    return Card(
+      margin: EdgeInsets.zero,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SizedBox(
+          // decoration: BoxDecoration(
+          //   borderRadius: const BorderRadius.all(Radius.circular(RADIUSSIZE)),
+          //   color: Theme.of(context).colorScheme.surfaceVariant,
+          // ),
+          // margin: const EdgeInsets.fromLTRB(OUTER, OUTER, OUTER, OUTER),
+          width: PALACESIZE,
+          height: PALACESIZE,
+          child: Column(
+            children: [
+              Expanded(
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Center(
+                          child: Text(
+                        "",
+                        style: boxTextStyle,
+                      )),
                     ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Row(
-              children: [
-                Expanded(
-                  child: Center(
-                    child: Text(
-                      (palace == 4)
-                          ? ""
-                          : (qimen.tianpan()[palace] == qimen.dipan()[1])
-                              ? "${qimen.tianpan()[palace]}-${qimen.dipan()[4]}"
-                              : qimen.tianpan()[palace],
-                      style: boxTextStyle,
+                    Expanded(
+                      child: Center(
+                        child: Text(
+                          (qimen.jiuxing()[palace] == "天芮")
+                              ? "${qimen.jiuxing()[palace]}-禽"
+                              : qimen.jiuxing()[palace],
+                          style: boxTextStyle,
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
-                Expanded(
-                  child: Center(
-                      child: Text(
-                    qimen.bashen()[palace],
-                    style: boxTextStyle,
-                  )),
+              ),
+              Expanded(
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Center(
+                        child: Text(
+                          (palace == 4)
+                              ? ""
+                              : (qimen.tianpan()[palace] == qimen.dipan()[1])
+                                  ? "${qimen.tianpan()[palace]}-${qimen.dipan()[4]}"
+                                  : qimen.tianpan()[palace],
+                          style: boxTextStyle,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Center(
+                          child: Text(
+                        qimen.bashen()[palace],
+                        style: boxTextStyle,
+                      )),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+              Expanded(
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Center(
+                          child: Text(
+                        "",
+                        style: boxTextStyle,
+                      )),
+                    ),
+                    Expanded(
+                      child: Center(
+                          child: Text(
+                        qimen.bamen()[palace],
+                        style: boxTextStyle,
+                      )),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Center(
+                          child: Text(
+                        (qimen.dipan()[palace] == qimen.dipan()[1])
+                            ? "${qimen.dipan()[palace]}-${qimen.dipan()[4]}"
+                            : qimen.dipan()[palace],
+                        style: boxTextStyle,
+                      )),
+                    ),
+                    Expanded(
+                      child: Center(
+                          child: Text(
+                        palaceName[palace],
+                        style: boxTextStyle,
+                      )),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-          Expanded(
-            child: Row(
-              children: [
-                Expanded(
-                  child: Center(
-                      child: Text(
-                    "",
-                    style: boxTextStyle,
-                  )),
-                ),
-                Expanded(
-                  child: Center(
-                      child: Text(
-                    qimen.bamen()[palace],
-                    style: boxTextStyle,
-                  )),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Row(
-              children: [
-                Expanded(
-                  child: Center(
-                      child: Text(
-                    (qimen.dipan()[palace] == qimen.dipan()[1])
-                        ? "${qimen.dipan()[palace]}-${qimen.dipan()[4]}"
-                        : qimen.dipan()[palace],
-                    style: boxTextStyle,
-                  )),
-                ),
-                Expanded(
-                  child: Center(
-                      child: Text(
-                    palaceName[palace],
-                    style: boxTextStyle,
-                  )),
-                ),
-              ],
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
