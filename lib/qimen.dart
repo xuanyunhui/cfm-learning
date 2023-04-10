@@ -93,7 +93,7 @@ class _QiMenContentState extends State<QiMenContent>
                           DateTime? pickedDate = await showDatePicker(
                               locale: locale,
                               context: context,
-                              initialDate: DateTime.now(), //get today's date
+                              initialDate: DateTime.parse(solar.toYmd()), //get today's date
                               firstDate: DateTime(
                                   1900), //DateTime.now() - not to allow to choose before today.
                               lastDate: DateTime(2301));
@@ -122,7 +122,9 @@ class _QiMenContentState extends State<QiMenContent>
                         onTap: () async {
                           TimeOfDay? pickedTime = await showTimePicker(
                             context: context,
-                            initialTime: TimeOfDay.now(),
+                            initialTime: TimeOfDay.fromDateTime(
+                              DateTime.parse(solar.toYmdHms())
+                            ),
                           );
                           if (pickedTime != null) {
                             timeController.text =

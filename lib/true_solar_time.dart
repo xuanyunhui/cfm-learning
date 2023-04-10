@@ -172,7 +172,7 @@ class _SolarTimeState extends State<SolarTimeScreen> {
                           DateTime? pickedDate = await showDatePicker(
                               locale: locale,
                               context: context,
-                              initialDate: DateTime.parse(dateController.text), //get today's date
+                              initialDate: pickedDateTime, //get today's date
                               firstDate: DateTime(
                                   1800), //DateTime.now() - not to allow to choose before today.
                               lastDate: DateTime(2101));
@@ -199,7 +199,7 @@ class _SolarTimeState extends State<SolarTimeScreen> {
                           TimeOfDay? pickedTime = await showTimePicker(
                             context: context,
                             initialTime: TimeOfDay.fromDateTime(
-                                DateTime.parse(timeController.text)),
+                                pickedDateTime),
                           );
                           if (pickedTime != null) {
                             timeController.text =
