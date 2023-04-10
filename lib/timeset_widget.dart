@@ -37,143 +37,108 @@ class TimesetWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double? textFontSize = Theme.of(context).textTheme.titleLarge?.fontSize;
     return Container(
           alignment: Alignment.center,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               color: Colors.transparent,
-              borderRadius: BorderRadius.circular(15)),
-          margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+              ),
+          // margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
           height: 100,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Expanded(
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: Center(
-                        child: Text(
-                          timeset.getYearGan(),
-                          style: TextStyle(
-                            // fontSize: mainFontSize,
-                            // fontWeight: mainFontWeight,
-                            color: _fiveElementColor(
-                                LunarUtil.WU_XING_GAN[timeset.getYearGan()]!),
-                          ),
-                        ),
-                      ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(
+                    timeset.getYearGan(),
+                    style: TextStyle(
+                      fontSize: textFontSize,
+                      // fontWeight: mainFontWeight,
+                      color: _fiveElementColor(
+                          LunarUtil.WU_XING_GAN[timeset.getYearGan()]!),
                     ),
-                    Expanded(
-                      child: Center(
-                        child: Text(
-                          timeset.getYearZhi(),
-                          style: TextStyle(
-                            // fontSize: mainFontSize,
-                            // fontWeight: mainFontWeight,
-                            color: _fiveElementColor(
-                                LunarUtil.WU_XING_ZHI[timeset.getYearZhi()]!),
-                          ),
-                        ),
-                      ),
+                  ),
+                  Text(
+                    timeset.getYearZhi(),
+                    style: TextStyle(
+                      fontSize: textFontSize,
+                      // fontWeight: mainFontWeight,
+                      color: _fiveElementColor(
+                          LunarUtil.WU_XING_ZHI[timeset.getYearZhi()]!),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              Expanded(
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: Center(
-                        child: Text(
-                          timeset.getMonthGan(),
-                          style: TextStyle(
-                            // fontSize: mainFontSize,
-                            // fontWeight: mainFontWeight,
-                            color: _fiveElementColor(
-                                LunarUtil.WU_XING_GAN[timeset.getMonthGan()]!),
-                          ),
-                        ),
-                      ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(
+                    timeset.getMonthGan(),
+                    style: TextStyle(
+                      fontSize: textFontSize,
+                      // fontWeight: mainFontWeight,
+                      color: _fiveElementColor(
+                          LunarUtil.WU_XING_GAN[timeset.getMonthGan()]!),
                     ),
-                    Expanded(
-                      child: Center(
-                        child: Text(
-                          timeset.getMonthZhi(),
-                          style: TextStyle(
-                            // fontSize: mainFontSize,
-                            // fontWeight: mainFontWeight,
-                            color: _fiveElementColor(
-                                LunarUtil.WU_XING_ZHI[timeset.getMonthZhi()]!),
-                          ),
-                        ),
-                      ),
+                  ),
+                  Text(
+                    timeset.getMonthZhi(),
+                    style: TextStyle(
+                      fontSize: textFontSize,
+                      // fontWeight: mainFontWeight,
+                      color: _fiveElementColor(
+                          LunarUtil.WU_XING_ZHI[timeset.getMonthZhi()]!),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              Expanded(
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: Center(
-                        child: Text(
-                          timeset.getDayGan(),
-                          style: TextStyle(
-                            // fontSize: mainFontSize,
-                            // fontWeight: mainFontWeight,
-                            color: _fiveElementColor(
-                                LunarUtil.WU_XING_GAN[timeset.getDayGan()]!),
-                          ),
-                        ),
-                      ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(
+                    timeset.getDayGan(),
+                    style: TextStyle(
+                      fontSize: textFontSize,
+                      // fontWeight: mainFontWeight,
+                      color: _fiveElementColor(
+                          LunarUtil.WU_XING_GAN[timeset.getDayGan()]!),
                     ),
-                    Expanded(
-                      child: Center(
-                        child: Text(
-                          timeset.getDayZhi(),
-                          style: TextStyle(
-                            // fontSize: mainFontSize,
-                            // fontWeight: mainFontWeight,
-                            color: _fiveElementColor(
-                                LunarUtil.WU_XING_ZHI[timeset.getDayZhi()]!),
-                          ),
-                        ),
-                      ),
+                  ),
+                  Text(
+                    timeset.getDayZhi(),
+                    style: TextStyle(
+                      fontSize: textFontSize,
+                      // fontWeight: mainFontWeight,
+                      color: _fiveElementColor(
+                          LunarUtil.WU_XING_ZHI[timeset.getDayZhi()]!),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              Expanded(
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: Center(
-                        child: Text(
-                          timeset.getTimeGan(),
-                          style: TextStyle(
-                            // fontSize: mainFontSize,
-                            // fontWeight: mainFontWeight,
-                            color: _fiveElementColor(
-                                LunarUtil.WU_XING_GAN[timeset.getTimeGan()]!),
-                          ),
-                        ),
-                      ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(
+                    timeset.getTimeGan(),
+                    style: TextStyle(
+                      fontSize: textFontSize,
+                      // fontWeight: mainFontWeight,
+                      color: _fiveElementColor(
+                          LunarUtil.WU_XING_GAN[timeset.getTimeGan()]!),
                     ),
-                    Expanded(
-                      child: Center(
-                        child: Text(
-                          timeset.getTimeZhi(),
-                          style: TextStyle(
-                            // fontSize: mainFontSize,
-                            // fontWeight: mainFontWeight,
-                            color: _fiveElementColor(
-                                LunarUtil.WU_XING_ZHI[timeset.getTimeZhi()]!),
-                          ),
-                        ),
-                      ),
+                  ),
+                  Text(
+                    timeset.getTimeZhi(),
+                    style: TextStyle(
+                      fontSize: textFontSize,
+                      // fontWeight: mainFontWeight,
+                      color: _fiveElementColor(
+                          LunarUtil.WU_XING_ZHI[timeset.getTimeZhi()]!),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ],
           ),

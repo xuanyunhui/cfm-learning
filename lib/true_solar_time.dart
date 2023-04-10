@@ -97,7 +97,6 @@ class _SolarTimeState extends State<SolarTimeScreen> {
     DateTime pickedDateTime = DateTime.now();
 
     return Scaffold(
-        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text(S.of(context).solarTimeTitle),
           centerTitle: true,
@@ -152,10 +151,12 @@ class _SolarTimeState extends State<SolarTimeScreen> {
           ],
         ),
         body: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
                     child: TextField(
@@ -171,7 +172,7 @@ class _SolarTimeState extends State<SolarTimeScreen> {
                           DateTime? pickedDate = await showDatePicker(
                               locale: locale,
                               context: context,
-                              initialDate: DateTime.now(), //get today's date
+                              initialDate: DateTime.parse(dateController.text), //get today's date
                               firstDate: DateTime(
                                   1800), //DateTime.now() - not to allow to choose before today.
                               lastDate: DateTime(2101));
@@ -197,7 +198,8 @@ class _SolarTimeState extends State<SolarTimeScreen> {
                         onTap: () async {
                           TimeOfDay? pickedTime = await showTimePicker(
                             context: context,
-                            initialTime: TimeOfDay.now(),
+                            initialTime: TimeOfDay.fromDateTime(
+                                DateTime.parse(timeController.text)),
                           );
                           if (pickedTime != null) {
                             timeController.text =
@@ -253,11 +255,9 @@ class _SolarTimeState extends State<SolarTimeScreen> {
                     border: const OutlineInputBorder(),
                     isDense: true),
               ),
+              const Divider(),
               Card(
-                elevation: 0,
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 0.0, vertical: 10.0),
-                color: Theme.of(context).colorScheme.surfaceVariant,
+                margin: const EdgeInsets.only(bottom: 8.0),
                 child: ValueListenableBuilder<SolarTime?>(
                   valueListenable: location.solartime,
                   builder: (context, SolarTime? value, Widget? child) {
@@ -283,7 +283,9 @@ class _SolarTimeState extends State<SolarTimeScreen> {
                                 : ""),
                             trailing: value != null
                                 ? IconButton(
-                                    icon: randomEighthNoteIcon(),
+                                    alignment: Alignment.topCenter,
+                                    padding: EdgeInsets.zero,
+                                    icon: Icon(randomEighthNoteIcon(),size: 30,),
                                     onPressed: () {
                                       Navigator.push(context,
                                           MaterialPageRoute(builder: (context) {
@@ -317,10 +319,7 @@ class _SolarTimeState extends State<SolarTimeScreen> {
                 ),
               ),
               Card(
-                elevation: 0,
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 0.0, vertical: 10.0),
-                color: Theme.of(context).colorScheme.surfaceVariant,
+                margin: const EdgeInsets.only(bottom: 8.0),
                 child: ValueListenableBuilder<SolarTime?>(
                   valueListenable: location.solartime,
                   builder: (context, SolarTime? value, Widget? child) {
@@ -342,10 +341,7 @@ class _SolarTimeState extends State<SolarTimeScreen> {
                 ),
               ),
               Card(
-                elevation: 0,
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 0.0, vertical: 10.0),
-                color: Theme.of(context).colorScheme.surfaceVariant,
+                margin: const EdgeInsets.only(bottom: 8.0),
                 child: ValueListenableBuilder<SolarTime?>(
                   valueListenable: location.solartime,
                   builder: (context, SolarTime? value, Widget? child) {
@@ -421,28 +417,28 @@ class _SolarTimeState extends State<SolarTimeScreen> {
     return twoDigitSeconds;
   }
 
-  Widget randomEighthNoteIcon() {
+  IconData randomEighthNoteIcon() {
     final random = Random();
     final note = random.nextInt(8);
     switch (note) {
       case 0:
-        return const Icon(IconData(0x2630, fontFamily: 'MaterialIcons'));
+        return const IconData(0x2630, fontFamily: 'MaterialIcons');
       case 1:
-        return const Icon(IconData(0x2631, fontFamily: 'MaterialIcons'));
+        return const IconData(0x2631, fontFamily: 'MaterialIcons');
       case 2:
-        return const Icon(IconData(0x2632, fontFamily: 'MaterialIcons'));
+        return const IconData(0x2632, fontFamily: 'MaterialIcons');
       case 3:
-        return const Icon(IconData(0x2633, fontFamily: 'MaterialIcons'));
+        return const IconData(0x2633, fontFamily: 'MaterialIcons');
       case 4:
-        return const Icon(IconData(0x2634, fontFamily: 'MaterialIcons'));
+        return const IconData(0x2634, fontFamily: 'MaterialIcons');
       case 5:
-        return const Icon(IconData(0x2635, fontFamily: 'MaterialIcons'));
+        return const IconData(0x2635, fontFamily: 'MaterialIcons');
       case 6:
-        return const Icon(IconData(0x2636, fontFamily: 'MaterialIcons'));
+        return const IconData(0x2636, fontFamily: 'MaterialIcons');
       case 7:
-        return const Icon(IconData(0x2637, fontFamily: 'MaterialIcons'));
+        return const IconData(0x2637, fontFamily: 'MaterialIcons');
       default:
-        return const Icon(IconData(0x2630, fontFamily: 'MaterialIcons'));
+        return const IconData(0x2630, fontFamily: 'MaterialIcons');
     }
   }
 }
