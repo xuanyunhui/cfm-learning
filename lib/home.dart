@@ -39,6 +39,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       key: scaffoldKey,
       appBar: AppBar(
         title: Text(S.of(context).homeTitle),
+        centerTitle: true,
       ),
       body: Center(
         child: Column(

@@ -59,61 +59,66 @@ class NavigationDrawerBuilder extends StatelessWidget {
               ListTile(
                   leading: const Icon(Icons.home_outlined),
                   title: Text(S.of(context).homeTitle),
-                  onTap: () {
-                    //close navigation drawer before
-                    // Navigator.pop(context);
-
-                    // Navigator.pushReplacementNamed(context, '/');
-                    return context.go('/');
-                  }),
-              const Divider(),
-              ListTile(
-                  leading: const Icon(Icons.looks_one),
-                  title: Text(S.of(context).qimenTitle),
-                  onTap: () {
-                    // Navigator.pop(context);
-                    // Navigator.pushReplacementNamed(context, '/qimen');
-                    return context.go('/qimen');
-                  }),
-              const Divider(),
-              ListTile(
-                  leading: const Icon(Icons.looks_two),
-                  title: Text(S.of(context).lifePalaceTitle),
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.pushReplacementNamed(context, '/lifepalace');
-                  }),
+                  onTap: () => context.go('/')),
+              // const Divider(),
+              // ListTile(
+              //     leading: const Icon(Icons.looks_one),
+              //     title: Text(S.of(context).qimenTitle),
+              //     onTap: () {
+              //       if (Scaffold.of(context).isDrawerOpen) {
+              //         Navigator.pop(context);
+              //       }
+              //       context.go('/qimen');
+              //     }),
+              // const Divider(),
+              // ListTile(
+              //     leading: const Icon(Icons.looks_two),
+              //     title: Text(S.of(context).lifePalaceTitle),
+              //     onTap: () {
+              //       if (Scaffold.of(context).isDrawerOpen) {
+              //         Navigator.pop(context);
+              //       }
+              //       context.go('/lifePalace');
+              //     }),
               const Divider(),
               ListTile(
                   leading: const Icon(Icons.looks_3),
                   title: Text(S.of(context).cycleTitle),
                   onTap: () {
-                    Navigator.pop(context);
-                    Navigator.pushReplacementNamed(context, '/cyclehexdecades');
+                    if (Scaffold.of(context).isDrawerOpen) {
+                      Navigator.pop(context);
+                    }
+                    context.go('/cyclehexdecades');
                   }),
-              const Divider(),
-              ListTile(
-                  leading: const Icon(Icons.looks_4),
-                  title: Text(S.of(context).solarTimeTitle),
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.pushReplacementNamed(context, '/solartime');
-                  }),
-              const Divider(),
-              ListTile(
-                  leading: const Icon(Icons.looks_5),
-                  title: Text(S.of(context).timesetTitle),
-                  onTap: () {
-                    // Navigator.pop(context);
-                    Navigator.pushReplacementNamed(context, '/timesetcalendar');
-                  }),
+              // const Divider(),
+              // ListTile(
+              //     leading: const Icon(Icons.looks_4),
+              //     title: Text(S.of(context).solarTimeTitle),
+              //     onTap: () {
+              //       if (Scaffold.of(context).isDrawerOpen) {
+              //         Navigator.pop(context);
+              //       }
+              //       context.go('/solartime');
+              //     }),
+              // const Divider(),
+              // ListTile(
+              //     leading: const Icon(Icons.looks_5),
+              //     title: Text(S.of(context).timesetTitle),
+              //     onTap: () {
+              //       if (Scaffold.of(context).isDrawerOpen) {
+              //         Navigator.pop(context);
+              //       }
+              //       context.go('/timesetcalendar');
+              //     }),
               const Divider(),
               ListTile(
                   leading: const Icon(Icons.settings_outlined),
                   title: Text(S.of(context).settingTitle),
                   onTap: () {
-                    // Navigator.pop(context);
-                    Navigator.pushReplacementNamed(context, '/settings');
+                    if (Scaffold.of(context).isDrawerOpen) {
+                      Navigator.pop(context);
+                    }
+                    return context.go('/settings');
                   }),
               const Divider(),
               ListTile(

@@ -46,7 +46,7 @@ class _CycleHexDecades extends State<CycleHexDecades> {
         title: Text(S.of(context).cycleTitle),
         centerTitle: true,
       ),
-      drawer: const NavigationDrawerBuilder(),
+      // drawer: const NavigationDrawerBuilder(),
       body: SafeArea(
           child: Padding(
         padding: const EdgeInsets.all(12.0),

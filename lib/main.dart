@@ -1,9 +1,9 @@
+import 'package:cfm_learning/provider/selected_index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:qimen/qimen.dart';
 
 import 'cycle_hex_decades.dart';
 import 'generated/l10n.dart';
@@ -25,41 +25,67 @@ void main() {
   runApp(MyApp());
 }
 
-class Routes {
-  static const homePage = '/';
-
-  static const palacePage = '/lifepalace';
-
-  static const qimenPage = '/qimen';
-
-  static const solarTimePage = '/solartime';
-
-  static const cycleHexDecades = '/cyclehexdecades';
-
-  static const timesetCalendar = '/timesetcalendar';
-
-  static const settings = '/settings';
-}
+final GlobalKey<NavigatorState> _rootNavigatorKey =
+    GlobalKey<NavigatorState>(debugLabel: 'root');
+final GlobalKey<NavigatorState> _shellNavigatorKey =
+    GlobalKey<NavigatorState>(debugLabel: 'shell');
 
 class MyApp extends StatelessWidget {
   MyApp({super.key});
 
   final GoRouter _router = GoRouter(
-    routes: <RouteBase>[
-      GoRoute(
-        path: "/",
-        builder: (context, state) => const Home(),
-        routes: <RouteBase>[
-          GoRoute(path: "qimen", builder: (context, state) => const QiMenContent()),
-          GoRoute(path: "settings", builder: (context, state) => const Settings()),
-          GoRoute(path: "lifepalace", builder: (context, state) => const Palace()),
-          GoRoute(path: "solartime", builder: (context, state) => const SolarTimeScreen()),
-          GoRoute(path: "cyclehexdecades", builder: (context, state) => const CycleHexDecades()),
-          GoRoute(path: "timesetcalendar", builder: (context, state) => const TimesetCalendar()),
-      ],
-      
-    )
-  ]);
+      navigatorKey: _rootNavigatorKey,
+      initialLocation: '/',
+      routes: <RouteBase>[
+        ShellRoute(
+          navigatorKey: _shellNavigatorKey,
+          builder: (BuildContext context, GoRouterState state, Widget child) {
+            return ScaffoldWithNavBar(child: child);
+          },
+          routes: <RouteBase>[
+            GoRoute(
+              path: '/',
+              builder: (BuildContext context, GoRouterState state) {
+                return const Home();
+              },
+              routes: <RouteBase>[
+                GoRoute(
+                    parentNavigatorKey: _rootNavigatorKey,
+                    path: 'settings',
+                    builder: (context, state) => const Settings()),
+                GoRoute(
+                    parentNavigatorKey: _rootNavigatorKey,
+                    path: 'cyclehexdecades',
+                    builder: (context, state) => const CycleHexDecades()),
+              ],
+            ),
+            GoRoute(
+              path: '/solartime',
+              builder: (BuildContext context, GoRouterState state) {
+                return const SolarTimeScreen();
+              },
+            ),
+            GoRoute(
+              path: '/qimen',
+              builder: (BuildContext context, GoRouterState state) {
+                return const QiMenContent();
+              },
+            ),
+            GoRoute(
+              path: '/lifepalace',
+              builder: (BuildContext context, GoRouterState state) {
+                return const Palace();
+              },
+            ),
+            GoRoute(
+              path: '/timesetcalendar',
+              builder: (BuildContext context, GoRouterState state) {
+                return const TimesetCalendar();
+              },
+            ),
+          ],
+        ),
+      ]);
 
   @override
   Widget build(BuildContext context) {
@@ -68,9 +94,7 @@ class MyApp extends StatelessWidget {
         builder: (context, snapshot) {
           final settings = Provider.of<ThemeSettings>(context);
           return MaterialApp.router(
-            routerDelegate: _router.routerDelegate,
-            routeInformationParser: _router.routeInformationParser,
-            routeInformationProvider: _router.routeInformationProvider,
+            routerConfig: _router,
             localizationsDelegates: const [
               S.delegate,
               GlobalMaterialLocalizations.delegate,
@@ -78,7 +102,7 @@ class MyApp extends StatelessWidget {
               GlobalCupertinoLocalizations.delegate,
             ],
             supportedLocales: S.delegate.supportedLocales,
-            title: 'Flutter Demo',
+            title: 'Learn traditional Chinese culture',
             theme: ThemeData(
                 useMaterial3: true,
                 colorScheme: settings.getlightColorScheme(),
@@ -87,18 +111,126 @@ class MyApp extends StatelessWidget {
                 useMaterial3: true,
                 colorScheme: settings.getdarkColorScheme(),
                 appBarTheme: const AppBarTheme(elevation: 4)),
-            // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-            // initialRoute: Routes.homePage,
-            // routes: {
-            //   Routes.homePage: (context) => const Home(),
-            //   Routes.palacePage: (context) => const Palace(),
-            //   Routes.qimenPage: (context) => const QiMenContent(),
-            //   Routes.solarTimePage: (context) => const SolarTimeScreen(),
-            //   Routes.cycleHexDecades: (context) => const CycleHexDecades(),
-            //   Routes.timesetCalendar: (context) => const TimesetCalendar(),
-            //   Routes.settings: (context) => const Settings()
-            // },
           );
         });
+  }
+}
+
+class ScaffoldWithNavBar extends StatelessWidget {
+  /// Constructs an [ScaffoldWithNavBar].
+  const ScaffoldWithNavBar({
+    required this.child,
+    super.key,
+  });
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: child,
+      bottomNavigationBar: ChangeNotifierProvider(
+          create: (context) => SelectedIndex(),
+          builder: (context, snapshot) {
+            final selectedIndex =
+                Provider.of<SelectedIndex>(context);
+            return NavigationBar(
+              selectedIndex: selectedIndex.index,
+              onDestinationSelected: (int idx) {
+                selectedIndex.index = idx;
+                _onItemTapped(idx, context);
+              },
+              destinations: [
+                NavigationDestination(
+                  icon: const Icon(Icons.home),
+                  label: S.of(context).homeTitle,
+                ),
+                NavigationDestination(
+                  icon: const Icon(Icons.business),
+                  label: S.of(context).solarTimeTitle,
+                ),
+                NavigationDestination(
+                  icon: const Icon(Icons.notification_important_rounded),
+                  label: S.of(context).qimenTitle,
+                ),
+                NavigationDestination(
+                  icon: const Icon(Icons.notification_important_rounded),
+                  label: S.of(context).lifePalaceTitle,
+                ),
+                NavigationDestination(
+                  icon: const Icon(Icons.notification_important_rounded),
+                  label: S.of(context).timesetTitle,
+                ),
+              ],
+            );
+          }),
+    );
+  }
+
+  static int _calculateSelectedIndex(BuildContext context) {
+    final String location = GoRouterState.of(context).location;
+    if (location.startsWith('/')) {
+      return 0;
+    }
+    if (location.startsWith('/solartime')) {
+      return 1;
+    }
+    if (location.startsWith('/qimen')) {
+      return 2;
+    }
+    if (location.startsWith('/lifepalace')) {
+      return 3;
+    }
+    if (location.startsWith('/timesetcalendar')) {
+      return 4;
+    }
+    return 0;
+  }
+
+  void _onItemTapped(int index, BuildContext context) {
+    switch (index) {
+      case 0:
+        GoRouter.of(context).go('/');
+        break;
+      case 1:
+        GoRouter.of(context).go('/solartime');
+        break;
+      case 2:
+        GoRouter.of(context).go('/qimen');
+        break;
+      case 3:
+        GoRouter.of(context).go('/lifepalace');
+        break;
+      case 4:
+        GoRouter.of(context).go('/timesetcalendar');
+        break;
+    }
+  }
+}
+
+/// The details screen for either the A, B or C screen.
+class DetailsScreen extends StatelessWidget {
+  /// Constructs a [DetailsScreen].
+  const DetailsScreen({
+    required this.label,
+    super.key,
+  });
+
+  /// The label to display in the center of the screen.
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Details Screen'),
+      ),
+      body: Center(
+        child: Text(
+          'Details for $label',
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
+      ),
+    );
   }
 }
