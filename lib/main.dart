@@ -127,43 +127,45 @@ class ScaffoldWithNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // SelectedIndex selectedIndex = SelectedIndex(_calculateSelectedIndex(context));
+    final int initailIndex = _calculateSelectedIndex(context);
     return Scaffold(
       body: child,
       bottomNavigationBar: ChangeNotifierProvider(
-          create: (context) => SelectedIndex(),
-          builder: (context, snapshot) {
-            final selectedIndex =
-                Provider.of<SelectedIndex>(context);
-            return NavigationBar(
-              selectedIndex: selectedIndex.index,
-              onDestinationSelected: (int idx) {
-                selectedIndex.index = idx;
-                _onItemTapped(idx, context);
-              },
-              destinations: [
-                NavigationDestination(
-                  icon: const Icon(Icons.home),
-                  label: S.of(context).homeTitle,
-                ),
-                NavigationDestination(
-                  icon: const Icon(Icons.business),
-                  label: S.of(context).solarTimeTitle,
-                ),
-                NavigationDestination(
-                  icon: const Icon(Icons.notification_important_rounded),
-                  label: S.of(context).qimenTitle,
-                ),
-                NavigationDestination(
-                  icon: const Icon(Icons.notification_important_rounded),
-                  label: S.of(context).lifePalaceTitle,
-                ),
-                NavigationDestination(
-                  icon: const Icon(Icons.notification_important_rounded),
-                  label: S.of(context).timesetTitle,
-                ),
-              ],
-            );
-          }),
+          // value: selectedIndex,
+          create: (context) => SelectedIndex(initailIndex),
+          child: Consumer<SelectedIndex>(
+              builder: (context, selected, child) {
+                return NavigationBar(
+                  selectedIndex: selected.index,
+                  onDestinationSelected: (int idx) {
+                    selected.index = idx;
+                    _onItemTapped(idx, context);
+                  },
+                  destinations: [
+                    NavigationDestination(
+                      icon: const Icon(Icons.home),
+                      label: S.of(context).homeTitle,
+                    ),
+                    NavigationDestination(
+                      icon: const Icon(Icons.business),
+                      label: S.of(context).solarTimeTitle,
+                    ),
+                    NavigationDestination(
+                      icon: const Icon(Icons.notification_important_rounded),
+                      label: S.of(context).qimenTitle,
+                    ),
+                    NavigationDestination(
+                      icon: const Icon(Icons.notification_important_rounded),
+                      label: S.of(context).lifePalaceTitle,
+                    ),
+                    NavigationDestination(
+                      icon: const Icon(Icons.notification_important_rounded),
+                      label: S.of(context).timesetTitle,
+                    ),
+                  ],
+                );
+              })),
     );
   }
 
