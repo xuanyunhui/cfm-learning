@@ -40,7 +40,6 @@ class _SettingsState extends State<Settings> {
         title: Text(S.of(context).settingTitle),
         centerTitle: true,
         ),
-      drawer: const NavigationDrawerBuilder(),
       body: Padding(
         padding: const EdgeInsets.all(12),
         child: DropdownButtonFormField<ColorsOfYear>(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import 'generated/l10n.dart';
 
@@ -6,17 +7,19 @@ class NavigationDrawerBuilder extends StatelessWidget {
   const NavigationDrawerBuilder({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => Drawer(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              // buildHeader(context),
-              buildMenuItem(context),
-            ],
-          ),
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            // buildHeader(context),
+            buildMenuItem(context),
+          ],
         ),
-      );
+      ),
+    );
+  }
 
   buildHeader(BuildContext context) => Material(
         child: InkWell(
@@ -45,7 +48,11 @@ class NavigationDrawerBuilder extends StatelessWidget {
       );
 
   buildMenuItem(BuildContext context) => Padding(
-        padding: EdgeInsets.fromLTRB(12, 12 + MediaQuery.of(context).padding.top, 12, 24 + MediaQuery.of(context).padding.bottom),
+        padding: EdgeInsets.fromLTRB(
+            12,
+            12 + MediaQuery.of(context).padding.top,
+            12,
+            24 + MediaQuery.of(context).padding.bottom),
         child: Wrap(
             runSpacing: 0, // vertical spacing
             children: [
@@ -54,17 +61,19 @@ class NavigationDrawerBuilder extends StatelessWidget {
                   title: Text(S.of(context).homeTitle),
                   onTap: () {
                     //close navigation drawer before
-                    Navigator.pop(context);
+                    // Navigator.pop(context);
 
-                    Navigator.pushReplacementNamed(context, '/');
+                    // Navigator.pushReplacementNamed(context, '/');
+                    return context.go('/');
                   }),
               const Divider(),
               ListTile(
                   leading: const Icon(Icons.looks_one),
                   title: Text(S.of(context).qimenTitle),
                   onTap: () {
-                    Navigator.pop(context);
-                    Navigator.pushReplacementNamed(context, '/qimen');
+                    // Navigator.pop(context);
+                    // Navigator.pushReplacementNamed(context, '/qimen');
+                    return context.go('/qimen');
                   }),
               const Divider(),
               ListTile(

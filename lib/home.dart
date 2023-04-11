@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'drawerbuilder.dart';
 import 'generated/l10n.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+class Home extends StatefulWidget {
+  const Home({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<Home> createState() => _HomeState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _HomeState extends State<Home> with TickerProviderStateMixin {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   int _counter = 0;
 
@@ -44,15 +44,17 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text('${Localizations.of<MaterialLocalizations>(context, MaterialLocalizations)!.formatFullDate(DateTime.now())}.'),
+            Text(
+                '${Localizations.of<MaterialLocalizations>(context, MaterialLocalizations)!.formatFullDate(DateTime.now())}.'),
             Text(
               S.of(context).homeDescribe,
             ),
             const Text(
-              'Penulis malas dan menyimpan halaman lalai projek ini, mungkin kita boleh menambah sesuatu di sini pada masa hadapan.'),
+                'Penulis malas dan menyimpan halaman lalai projek ini, mungkin kita boleh menambah sesuatu di sini pada masa hadapan.'),
             const Text(
-              'Автор ленив и держит страницу этого проекта по умолчанию, возможно, мы сможем что-то добавить сюда в будущем.'),
-            const Text('ผู้เขียนขี้เกียจและเก็บหน้าเริ่มต้นสำหรับโครงการนี้ บางทีเราอาจจะเพิ่มบางอย่างที่นี่ในอนาคต'),
+                'Автор ленив и держит страницу этого проекта по умолчанию, возможно, мы сможем что-то добавить сюда в будущем.'),
+            const Text(
+                'ผู้เขียนขี้เกียจและเก็บหน้าเริ่มต้นสำหรับโครงการนี้ บางทีเราอาจจะเพิ่มบางอย่างที่นี่ในอนาคต'),
             const Text(
               'Der Autor ist faul und behält die Standardseite dieses Projekts, vielleicht können wir in Zukunft etwas hinzufügen.',
             ),

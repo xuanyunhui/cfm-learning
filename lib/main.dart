@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:qimen/qimen.dart';
 
 import 'cycle_hex_decades.dart';
 import 'generated/l10n.dart';
@@ -40,18 +42,35 @@ class Routes {
 }
 
 class MyApp extends StatelessWidget {
-  // final int themeIndex;
-  const MyApp({super.key});
-  // const MyApp({super.key, required this.themeIndex});
+  MyApp({super.key});
 
-  // This widget is the root of your application.
+  final GoRouter _router = GoRouter(
+    routes: <RouteBase>[
+      GoRoute(
+        path: "/",
+        builder: (context, state) => const Home(),
+        routes: <RouteBase>[
+          GoRoute(path: "qimen", builder: (context, state) => const QiMenContent()),
+          GoRoute(path: "settings", builder: (context, state) => const Settings()),
+          GoRoute(path: "lifepalace", builder: (context, state) => const Palace()),
+          GoRoute(path: "solartime", builder: (context, state) => const SolarTimeScreen()),
+          GoRoute(path: "cyclehexdecades", builder: (context, state) => const CycleHexDecades()),
+          GoRoute(path: "timesetcalendar", builder: (context, state) => const TimesetCalendar()),
+      ],
+      
+    )
+  ]);
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
         create: (context) => ThemeSettings(),
         builder: (context, snapshot) {
           final settings = Provider.of<ThemeSettings>(context);
-          return MaterialApp(
+          return MaterialApp.router(
+            routerDelegate: _router.routerDelegate,
+            routeInformationParser: _router.routeInformationParser,
+            routeInformationProvider: _router.routeInformationProvider,
             localizationsDelegates: const [
               S.delegate,
               GlobalMaterialLocalizations.delegate,
@@ -69,16 +88,16 @@ class MyApp extends StatelessWidget {
                 colorScheme: settings.getdarkColorScheme(),
                 appBarTheme: const AppBarTheme(elevation: 4)),
             // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-            initialRoute: Routes.homePage,
-            routes: {
-              Routes.homePage: (context) => const MyHomePage(),
-              Routes.palacePage: (context) => const Palace(),
-              Routes.qimenPage: (context) => const QiMenContent(),
-              Routes.solarTimePage: (context) => const SolarTimeScreen(),
-              Routes.cycleHexDecades: (context) => const CycleHexDecades(),
-              Routes.timesetCalendar: (context) => const TimesetCalendar(),
-              Routes.settings: (context) => const Settings()
-            },
+            // initialRoute: Routes.homePage,
+            // routes: {
+            //   Routes.homePage: (context) => const Home(),
+            //   Routes.palacePage: (context) => const Palace(),
+            //   Routes.qimenPage: (context) => const QiMenContent(),
+            //   Routes.solarTimePage: (context) => const SolarTimeScreen(),
+            //   Routes.cycleHexDecades: (context) => const CycleHexDecades(),
+            //   Routes.timesetCalendar: (context) => const TimesetCalendar(),
+            //   Routes.settings: (context) => const Settings()
+            // },
           );
         });
   }
