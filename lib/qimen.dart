@@ -71,7 +71,6 @@ class _QiMenContentState extends State<QiMenContent>
           title: Text(S.of(context).qimenTitle),
           centerTitle: true,
         ),
-        drawer: const NavigationDrawerBuilder(),
         body: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(

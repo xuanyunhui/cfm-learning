@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:lunar/lunar.dart';
 import 'package:provider/provider.dart';
 
+import 'data/icon_data.dart';
 import 'drawerbuilder.dart';
 import 'generated/l10n.dart';
 import 'models/exam.dart';
+import 'qimen.dart';
+import 'extensions/datetime_extensions.dart';
 
 class TimesetCalendar extends StatefulWidget {
   const TimesetCalendar({super.key});
@@ -59,12 +62,14 @@ class _TimesetCalendarState extends State<TimesetCalendar> {
       rootEntries.add(DropdownMenuItem<String>(value: root, child: Text(root)));
     }
 
+    final ColorScheme colors = Theme.of(context).colorScheme;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(S.of(context).timesetTitle),
         centerTitle: true,
       ),
-      drawer: const NavigationDrawerBuilder(),
+      // drawer: const NavigationDrawerBuilder(),
       body: SafeArea(
           child: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -238,6 +243,34 @@ class _TimesetCalendarState extends State<TimesetCalendar> {
                           ListTile(
                             leading: Text('${S.of(context).gongliText}:'),
                             title: Text(solar.toYmdHms()),
+                            trailing: IconButton(
+                                    alignment: Alignment.topCenter,
+                                    padding: EdgeInsets.zero,
+                                    icon: Icon(randomEighthNoteIcon(),size: 30,),
+                                    onPressed: () {
+                                      Navigator.push(context,
+                                          MaterialPageRoute(builder: (context) {
+                                        return QiMenContent(
+                                          date: solar.getDateTime(),
+                                        );
+                                      }));
+                                    },
+                                    style: IconButton.styleFrom(
+                                      foregroundColor:
+                                          colors.onSecondaryContainer,
+                                      backgroundColor:
+                                          colors.secondaryContainer,
+                                      disabledBackgroundColor:
+                                          colors.onSurface.withOpacity(0.12),
+                                      hoverColor: colors.onSecondaryContainer
+                                          .withOpacity(0.08),
+                                      focusColor: colors.onSecondaryContainer
+                                          .withOpacity(0.12),
+                                      highlightColor: colors
+                                          .onSecondaryContainer
+                                          .withOpacity(0.12),
+                                    ),
+                                  ),
                           ),
                     ],
                     );

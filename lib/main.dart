@@ -1,9 +1,12 @@
+import 'dart:ffi';
+
 import 'package:cfm_learning/provider/selected_index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:tuple/tuple.dart';
 
 import 'cycle_hex_decades.dart';
 import 'generated/l10n.dart';
@@ -72,6 +75,13 @@ class MyApp extends StatelessWidget {
               },
             ),
             GoRoute(
+              path: '/qimen/:date',
+              builder: (BuildContext context, GoRouterState state) {
+                final DateTime date = DateTime.parse(state.params['date']!);
+                return QiMenContent(date: date);
+              },
+            ),
+            GoRoute(
               path: '/lifepalace',
               builder: (BuildContext context, GoRouterState state) {
                 return const Palace();
@@ -89,30 +99,42 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-        create: (context) => ThemeSettings(),
-        builder: (context, snapshot) {
-          final settings = Provider.of<ThemeSettings>(context);
-          return MaterialApp.router(
-            routerConfig: _router,
-            localizationsDelegates: const [
-              S.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: S.delegate.supportedLocales,
-            title: 'Learn traditional Chinese culture',
-            theme: ThemeData(
-                useMaterial3: true,
-                colorScheme: settings.getlightColorScheme(),
-                appBarTheme: const AppBarTheme(elevation: 4)),
-            darkTheme: ThemeData(
-                useMaterial3: true,
-                colorScheme: settings.getdarkColorScheme(),
-                appBarTheme: const AppBarTheme(elevation: 4)),
-          );
-        });
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider<ThemeSettings>(
+              create: (context) => ThemeSettings()),
+          ChangeNotifierProvider<SelectedIndex>(
+              create: (context) => SelectedIndex()),
+          // ProxyProvider<int,SelectedIndex>(
+          //   update: (context, previous, selectedIndex) {
+          //     return SelectedIndex();
+          //   },
+          // )
+        ],
+        child: Selector<ThemeSettings, Tuple2<ColorScheme, ColorScheme>>(
+            selector: (context, theme) =>
+                Tuple2(theme.getlightColorScheme(), theme.getdarkColorScheme()),
+            builder: (context, theme, child) {
+              return MaterialApp.router(
+                routerConfig: _router,
+                localizationsDelegates: const [
+                  S.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
+                supportedLocales: S.delegate.supportedLocales,
+                title: 'Learn traditional Chinese culture',
+                theme: ThemeData(
+                    useMaterial3: true,
+                    colorScheme: theme.item1,
+                    appBarTheme: const AppBarTheme(elevation: 4)),
+                darkTheme: ThemeData(
+                    useMaterial3: true,
+                    colorScheme: theme.item2,
+                    appBarTheme: const AppBarTheme(elevation: 4)),
+              );
+            }));
   }
 }
 
@@ -127,53 +149,53 @@ class ScaffoldWithNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // SelectedIndex selectedIndex = SelectedIndex(_calculateSelectedIndex(context));
-    final int initailIndex = _calculateSelectedIndex(context);
+    Future.delayed(Duration.zero, () async {
+      Provider.of<SelectedIndex>(context, listen: false).index =
+          _calculateSelectedIndex(context);
+    });
+
     return Scaffold(
       body: child,
-      bottomNavigationBar: ChangeNotifierProvider(
-          // value: selectedIndex,
-          create: (context) => SelectedIndex(initailIndex),
-          child: Consumer<SelectedIndex>(
-              builder: (context, selected, child) {
-                return NavigationBar(
-                  selectedIndex: selected.index,
-                  onDestinationSelected: (int idx) {
-                    selected.index = idx;
-                    _onItemTapped(idx, context);
-                  },
-                  destinations: [
-                    NavigationDestination(
-                      icon: const Icon(Icons.home),
-                      label: S.of(context).homeTitle,
-                    ),
-                    NavigationDestination(
-                      icon: const Icon(Icons.business),
-                      label: S.of(context).solarTimeTitle,
-                    ),
-                    NavigationDestination(
-                      icon: const Icon(Icons.notification_important_rounded),
-                      label: S.of(context).qimenTitle,
-                    ),
-                    NavigationDestination(
-                      icon: const Icon(Icons.notification_important_rounded),
-                      label: S.of(context).lifePalaceTitle,
-                    ),
-                    NavigationDestination(
-                      icon: const Icon(Icons.notification_important_rounded),
-                      label: S.of(context).timesetTitle,
-                    ),
-                  ],
-                );
-              })),
+      bottomNavigationBar:
+          Consumer<SelectedIndex>(builder: (context, selected, child) {
+        return NavigationBar(
+          selectedIndex: selected.index,
+          onDestinationSelected: (int idx) {
+            selected.index = idx;
+            _onItemTapped(idx, context);
+          },
+          destinations: [
+            NavigationDestination(
+              icon: const Icon(Icons.home),
+              label: S.of(context).homeTitle,
+            ),
+            NavigationDestination(
+              icon: const Icon(Icons.business),
+              label: S.of(context).solarTimeTitle,
+            ),
+            NavigationDestination(
+              icon: const Icon(Icons.notification_important_rounded),
+              label: S.of(context).qimenTitle,
+            ),
+            NavigationDestination(
+              icon: const Icon(Icons.notification_important_rounded),
+              label: S.of(context).lifePalaceTitle,
+            ),
+            NavigationDestination(
+              icon: const Icon(Icons.notification_important_rounded),
+              label: S.of(context).timesetTitle,
+            ),
+          ],
+        );
+      }),
     );
   }
 
   static int _calculateSelectedIndex(BuildContext context) {
     final String location = GoRouterState.of(context).location;
-    if (location.startsWith('/')) {
-      return 0;
-    }
+    // if (location.startsWith('/')) {
+    //   return 0;
+    // }
     if (location.startsWith('/solartime')) {
       return 1;
     }

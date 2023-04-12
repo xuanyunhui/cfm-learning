@@ -54,4 +54,8 @@ extension SolarExtension on Solar {
   String toHM() {
     return '${getHour()}:${getMinute()}';
   }
+
+  DateTime getDateTime() {
+    return DateTime(getYear(), getMonth(), getDay(), getHour(), getMinute(),getSecond());
+  }
 }

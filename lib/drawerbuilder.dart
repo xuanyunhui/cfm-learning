@@ -88,7 +88,7 @@ class NavigationDrawerBuilder extends StatelessWidget {
                     if (Scaffold.of(context).isDrawerOpen) {
                       Navigator.pop(context);
                     }
-                    context.go('/cyclehexdecades');
+                    context.push('/cyclehexdecades');
                   }),
               // const Divider(),
               // ListTile(
@@ -118,7 +118,7 @@ class NavigationDrawerBuilder extends StatelessWidget {
                     if (Scaffold.of(context).isDrawerOpen) {
                       Navigator.pop(context);
                     }
-                    return context.go('/settings');
+                    context.push('/settings');
                   }),
               const Divider(),
               ListTile(
