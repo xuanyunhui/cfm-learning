@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:cfm_learning/provider/selected_index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -75,6 +73,7 @@ class MyApp extends StatelessWidget {
               },
             ),
             GoRoute(
+              parentNavigatorKey: _rootNavigatorKey,
               path: '/qimen/:date',
               builder: (BuildContext context, GoRouterState state) {
                 final DateTime date = DateTime.parse(state.params['date']!);

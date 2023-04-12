@@ -1,7 +1,24 @@
 {
     "name": "五行学习工具",
     "short_name": "五行学习",
-    "start_url": ".",
+    "scope_url": "https://tools.bestheme.ac.cn/",
+    "intent_filters": {
+        "scope_url_scheme": "https",
+        "scope_url_host": "tools.bestheme.ac.cn",
+        "scope_url_path": "/"
+    },
+    "url_handlers": [
+        {
+          "origin": "https://tools.bestheme.ac.cn"
+        },
+        {
+          "origin": "https://*.tools.bestheme.ac.cn"
+        },
+        {
+          "origin": "https://tools.bestheme.ac.cn/#/qimen"
+        }
+      ],
+    "start_url": "https://tools.bestheme.ac.cn/",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
@@ -15,36 +32,36 @@
             "sizes": "36x36",
             "type": "image/png",
             "density": "0.75"
-           },
-           {
+        },
+        {
             "src": "icons/android-icon-48x48.png",
             "sizes": "48x48",
             "type": "image/png",
             "density": "1.0"
-           },
-           {
+        },
+        {
             "src": "icons/android-icon-72x72.png",
             "sizes": "72x72",
             "type": "image/png",
             "density": "1.5"
-           },
-           {
+        },
+        {
             "src": "icons/android-icon-96x96.png",
             "sizes": "96x96",
             "type": "image/png",
             "density": "2.0"
-           },
-           {
+        },
+        {
             "src": "icons/android-icon-144x144.png",
             "sizes": "144x144",
             "type": "image/png",
             "density": "3.0"
-           },
-           {
+        },
+        {
             "src": "icons/android-icon-192x192.png",
             "sizes": "192x192",
             "type": "image/png",
             "density": "4.0"
-           }
+        }
     ]
 }
