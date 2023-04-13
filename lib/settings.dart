@@ -1,5 +1,6 @@
 import 'package:cfm_learning/drawerbuilder.dart';
 import 'package:cfm_learning/provider/theme_settings.dart';
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,7 +15,6 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
-
   void _setTheme(int index) async {
     final settings = Provider.of<ThemeSettings>(context, listen: false);
     settings.setTheme(index);
@@ -22,36 +22,39 @@ class _SettingsState extends State<Settings> {
 
   @override
   Widget build(BuildContext context) {
-    final List<DropdownMenuItem<ColorsOfYear>> colorItems =
-        <DropdownMenuItem<ColorsOfYear>>[];
-    for (final ColorsOfYear color in ColorsOfYear.values) {
-      colorItems.add(DropdownMenuItem<ColorsOfYear>(
+    final List<DropdownMenuItem<FlexScheme>> colorItems =
+        <DropdownMenuItem<FlexScheme>>[];
+    for (final FlexScheme scheme in FlexScheme.values) {
+      colorItems.add(DropdownMenuItem<FlexScheme>(
           alignment: AlignmentDirectional.center,
-          value: color,
+          value: scheme,
           child: Text(
-            color.displayTitle,
-            selectionColor: color.color(),
-            style: TextStyle(color: color.color()),
+            scheme.name,
+            // selectionColor: color.color(),
+            // style: TextStyle(color: FlexSchemeData.light(scheme).primary),
           )));
     }
 
+    
     return Scaffold(
       appBar: AppBar(
         title: Text(S.of(context).settingTitle),
         centerTitle: true,
-        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(12),
-        child: DropdownButtonFormField<ColorsOfYear>(
-          value: ColorsOfYear.vivaMagenta,
+        child: DropdownButtonFormField<FlexScheme>(
+          value: FlexScheme.material,
           items: colorItems,
-          onChanged: (ColorsOfYear? color) {
-            if (color != null) {
-              _setTheme(color.index);
+          onChanged: (FlexScheme? scheme) {
+            if (scheme != null) {
+              _setTheme(scheme.index);
             }
           },
           decoration: InputDecoration(
-              labelText: S.of(context).theme, border: const OutlineInputBorder(), isDense: true),
+              labelText: S.of(context).theme,
+              border: const OutlineInputBorder(),
+              isDense: true),
         ),
       ),
     );

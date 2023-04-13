@@ -58,6 +58,14 @@ class MyApp extends StatelessWidget {
                     parentNavigatorKey: _rootNavigatorKey,
                     path: 'cyclehexdecades',
                     builder: (context, state) => const CycleHexDecades()),
+                GoRoute(
+                  parentNavigatorKey: _rootNavigatorKey,
+                  path: 'qimen/:date',
+                  builder: (BuildContext context, GoRouterState state) {
+                    final DateTime date = DateTime.parse(state.params['date']!);
+                    return QiMenContent(date: date);
+                  },
+                ),
               ],
             ),
             GoRoute(
@@ -70,14 +78,6 @@ class MyApp extends StatelessWidget {
               path: '/qimen',
               builder: (BuildContext context, GoRouterState state) {
                 return const QiMenContent();
-              },
-            ),
-            GoRoute(
-              parentNavigatorKey: _rootNavigatorKey,
-              path: '/qimen/:date',
-              builder: (BuildContext context, GoRouterState state) {
-                final DateTime date = DateTime.parse(state.params['date']!);
-                return QiMenContent(date: date);
               },
             ),
             GoRoute(
@@ -110,7 +110,7 @@ class MyApp extends StatelessWidget {
           //   },
           // )
         ],
-        child: Selector<ThemeSettings, Tuple2<ColorScheme, ColorScheme>>(
+        child: Selector<ThemeSettings, Tuple2<ThemeData, ThemeData>>(
             selector: (context, theme) =>
                 Tuple2(theme.getlightColorScheme(), theme.getdarkColorScheme()),
             builder: (context, theme, child) {
@@ -124,14 +124,8 @@ class MyApp extends StatelessWidget {
                 ],
                 supportedLocales: S.delegate.supportedLocales,
                 title: 'Learn traditional Chinese culture',
-                theme: ThemeData(
-                    useMaterial3: true,
-                    colorScheme: theme.item1,
-                    appBarTheme: const AppBarTheme(elevation: 4)),
-                darkTheme: ThemeData(
-                    useMaterial3: true,
-                    colorScheme: theme.item2,
-                    appBarTheme: const AppBarTheme(elevation: 4)),
+                theme: theme.item1,
+                darkTheme: theme.item2,
               );
             }));
   }

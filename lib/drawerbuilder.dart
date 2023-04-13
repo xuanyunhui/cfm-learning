@@ -5,7 +5,7 @@ import 'generated/l10n.dart';
 
 class NavigationDrawerBuilder extends StatelessWidget {
   const NavigationDrawerBuilder({Key? key}) : super(key: key);
-
+  
   @override
   Widget build(BuildContext context) {
     return Drawer(
