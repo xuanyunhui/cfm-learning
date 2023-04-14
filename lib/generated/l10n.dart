@@ -50,6 +50,16 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `Learn traditional Chinese culture`
+  String get appTitle {
+    return Intl.message(
+      'Learn traditional Chinese culture',
+      name: 'appTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `HOME`
   String get homeTitle {
     return Intl.message(

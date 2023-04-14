@@ -1,4 +1,6 @@
 import 'package:cfm_learning/provider/selected_index.dart';
+import 'package:cfm_learning/screens/theme_setting_screen.dart';
+import 'package:cfm_learning/shared/services/theme_service_prefs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -12,18 +14,30 @@ import 'home.dart';
 import 'life_place.dart';
 import 'provider/theme_settings.dart';
 import 'settings.dart';
+import 'shared/controllers/theme_controller.dart';
+import 'shared/services/theme_service.dart';
 import 'true_solar_time.dart';
 import 'timeset_calendar.dart';
 import 'qimen.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
   // final int themeindex = sharedPreferences.getInt('theme') ?? 0;
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
       overlays: [SystemUiOverlay.top]);
   // ignore: prefer_const_constructors
-  runApp(MyApp());
+
+  final ThemeService themeService = ThemeServicePrefs();
+  await themeService.init();
+
+  final ThemeController themeController = ThemeController(themeService);
+  await themeController.loadAll();
+
+  runApp(ChangeNotifierProvider.value(
+    value: themeController,
+    child: MyApp(),
+  ));
 }
 
 final GlobalKey<NavigatorState> _rootNavigatorKey =
@@ -100,8 +114,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
-          ChangeNotifierProvider<ThemeSettings>(
-              create: (context) => ThemeSettings()),
           ChangeNotifierProvider<SelectedIndex>(
               create: (context) => SelectedIndex()),
           // ProxyProvider<int,SelectedIndex>(
@@ -110,9 +122,12 @@ class MyApp extends StatelessWidget {
           //   },
           // )
         ],
-        child: Selector<ThemeSettings, Tuple2<ThemeData, ThemeData>>(
-            selector: (context, theme) =>
-                Tuple2(theme.getlightColorScheme(), theme.getdarkColorScheme()),
+        child: Selector<ThemeController, Tuple3<ThemeData, ThemeData,ThemeMode>>(
+            selector: (context, controller) =>
+                Tuple3(
+                  BuildThemeData.light(controller.usedScheme),
+                  BuildThemeData.dark(controller.usedScheme),
+                  controller.themeMode),
             builder: (context, theme, child) {
               return MaterialApp.router(
                 routerConfig: _router,
@@ -123,9 +138,10 @@ class MyApp extends StatelessWidget {
                   GlobalCupertinoLocalizations.delegate,
                 ],
                 supportedLocales: S.delegate.supportedLocales,
-                title: 'Learn traditional Chinese culture',
+                title: '晨植五行学习工具',
                 theme: theme.item1,
                 darkTheme: theme.item2,
+                themeMode: theme.item3,
               );
             }));
   }

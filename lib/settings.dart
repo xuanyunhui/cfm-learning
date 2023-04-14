@@ -1,11 +1,10 @@
-import 'package:cfm_learning/drawerbuilder.dart';
 import 'package:cfm_learning/provider/theme_settings.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'extensions/enum_type.dart';
 import 'generated/l10n.dart';
+import 'screens/theme_setting_screen.dart';
 
 class Settings extends StatefulWidget {
   const Settings({super.key});
@@ -22,6 +21,8 @@ class _SettingsState extends State<Settings> {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+
     final List<DropdownMenuItem<FlexScheme>> colorItems =
         <DropdownMenuItem<FlexScheme>>[];
     for (final FlexScheme scheme in FlexScheme.values) {
@@ -35,7 +36,6 @@ class _SettingsState extends State<Settings> {
           )));
     }
 
-    
     return Scaffold(
       appBar: AppBar(
         title: Text(S.of(context).settingTitle),
@@ -43,19 +43,41 @@ class _SettingsState extends State<Settings> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(12),
-        child: DropdownButtonFormField<FlexScheme>(
-          value: FlexScheme.material,
-          items: colorItems,
-          onChanged: (FlexScheme? scheme) {
-            if (scheme != null) {
-              _setTheme(scheme.index);
-            }
-          },
-          decoration: InputDecoration(
-              labelText: S.of(context).theme,
-              border: const OutlineInputBorder(),
-              isDense: true),
+        child: ListView(
+          children: <Widget>[
+            const SizedBox(height: 12),
+            ListTile(
+              leading: const Icon(
+                Icons.color_lens_outlined,
+                size: 30,
+              ),
+              title: Text(
+                S.of(context).theme,
+                style: theme.textTheme.titleLarge,
+              ),
+              subtitle: Text(
+                '颜色，主题和样式',
+                style: theme.textTheme.titleSmall,
+              ),
+              onTap: () => Navigator.push(context,
+                  MaterialPageRoute(
+                    builder: (context) => const ThemeSettingScreen())),
+            ),
+          ],
         ),
+        // DropdownButtonFormField<FlexScheme>(
+        //   value: FlexScheme.material,
+        //   items: colorItems,
+        //   onChanged: (FlexScheme? scheme) {
+        //     if (scheme != null) {
+        //       _setTheme(scheme.index);
+        //     }
+        //   },
+        //   decoration: InputDecoration(
+        //       labelText: S.of(context).theme,
+        //       border: const OutlineInputBorder(),
+        //       isDense: true),
+        // ),
       ),
     );
   }
