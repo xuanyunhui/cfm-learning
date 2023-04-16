@@ -2,6 +2,7 @@ import 'package:cfm_learning/qimen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:lunar/lunar.dart';
 import 'package:timezone/data/latest.dart';
@@ -177,7 +178,8 @@ class _SolarTimeState extends State<SolarTimeScreen> {
                               lastDate: DateTime(2101));
                           if (pickedDate != null) {
                             dateController.text =
-                                DateFormat.yMMMMd(languageCode).format(pickedDate);
+                                DateFormat.yMMMMd(languageCode)
+                                    .format(pickedDate);
                             // setState(() {
                             pickedDateTime = pickedDateTime.setDate(pickedDate);
                             // });
@@ -197,8 +199,7 @@ class _SolarTimeState extends State<SolarTimeScreen> {
                         onTap: () async {
                           TimeOfDay? pickedTime = await showTimePicker(
                             context: context,
-                            initialTime: TimeOfDay.fromDateTime(
-                                pickedDateTime),
+                            initialTime: TimeOfDay.fromDateTime(pickedDateTime),
                           );
                           if (pickedTime != null) {
                             timeController.text =
@@ -269,7 +270,8 @@ class _SolarTimeState extends State<SolarTimeScreen> {
                               : ""),
                         ),
                         ListTile(
-                          leading: Text("${S.of(context).geographicalTimeDifferenceText}:"),
+                          leading: Text(
+                              "${S.of(context).geographicalTimeDifferenceText}:"),
                           title: Text(value != null
                               ? formatDuration(value.geoTimeDifference)
                               : ""),
@@ -284,14 +286,12 @@ class _SolarTimeState extends State<SolarTimeScreen> {
                                 ? IconButton(
                                     alignment: Alignment.topCenter,
                                     padding: EdgeInsets.zero,
-                                    icon: Icon(randomEighthNoteIcon(),size: 30,),
+                                    icon: Icon(
+                                      randomEighthNoteIcon(),
+                                      size: 30,
+                                    ),
                                     onPressed: () {
-                                      Navigator.push(context,
-                                          MaterialPageRoute(builder: (context) {
-                                        return QiMenContent(
-                                          date: value.localSolarTime,
-                                        );
-                                      }));
+                                      context.push("/qimen/${value.localSolarTime.toIso8601String()}",);
                                     },
                                     style: IconButton.styleFrom(
                                       foregroundColor:

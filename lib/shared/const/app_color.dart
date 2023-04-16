@@ -12,6 +12,36 @@ class AppColor {
   // prevents instantiation and extension.
   AppColor._();
 
+
+  // Create a custom flex scheme color for a light theme.
+  static const FlexSchemeColor _timesetsSchemeLight = FlexSchemeColor(
+    primary: Color(0xFF7b4998),
+    primaryContainer: Color(0xFFf5d9ff),
+    secondary: Color(0xFF3e5aa9),
+    secondaryContainer: Color(0xFFdbe1ff),
+    tertiary: Color(0xFF934173),
+    tertiaryContainer: Color(0xFFffd8ea),
+    // The built in schemes use their tertiary color as their default
+    // custom app bar color, but it can be any color. We use a custom color
+    // here. We will see this in example 5 when using the theme and selecting
+    // the custom app bar style. We use a light blue that matches branded
+    // surface colors, but is a bit stronger than most surface branding.
+    appBarColor: Color(0xFFffd8ea),
+    swapOnMaterial3: true,
+  );
+  // Create a corresponding custom flex scheme color for a dark theme.
+  static const FlexSchemeColor _timesetsSchemeDark = FlexSchemeColor(
+    primary: Color(0xFFe5b4ff),
+    primaryContainer: Color(0xFF61317e),
+    secondary: Color(0xFFb4c5ff),
+    secondaryContainer: Color(0xFF234290),
+    tertiary: Color(0xFFffaed9),
+    tertiaryContainer: Color(0xFF762a5a),
+    // A custom very dark blue, to match the dark theme mode
+    appBarColor: Color(0xFF00102B),
+    swapOnMaterial3: true,
+  );
+
   // Create a custom flex scheme color for a light theme.
   static const FlexSchemeColor _myScheme1Light = FlexSchemeColor(
     primary: Color(0xFF00296B),
@@ -125,6 +155,16 @@ class AppColor {
     // We add our custom light and dark FlexSchemeColor schemes we defined
     // to a list of FlexSchemeData, where we can bundle each light and dark
     // theme that goes together and give it a name and description too.
+    const FlexSchemeData(
+      name: 'Timesets',
+      description: 'Timesets theme that build with Material theme builder.',
+      // FlexSchemeData holds separate defined color schemes for light and
+      // matching dark theme colors. Dark theme colors typically need to be less
+      // saturated versions of their than light counter parts. Using the same
+      // colors in light and dark theme modes does not work so well.
+      light: _timesetsSchemeLight,
+      dark: _timesetsSchemeDark,
+    ),
     const FlexSchemeData(
       name: 'Example Midnight',
       description: 'Midnight blue theme, created as an in code example by '

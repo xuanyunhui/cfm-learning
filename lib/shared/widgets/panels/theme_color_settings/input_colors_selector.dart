@@ -109,6 +109,7 @@ class _InputColorsSelectorState extends State<InputColorsSelector> {
                   scrollOffset = scrollController.offset;
                   schemeIndex = index;
                   widget.controller.setSchemeIndex(index);
+                  // widget.controller.setUsedScheme(AppColor.schemes[index]);
                 },
               ),
             ),

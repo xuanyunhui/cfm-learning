@@ -14,6 +14,7 @@ import 'home.dart';
 import 'life_place.dart';
 import 'provider/theme_settings.dart';
 import 'settings.dart';
+import 'shared/const/app_color.dart';
 import 'shared/controllers/theme_controller.dart';
 import 'shared/services/theme_service.dart';
 import 'true_solar_time.dart';
@@ -116,17 +117,12 @@ class MyApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider<SelectedIndex>(
               create: (context) => SelectedIndex()),
-          // ProxyProvider<int,SelectedIndex>(
-          //   update: (context, previous, selectedIndex) {
-          //     return SelectedIndex();
-          //   },
-          // )
         ],
         child: Selector<ThemeController, Tuple3<ThemeData, ThemeData,ThemeMode>>(
             selector: (context, controller) =>
                 Tuple3(
-                  BuildThemeData.light(controller.usedScheme),
-                  BuildThemeData.dark(controller.usedScheme),
+                  BuildThemeData.light(AppColor.customSchemes[controller.schemeIndex].light,),
+                  BuildThemeData.dark(AppColor.customSchemes[controller.schemeIndex].dark),
                   controller.themeMode),
             builder: (context, theme, child) {
               return MaterialApp.router(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lunar/lunar.dart';
 import 'package:provider/provider.dart';
 
@@ -156,8 +157,12 @@ class _TimesetCalendarState extends State<TimesetCalendar> {
                     child: Consumer<TimesetModel>(
                         builder: (context, timeset, child) {
                       return DropdownButtonFormField<String>(
-                        value: dropdownMenuItemBuilder(rootsBuilder(timeset.yearStem)).first.value,
-                        items: dropdownMenuItemBuilder(rootsBuilder(timeset.yearStem)),
+                        value: dropdownMenuItemBuilder(
+                                rootsBuilder(timeset.yearStem))
+                            .first
+                            .value,
+                        items: dropdownMenuItemBuilder(
+                            rootsBuilder(timeset.yearStem)),
                         onChanged: (String? root) {
                           timeset.yearRoot = root!;
                         },
@@ -190,8 +195,12 @@ class _TimesetCalendarState extends State<TimesetCalendar> {
                     child: Consumer<TimesetModel>(
                         builder: (context, timeset, child) {
                       return DropdownButtonFormField<String>(
-                        value: dropdownMenuItemBuilder(rootsBuilder(timeset.dayStem)).first.value,
-                        items: dropdownMenuItemBuilder(rootsBuilder(timeset.dayStem)),
+                        value: dropdownMenuItemBuilder(
+                                rootsBuilder(timeset.dayStem))
+                            .first
+                            .value,
+                        items: dropdownMenuItemBuilder(
+                            rootsBuilder(timeset.dayStem)),
                         onChanged: (String? root) {
                           timeset.dayRoot = root!;
                         },
@@ -239,40 +248,43 @@ class _TimesetCalendarState extends State<TimesetCalendar> {
                     // }
                     return Column(
                       children: [
-                        for (final solar in solars) 
+                        for (final solar in solars)
                           ListTile(
                             leading: Text('${S.of(context).gongliText}:'),
                             title: Text(solar.toYmdHms()),
                             trailing: IconButton(
-                                    alignment: Alignment.topCenter,
-                                    padding: EdgeInsets.zero,
-                                    icon: Icon(randomEighthNoteIcon(),size: 30,),
-                                    onPressed: () {
-                                      Navigator.push(context,
-                                          MaterialPageRoute(builder: (context) {
-                                        return QiMenContent(
-                                          date: solar.getDateTime(),
-                                        );
-                                      }));
-                                    },
-                                    style: IconButton.styleFrom(
-                                      foregroundColor:
-                                          colors.onSecondaryContainer,
-                                      backgroundColor:
-                                          colors.secondaryContainer,
-                                      disabledBackgroundColor:
-                                          colors.onSurface.withOpacity(0.12),
-                                      hoverColor: colors.onSecondaryContainer
-                                          .withOpacity(0.08),
-                                      focusColor: colors.onSecondaryContainer
-                                          .withOpacity(0.12),
-                                      highlightColor: colors
-                                          .onSecondaryContainer
-                                          .withOpacity(0.12),
-                                    ),
-                                  ),
+                              alignment: Alignment.topCenter,
+                              padding: EdgeInsets.zero,
+                              icon: Icon(
+                                randomEighthNoteIcon(),
+                                size: 30,
+                              ),
+                              onPressed: () {
+                                context.push(
+                                  "/qimen/${solar.toYmdHms()}",
+                                );
+                                // Navigator.push(context,
+                                //     MaterialPageRoute(builder: (context) {
+                                //   return QiMenContent(
+                                //     date: solar.getDateTime(),
+                                //   );
+                                // }));
+                              },
+                              style: IconButton.styleFrom(
+                                foregroundColor: colors.onSecondaryContainer,
+                                backgroundColor: colors.secondaryContainer,
+                                disabledBackgroundColor:
+                                    colors.onSurface.withOpacity(0.12),
+                                hoverColor: colors.onSecondaryContainer
+                                    .withOpacity(0.08),
+                                focusColor: colors.onSecondaryContainer
+                                    .withOpacity(0.12),
+                                highlightColor: colors.onSecondaryContainer
+                                    .withOpacity(0.12),
+                              ),
+                            ),
                           ),
-                    ],
+                      ],
                     );
                   },
                 ),
