@@ -1,10 +1,13 @@
-import 'package:cfm_learning/qimen.dart';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:lunar/lunar.dart';
+import 'package:screenshot/screenshot.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:timezone/data/latest.dart';
 
 import 'package:timezone/timezone.dart';
@@ -46,6 +49,8 @@ class _SolarTimeState extends State<SolarTimeScreen> {
   String currentTimeZone = 'Asia/Macau';
 
   LocationNotifier location = LocationNotifier();
+
+  final ScreenshotController screenshotController = ScreenshotController();
 
   @override
   void initState() {
@@ -100,6 +105,16 @@ class _SolarTimeState extends State<SolarTimeScreen> {
         appBar: AppBar(
           title: Text(S.of(context).solarTimeTitle),
           centerTitle: true,
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.share),
+              onPressed: () async {
+                final Uint8List? imageInUnit8List = await screenshotController.capture();
+                final XFile file = XFile.fromData(imageInUnit8List!);
+                await Share.shareXFiles([file], text: "真太阳时");
+              },
+            ),
+            ]
         ),
         drawer: const NavigationDrawerBuilder(),
         floatingActionButton: Column(
@@ -150,222 +165,231 @@ class _SolarTimeState extends State<SolarTimeScreen> {
             ),
           ],
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: TextField(
-                        controller:
-                            dateController, //editing controller of this TextField
-                        decoration: InputDecoration(
-                          border: const OutlineInputBorder(),
-                          labelText: S.of(context).date,
-                          isDense: true,
-                        ),
-                        readOnly: true, // when true user cannot edit text
-                        onTap: () async {
-                          DateTime? pickedDate = await showDatePicker(
-                              locale: locale,
+        body: Screenshot(
+          controller: screenshotController,
+          child: Container(
+            color: Theme.of(context).colorScheme.background,
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: TextField(
+                          controller:
+                              dateController, //editing controller of this TextField
+                          decoration: InputDecoration(
+                            border: const OutlineInputBorder(),
+                            labelText: S.of(context).date,
+                            isDense: true,
+                          ),
+                          readOnly: true, // when true user cannot edit text
+                          onTap: () async {
+                            DateTime? pickedDate = await showDatePicker(
+                                locale: locale,
+                                context: context,
+                                initialDate: pickedDateTime, //get today's date
+                                firstDate: DateTime(
+                                    1800), //DateTime.now() - not to allow to choose before today.
+                                lastDate: DateTime(2101));
+                            if (pickedDate != null) {
+                              dateController.text =
+                                  DateFormat.yMMMMd(languageCode)
+                                      .format(pickedDate);
+                              // setState(() {
+                              pickedDateTime =
+                                  pickedDateTime.setDate(pickedDate);
+                              // });
+                            }
+                          }),
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: TextField(
+                          controller:
+                              timeController, //editing controller of this TextField
+                          decoration: InputDecoration(
+                              border: const OutlineInputBorder(),
+                              labelText: S.of(context).time,
+                              isDense: true),
+                          readOnly: true, // when true user cannot edit text
+                          onTap: () async {
+                            TimeOfDay? pickedTime = await showTimePicker(
                               context: context,
-                              initialDate: pickedDateTime, //get today's date
-                              firstDate: DateTime(
-                                  1800), //DateTime.now() - not to allow to choose before today.
-                              lastDate: DateTime(2101));
-                          if (pickedDate != null) {
-                            dateController.text =
-                                DateFormat.yMMMMd(languageCode)
-                                    .format(pickedDate);
-                            // setState(() {
-                            pickedDateTime = pickedDateTime.setDate(pickedDate);
-                            // });
-                          }
-                        }),
-                  ),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: TextField(
-                        controller:
-                            timeController, //editing controller of this TextField
+                              initialTime:
+                                  TimeOfDay.fromDateTime(pickedDateTime),
+                            );
+                            if (pickedTime != null) {
+                              timeController.text =
+                                  "${pickedTime.hour}:${pickedTime.minute}";
+                              // setState(() {
+                              pickedDateTime =
+                                  pickedDateTime.setTimeOfDay(pickedTime);
+                              // });
+                            }
+                          }),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: _latitudeController,
                         decoration: InputDecoration(
                             border: const OutlineInputBorder(),
-                            labelText: S.of(context).time,
+                            labelText: S.of(context).latitudeLabel,
                             isDense: true),
-                        readOnly: true, // when true user cannot edit text
-                        onTap: () async {
-                          TimeOfDay? pickedTime = await showTimePicker(
-                            context: context,
-                            initialTime: TimeOfDay.fromDateTime(pickedDateTime),
-                          );
-                          if (pickedTime != null) {
-                            timeController.text =
-                                "${pickedTime.hour}:${pickedTime.minute}";
-                            // setState(() {
-                            pickedDateTime =
-                                pickedDateTime.setTimeOfDay(pickedTime);
-                            // });
-                          }
-                        }),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 10.0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: TextField(
-                      controller: _latitudeController,
-                      decoration: InputDecoration(
-                          border: const OutlineInputBorder(),
-                          labelText: S.of(context).latitudeLabel,
-                          isDense: true),
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: 8.0),
-                  Expanded(
-                    child: TextField(
-                      controller: _longitudeController,
-                      decoration: InputDecoration(
-                          border: const OutlineInputBorder(),
-                          labelText: S.of(context).longitudeLabel,
-                          isDense: true),
+                    const SizedBox(width: 8.0),
+                    Expanded(
+                      child: TextField(
+                        controller: _longitudeController,
+                        decoration: InputDecoration(
+                            border: const OutlineInputBorder(),
+                            labelText: S.of(context).longitudeLabel,
+                            isDense: true),
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 10.0),
-              DropdownButtonFormField<Location>(
-                // controller: pala,
-                // enableFilter: true,
-                // leadingIcon: const Icon(Icons.search),
-                value: location.location.value,
-                items: locations,
-                // inputDecorationTheme:
-                //     const InputDecorationTheme(filled: true),
-                onChanged: (Location? tLocation) {
-                  location.location.value = tLocation!;
-                },
-                decoration: InputDecoration(
-                    labelText: S.of(context).timeZoneLabel,
-                    border: const OutlineInputBorder(),
-                    isDense: true),
-              ),
-              const Divider(),
-              Card(
-                margin: const EdgeInsets.only(bottom: 8.0),
-                child: ValueListenableBuilder<SolarTime?>(
-                  valueListenable: location.solartime,
-                  builder: (context, SolarTime? value, Widget? child) {
-                    return Column(
-                      children: [
-                        ListTile(
-                          leading: Text("${S.of(context).equationOfTimeText}:"),
-                          title: Text(value != null
-                              ? formatDuration(value.equationOfTime)
-                              : ""),
-                        ),
-                        ListTile(
-                          leading: Text(
-                              "${S.of(context).geographicalTimeDifferenceText}:"),
-                          title: Text(value != null
-                              ? formatDuration(value.geoTimeDifference)
-                              : ""),
-                        ),
-                        ListTile(
-                            leading: Text("${S.of(context).solarTimeText}:"),
+                  ],
+                ),
+                const SizedBox(height: 10.0),
+                DropdownButtonFormField<Location>(
+                  // controller: pala,
+                  // enableFilter: true,
+                  // leadingIcon: const Icon(Icons.search),
+                  value: location.location.value,
+                  items: locations,
+                  // inputDecorationTheme:
+                  //     const InputDecorationTheme(filled: true),
+                  onChanged: (Location? tLocation) {
+                    location.location.value = tLocation!;
+                  },
+                  decoration: InputDecoration(
+                      labelText: S.of(context).timeZoneLabel,
+                      border: const OutlineInputBorder(),
+                      isDense: true),
+                ),
+                const Divider(),
+                Card(
+                  margin: const EdgeInsets.only(bottom: 8.0),
+                  child: ValueListenableBuilder<SolarTime?>(
+                    valueListenable: location.solartime,
+                    builder: (context, SolarTime? value, Widget? child) {
+                      return Column(
+                        children: [
+                          ListTile(
+                            leading:
+                                Text("${S.of(context).equationOfTimeText}:"),
                             title: Text(value != null
-                                ? DateFormat('y/MM/dd HH:mm:ss')
-                                    .format(value.localSolarTime)
+                                ? formatDuration(value.equationOfTime)
                                 : ""),
-                            trailing: value != null
-                                ? IconButton(
-                                    alignment: Alignment.topCenter,
-                                    padding: EdgeInsets.zero,
-                                    icon: Icon(
-                                      randomEighthNoteIcon(),
-                                      size: 30,
-                                    ),
-                                    onPressed: () {
-                                      context.push("/qimen/${value.localSolarTime.toIso8601String()}",);
-                                    },
-                                    style: IconButton.styleFrom(
-                                      foregroundColor:
-                                          colors.onSecondaryContainer,
-                                      backgroundColor:
-                                          colors.secondaryContainer,
-                                      disabledBackgroundColor:
-                                          colors.onSurface.withOpacity(0.12),
-                                      hoverColor: colors.onSecondaryContainer
-                                          .withOpacity(0.08),
-                                      focusColor: colors.onSecondaryContainer
-                                          .withOpacity(0.12),
-                                      highlightColor: colors
-                                          .onSecondaryContainer
-                                          .withOpacity(0.12),
-                                    ),
-                                  )
-                                : const Text("")
-                            // subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
-                            ),
-                      ],
-                    );
-                  },
+                          ),
+                          ListTile(
+                            leading: Text(
+                                "${S.of(context).geographicalTimeDifferenceText}:"),
+                            title: Text(value != null
+                                ? formatDuration(value.geoTimeDifference)
+                                : ""),
+                          ),
+                          ListTile(
+                              leading: Text("${S.of(context).solarTimeText}:"),
+                              title: Text(value != null
+                                  ? DateFormat('y/MM/dd HH:mm:ss')
+                                      .format(value.localSolarTime)
+                                  : ""),
+                              trailing: value != null
+                                  ? IconButton(
+                                      alignment: Alignment.topCenter,
+                                      padding: EdgeInsets.zero,
+                                      icon: Icon(
+                                        randomEighthNoteIcon(),
+                                        size: 30,
+                                      ),
+                                      onPressed: () {
+                                        context.push(
+                                          "/qimen/${value.localSolarTime.toIso8601String()}",
+                                        );
+                                      },
+                                      style: IconButton.styleFrom(
+                                        foregroundColor:
+                                            colors.onSecondaryContainer,
+                                        backgroundColor:
+                                            colors.secondaryContainer,
+                                        disabledBackgroundColor:
+                                            colors.onSurface.withOpacity(0.12),
+                                        hoverColor: colors.onSecondaryContainer
+                                            .withOpacity(0.08),
+                                        focusColor: colors.onSecondaryContainer
+                                            .withOpacity(0.12),
+                                        highlightColor: colors
+                                            .onSecondaryContainer
+                                            .withOpacity(0.12),
+                                      ),
+                                    )
+                                  : const Text("")
+                              // subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
+                              ),
+                        ],
+                      );
+                    },
+                  ),
                 ),
-              ),
-              Card(
-                margin: const EdgeInsets.only(bottom: 8.0),
-                child: ValueListenableBuilder<SolarTime?>(
-                  valueListenable: location.solartime,
-                  builder: (context, SolarTime? value, Widget? child) {
-                    Lunar? lunar;
-                    if (value != null) {
-                      lunar = Solar.fromDate(value.localSolarTime).getLunar();
-                    }
-                    return Column(
-                      children: [
-                        ListTile(
-                          leading: Text("${S.of(context).lunarText}:"),
-                          title: lunar != null
-                              ? Text(lunar.toString())
-                              : const Text(""),
-                        ),
-                      ],
-                    );
-                  },
+                Card(
+                  margin: const EdgeInsets.only(bottom: 8.0),
+                  child: ValueListenableBuilder<SolarTime?>(
+                    valueListenable: location.solartime,
+                    builder: (context, SolarTime? value, Widget? child) {
+                      Lunar? lunar;
+                      if (value != null) {
+                        lunar = Solar.fromDate(value.localSolarTime).getLunar();
+                      }
+                      return Column(
+                        children: [
+                          ListTile(
+                            leading: Text("${S.of(context).lunarText}:"),
+                            title: lunar != null
+                                ? Text(lunar.toString())
+                                : const Text(""),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
                 ),
-              ),
-              Card(
-                margin: const EdgeInsets.only(bottom: 8.0),
-                child: ValueListenableBuilder<SolarTime?>(
-                  valueListenable: location.solartime,
-                  builder: (context, SolarTime? value, Widget? child) {
-                    EightChar? timeset;
-                    if (value != null) {
-                      timeset = Solar.fromDate(value.localSolarTime)
-                          .getLunar()
-                          .getEightChar();
-                      timeset.setSect(1);
-                    }
-                    return Column(
-                      children: [
-                        ListTile(
-                          title: Text("${S.of(context).timesetText}:"),
-                          subtitle: timeset != null
-                              ? TimesetWidget(timeset: timeset)
-                              : const Text(""),
-                        ),
-                      ],
-                    );
-                  },
+                Card(
+                  margin: const EdgeInsets.only(bottom: 8.0),
+                  child: ValueListenableBuilder<SolarTime?>(
+                    valueListenable: location.solartime,
+                    builder: (context, SolarTime? value, Widget? child) {
+                      EightChar? timeset;
+                      if (value != null) {
+                        timeset = Solar.fromDate(value.localSolarTime)
+                            .getLunar()
+                            .getEightChar();
+                        timeset.setSect(1);
+                      }
+                      return Column(
+                        children: [
+                          ListTile(
+                            title: Text("${S.of(context).timesetText}:"),
+                            subtitle: timeset != null
+                                ? TimesetWidget(timeset: timeset)
+                                : const Text(""),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
                 ),
-              ),
-              const Spacer()
-            ],
+                const Spacer()
+              ],
+            ),
           ),
         ));
   }

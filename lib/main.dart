@@ -12,7 +12,6 @@ import 'cycle_hex_decades.dart';
 import 'generated/l10n.dart';
 import 'home.dart';
 import 'life_place.dart';
-import 'provider/theme_settings.dart';
 import 'settings.dart';
 import 'shared/const/app_color.dart';
 import 'shared/controllers/theme_controller.dart';
