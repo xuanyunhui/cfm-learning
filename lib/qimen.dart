@@ -25,9 +25,9 @@ const String DATE_FORMAT = 'yyyy-MM-dd,H时:m分';
 
 class _QiMenContentState extends State<QiMenContent>
     with SingleTickerProviderStateMixin {
-  TextEditingController _solarTextEditingController = TextEditingController(),
+  final TextEditingController _solarTextEditingController = TextEditingController(),
       _lunarTextEditingController = TextEditingController();
-  TextEditingController _timesetTextEditingController = TextEditingController();
+  final TextEditingController _timesetTextEditingController = TextEditingController();
 
   TextEditingController dateController = TextEditingController();
   TextEditingController timeController = TextEditingController();
@@ -65,7 +65,6 @@ class _QiMenContentState extends State<QiMenContent>
   @override
   Widget build(BuildContext context) {
     final Locale locale = Localizations.localeOf(context);
-    final String? countryCode = Localizations.localeOf(context).countryCode;
     final String languageCode = Localizations.localeOf(context).languageCode;
 
     return Scaffold(

@@ -41,23 +41,23 @@ dependencies:
   qimen:
     git:
       url: https://github.com/bestheme/qimen-dart.git
-      ref: a375a92d30849209f20e63a27de349be1885b052
+      ref: d1e6558aa609ce1a36542eda2a368dddef7afbef
   timezone: ^0.9.1
   geolocator: ^9.0.2
   flutter_native_timezone: ^2.0.0
   provider: ^6.0.5
   shared_preferences: ^2.1.0
   dynamic_color: ^1.6.3
-  go_router: ^6.5.5
+  go_router: ^7.0.1
   url_strategy: ^0.2.0
   tuple: ^2.0.1
   flex_color_scheme: ^7.0.1
-  package_info_plus: ^3.1.0
+  package_info_plus: ^4.0.0
   google_fonts: ^4.0.3
   url_launcher: ^6.1.10
-  screenshot: ^1.3.0
+  screenshot: ^2.1.0
   path_provider: ^2.0.14
-  share_plus: ^6.3.2
+  share_plus: ^7.0.0
   cross_file: ^0.3.3+4
 
 dev_dependencies:

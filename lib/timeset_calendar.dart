@@ -4,11 +4,8 @@ import 'package:lunar/lunar.dart';
 import 'package:provider/provider.dart';
 
 import 'data/icon_data.dart';
-import 'drawerbuilder.dart';
 import 'generated/l10n.dart';
 import 'models/exam.dart';
-import 'qimen.dart';
-import 'extensions/datetime_extensions.dart';
 
 class TimesetCalendar extends StatefulWidget {
   const TimesetCalendar({super.key});
@@ -242,7 +239,8 @@ class _TimesetCalendarState extends State<TimesetCalendar> {
                         timeset!.yearStem + timeset.yearRoot,
                         timeset.monthStem + timeset.monthRoot,
                         timeset.dayStem + timeset.dayRoot,
-                        timeset.hourStem + timeset.hourRoot);
+                        timeset.hourStem + timeset.hourRoot,
+                        sect: 1);
                     // if (solar != null) {
                     //   lunar = Solar.fromDate(value.localSolarTime).getLunar();
                     // }

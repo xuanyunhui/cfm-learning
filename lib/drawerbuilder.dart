@@ -4,8 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import 'generated/l10n.dart';
-import 'shared/const/app.dart';
-import 'shared/utils/link_text_span.dart';
 import 'shared/widgets/app/about.dart';
 
 class NavigationDrawerBuilder extends StatelessWidget {

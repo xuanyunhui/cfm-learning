@@ -76,7 +76,7 @@ class MyApp extends StatelessWidget {
                   parentNavigatorKey: _rootNavigatorKey,
                   path: 'qimen/:date',
                   builder: (BuildContext context, GoRouterState state) {
-                    final DateTime date = DateTime.parse(state.params['date']!);
+                    final DateTime date = DateTime.parse(state.pathParameters['date']!);
                     return QiMenContent(date: date);
                   },
                 ),

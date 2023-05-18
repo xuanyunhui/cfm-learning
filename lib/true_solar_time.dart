@@ -87,7 +87,6 @@ class _SolarTimeState extends State<SolarTimeScreen> {
   Widget build(BuildContext context) {
     final ColorScheme colors = Theme.of(context).colorScheme;
     final Locale locale = Localizations.localeOf(context);
-    final String? countryCode = Localizations.localeOf(context).countryCode;
     final String languageCode = Localizations.localeOf(context).languageCode;
 
     final List<DropdownMenuItem<Location>> locations =
