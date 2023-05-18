@@ -151,7 +151,7 @@ class NavigationDrawerBuilder extends StatelessWidget {
               //       if (Scaffold.of(context).isDrawerOpen) {
               //         Navigator.pop(context);
               //       }
-              //       context.go('/solartime');
+              //       context.go('/person');
               //     }),
               // const Divider(),
               // ListTile(

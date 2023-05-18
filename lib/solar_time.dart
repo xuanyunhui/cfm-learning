@@ -4,8 +4,6 @@ import 'package:timezone/timezone.dart';
 class SolarTime {
   static const double degreeInMicroseconds = 4 * 60 * 1000000;
 
-  static const Duration dayLightSavingTimeOffset = Duration(hours: -1);
-
   final TZDateTime _date;
 
   /// The latitude of this position in degrees normalized to the interval -90.0

@@ -12,6 +12,7 @@ import 'cycle_hex_decades.dart';
 import 'generated/l10n.dart';
 import 'home.dart';
 import 'life_place.dart';
+import 'screens/person_edit.dart';
 import 'settings.dart';
 import 'shared/const/app_color.dart';
 import 'shared/controllers/theme_controller.dart';
@@ -65,13 +66,15 @@ class MyApp extends StatelessWidget {
               },
               routes: <RouteBase>[
                 GoRoute(
-                    parentNavigatorKey: _rootNavigatorKey,
-                    path: 'settings',
-                    builder: (context, state) => const Settings()),
+                  parentNavigatorKey: _rootNavigatorKey,
+                  path: 'settings',
+                  builder: (context, state) => const Settings(),
+                ),
                 GoRoute(
-                    parentNavigatorKey: _rootNavigatorKey,
-                    path: 'cyclehexdecades',
-                    builder: (context, state) => const CycleHexDecades()),
+                  parentNavigatorKey: _rootNavigatorKey,
+                  path: 'cyclehexdecades',
+                  builder: (context, state) => const CycleHexDecades(),
+                ),
                 GoRoute(
                   parentNavigatorKey: _rootNavigatorKey,
                   path: 'qimen/:date',
@@ -80,6 +83,11 @@ class MyApp extends StatelessWidget {
                     return QiMenContent(date: date);
                   },
                 ),
+                GoRoute(
+                  parentNavigatorKey: _rootNavigatorKey,
+                  path: 'person',
+                  builder: (context, state) => const PersonEditor(),
+                )
               ],
             ),
             GoRoute(
@@ -117,28 +125,31 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider<SelectedIndex>(
               create: (context) => SelectedIndex()),
         ],
-        child: Selector<ThemeController, Tuple3<ThemeData, ThemeData,ThemeMode>>(
-            selector: (context, controller) =>
-                Tuple3(
-                  BuildThemeData.light(AppColor.customSchemes[controller.schemeIndex].light,),
-                  BuildThemeData.dark(AppColor.customSchemes[controller.schemeIndex].dark),
-                  controller.themeMode),
-            builder: (context, theme, child) {
-              return MaterialApp.router(
-                routerConfig: _router,
-                localizationsDelegates: const [
-                  S.delegate,
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
-                ],
-                supportedLocales: S.delegate.supportedLocales,
-                title: '晨植五行学习工具',
-                theme: theme.item1,
-                darkTheme: theme.item2,
-                themeMode: theme.item3,
-              );
-            }));
+        child:
+            Selector<ThemeController, Tuple3<ThemeData, ThemeData, ThemeMode>>(
+                selector: (context, controller) => Tuple3(
+                    BuildThemeData.light(
+                      AppColor.customSchemes[controller.schemeIndex].light,
+                    ),
+                    BuildThemeData.dark(
+                        AppColor.customSchemes[controller.schemeIndex].dark),
+                    controller.themeMode),
+                builder: (context, theme, child) {
+                  return MaterialApp.router(
+                    routerConfig: _router,
+                    localizationsDelegates: const [
+                      S.delegate,
+                      GlobalMaterialLocalizations.delegate,
+                      GlobalWidgetsLocalizations.delegate,
+                      GlobalCupertinoLocalizations.delegate,
+                    ],
+                    supportedLocales: S.delegate.supportedLocales,
+                    title: '晨植五行学习工具',
+                    theme: theme.item1,
+                    darkTheme: theme.item2,
+                    themeMode: theme.item3,
+                  );
+                }));
   }
 }
 
