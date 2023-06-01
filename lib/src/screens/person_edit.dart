@@ -9,7 +9,7 @@ class PersonEditor extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Person Editor'),
       ),
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
         child: ListBody(children: <Widget>[
           Placeholder(),
           Placeholder(),

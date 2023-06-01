@@ -1,3 +1,4 @@
+import 'package:cross_file/cross_file.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -5,7 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:lunar/lunar.dart';
 import 'package:qimen/qimen.dart';
 import 'package:screenshot/screenshot.dart';
-import 'package:share_plus/share_plus.dart';
+import 'package:share_plus/share_plus.dart' show Share;
 
 import 'extensions/datetime_extensions.dart';
 import '../generated/l10n.dart';
@@ -259,7 +260,7 @@ class _QiMenContentState extends State<QiMenContent>
 
   Widget magicSquareUnit(BuildContext context, int palace) {
     TextStyle? boxTextStyle = Theme.of(context).textTheme.bodyLarge;
-    const palaceName = ["坎1", "坤2", "震3", "巽4", "中5", "乾6", "兑7", "艮8", "离9"];
+    const palaceName = ["☵坎", "☷坤", "☳震", "☴巽", "中宫", "☰乾", "☱兑", "☶艮8", "☲离"];
 
     return Card(
       margin: EdgeInsets.zero,

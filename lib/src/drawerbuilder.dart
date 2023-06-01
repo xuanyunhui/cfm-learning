@@ -82,8 +82,8 @@ class NavigationDrawerBuilder extends StatelessWidget {
               top: 24 + MediaQuery.of(context).padding.top,
               bottom: 24,
             ),
-            child: Column(
-              children: const [
+            child: const Column(
+              children: [
                 CircleAvatar(
                   radius: 52,
                   backgroundImage: NetworkImage(
