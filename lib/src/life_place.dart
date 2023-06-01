@@ -1,16 +1,18 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:lunar/calendar/util/LunarUtil.dart';
 
-import 'generated/l10n.dart';
+import 'drawerbuilder.dart';
+import '../generated/l10n.dart';
 
-class CycleHexDecades extends StatefulWidget {
-  const CycleHexDecades({super.key});
+class Palace extends StatefulWidget {
+  const Palace({super.key});
 
   @override
-  State<CycleHexDecades> createState() => _CycleHexDecades();
+  State<Palace> createState() => _PalaceState();
 }
 
-class _CycleHexDecades extends State<CycleHexDecades> {
+class _PalaceState extends State<Palace> {
   final TextEditingController palaceController = TextEditingController();
 
   SelectedNotifier selected = SelectedNotifier();
@@ -42,10 +44,10 @@ class _CycleHexDecades extends State<CycleHexDecades> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(S.of(context).cycleTitle),
+        title: Text(S.of(context).lifePalaceTitle),
         centerTitle: true,
       ),
-      // drawer: const NavigationDrawerBuilder(),
+      drawer: const NavigationDrawerBuilder(),
       body: SafeArea(
           child: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -91,7 +93,7 @@ class _CycleHexDecades extends State<CycleHexDecades> {
                             return TextField(
                               readOnly: true,
                               decoration: InputDecoration(
-                                labelText: getCycleIndex(stem!, root!),
+                                labelText: getPalace(stem!, root!),
                                 border: const OutlineInputBorder(),
                                 constraints:
                                     const BoxConstraints(maxWidth: 100),
@@ -103,25 +105,102 @@ class _CycleHexDecades extends State<CycleHexDecades> {
               ],
             ),
             const SizedBox(height: 12),
-            // FilledButton(
-            //   onPressed: () {
-            //     setState(() {
-            //     });
-            //   },
-            //    child: const Text('刷新题目')
-            // ),
-            // training(result),
+            FilledButton(
+              onPressed: () {
+                setState(() {
+                });
+              },
+               child: Text(S.of(context).refreshQuestion)
+            ),
+            training(result),
           ],
         ),
       )),
     );
   }
 
-  String getCycleIndex(StemLabel stem, RootLabel root) {
-    int index = LunarUtil.JIA_ZI.indexOf('${stem.label}${root.label}');
-    return (index + 1).toString();
+  String getPalace(StemLabel stem, RootLabel root) {
+    int? offset = stem.offset;
+    int index = offset + (stem.index % 2 == 0 ? root.index : -root.index);
+    if (index >= 12) {
+      index -= 12;
+    }
+    if (index < 0) {
+      index += 12;
+    }
+    return PalaceLabel.values[index].label;
   }
 
+  Widget training(result) {
+    var rng = Random();
+    final entries = []; // List<Map<String, dynamic>>();
+    for (int i = 0; i < 5; ++i) {
+      entries.add({
+        'stem': StemLabel.values[rng.nextInt(10)],
+        'root': RootLabel.values[rng.nextInt(10)],
+        'result': ResultNotifier(),
+      });
+    }
+    final List<DropdownMenuItem<PalaceLabel>> palaceEntries =
+        <DropdownMenuItem<PalaceLabel>>[];
+    for (final PalaceLabel palace in PalaceLabel.values) {
+      palaceEntries.add(DropdownMenuItem<PalaceLabel>(
+          value: palace, child: Text(palace.label)));
+    }
+
+    return Column(children: [
+      for (final entry in entries)
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text('${entry['stem'].label} ${entry['root'].label}'),
+              const SizedBox(width: 8),
+              DropdownButtonFormField<PalaceLabel>(
+                // controller: pala,
+                // enableFilter: true,
+                // leadingIcon: const Icon(Icons.search),
+                value: null,
+                items: palaceEntries,
+                // inputDecorationTheme:
+                //     const InputDecorationTheme(filled: true),
+                onChanged: (PalaceLabel? palace) {
+                  // setState(() {
+                  entry['result'].result.value = verify(entry, palace);
+                  // });
+                },
+                decoration: InputDecoration(
+                  labelText: S.of(context).lifePalace,
+                  border: const OutlineInputBorder(),
+                  constraints: const BoxConstraints(maxWidth: 100),
+                  isDense: true
+                ),
+              ),
+              ValueListenableBuilder<bool?>(
+                  valueListenable: entry['result'].result,
+                  builder: (context, result, _) {
+                    return result != null
+                        ? result
+                            ? const Icon(Icons.check, color: Colors.green)
+                            : const Icon(Icons.close, color: Colors.red)
+                        : const SizedBox(width: 24);
+                  }),
+            ],
+          ),
+        )
+    ]);
+  }
+
+  bool verify(entry, PalaceLabel? palace) {
+    String target = palace!.label.toString();
+    String src = getPalace(entry['stem'], entry['root']);
+    if (target == src) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
 
 enum StemLabel {
@@ -159,6 +238,24 @@ enum RootLabel {
   const RootLabel(this.label, this.rootIndex);
   final String label;
   final int rootIndex;
+}
+
+enum PalaceLabel {
+  newborn('长生'),
+  baptize('沐浴'),
+  dressup('冠带'),
+  takeoffice('临官'),
+  tiptop('帝旺'),
+  recess('衰'),
+  sick('病'),
+  dead('死'),
+  tomb('墓'),
+  extingnished('绝'),
+  conceive('胎'),
+  incubate('养');
+
+  const PalaceLabel(this.label);
+  final String label;
 }
 
 class ResultNotifier with ChangeNotifier {

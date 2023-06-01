@@ -1,9 +1,9 @@
-import 'package:cfm_learning/provider/selected_index.dart';
+import 'package:cfm_learning/src/provider/selected_index.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import 'generated/l10n.dart';
+import '../generated/l10n.dart';
 import 'shared/widgets/app/about.dart';
 
 class NavigationDrawerBuilder extends StatelessWidget {

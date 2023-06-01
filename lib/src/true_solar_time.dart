@@ -15,7 +15,7 @@ import 'package:timezone/timezone.dart';
 
 import 'data/icon_data.dart';
 import 'extensions/datetime_extensions.dart';
-import 'generated/l10n.dart';
+import '../generated/l10n.dart';
 import 'timeset_widget.dart';
 import 'drawerbuilder.dart';
 import 'solar_time.dart';

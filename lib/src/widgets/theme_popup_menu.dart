@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../shared/const/app_color.dart';
+import '../shared/const/app_color.dart';
 
 // Widget used to change the used AppColor.customSchemes[index] in example 4.
 class ThemePopupMenu extends StatelessWidget {

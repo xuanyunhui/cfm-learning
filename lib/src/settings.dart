@@ -1,9 +1,9 @@
-import 'package:cfm_learning/provider/theme_settings.dart';
+import 'package:cfm_learning/src/provider/theme_settings.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'generated/l10n.dart';
+import '../generated/l10n.dart';
 import 'screens/theme_setting_screen.dart';
 
 class Settings extends StatefulWidget {

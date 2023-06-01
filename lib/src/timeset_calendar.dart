@@ -4,7 +4,7 @@ import 'package:lunar/lunar.dart';
 import 'package:provider/provider.dart';
 
 import 'data/icon_data.dart';
-import 'generated/l10n.dart';
+import '../generated/l10n.dart';
 import 'models/exam.dart';
 
 class TimesetCalendar extends StatefulWidget {

@@ -1,6 +1,6 @@
-import 'package:cfm_learning/provider/selected_index.dart';
-import 'package:cfm_learning/screens/theme_setting_screen.dart';
-import 'package:cfm_learning/shared/services/theme_service_prefs.dart';
+import 'package:cfm_learning/src/provider/selected_index.dart';
+import 'package:cfm_learning/src/screens/theme_setting_screen.dart';
+import 'package:cfm_learning/src/shared/services/theme_service_prefs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -8,18 +8,18 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 
-import 'cycle_hex_decades.dart';
+import 'src/cycle_hex_decades.dart';
 import 'generated/l10n.dart';
-import 'home.dart';
-import 'life_place.dart';
-import 'screens/person_edit.dart';
-import 'settings.dart';
-import 'shared/const/app_color.dart';
-import 'shared/controllers/theme_controller.dart';
-import 'shared/services/theme_service.dart';
-import 'true_solar_time.dart';
-import 'timeset_calendar.dart';
-import 'qimen.dart';
+import 'src/home.dart';
+import 'src/life_place.dart';
+import 'src/screens/person_edit.dart';
+import 'src/settings.dart';
+import 'src/shared/const/app_color.dart';
+import 'src/shared/controllers/theme_controller.dart';
+import 'src/shared/services/theme_service.dart';
+import 'src/true_solar_time.dart';
+import 'src/timeset_calendar.dart';
+import 'src/qimen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
