@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:cross_file/cross_file.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:geolocator/geolocator.dart';
@@ -7,7 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:lunar/lunar.dart';
 import 'package:screenshot/screenshot.dart';
-import 'package:share_plus/share_plus.dart';
+import 'package:share_plus/share_plus.dart' show Share;
 import 'package:timezone/data/latest.dart';
 
 import 'package:timezone/timezone.dart';
