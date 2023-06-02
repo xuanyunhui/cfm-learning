@@ -111,57 +111,56 @@ flutter:
     - family: BabelStone
       fonts:
         - asset: assets/fonts/BabelStoneShuishuWSF.ttf
-    - family: Mojikyo
-      fonts:
-        - asset: assets/fonts/mojikyo/Mojikm01.TTF
-        - asset: assets/fonts/mojikyo/Mojikm02.TTF
-        - asset: assets/fonts/mojikyo/Mojikm03.TTF
-        - asset: assets/fonts/mojikyo/Mojikm04.TTF
-        - asset: assets/fonts/mojikyo/Mojikm05.TTF
-        - asset: assets/fonts/mojikyo/Mojikm06.TTF
-        - asset: assets/fonts/mojikyo/Mojikm07.TTF
-        - asset: assets/fonts/mojikyo/Mojikm08.TTF
-        - asset: assets/fonts/mojikyo/Mojikm09.TTF
-        - asset: assets/fonts/mojikyo/Mojikm0A.TTF
-        - asset: assets/fonts/mojikyo/Mojikm0B.TTF
-        - asset: assets/fonts/mojikyo/Mojikm0C.TTF
-        - asset: assets/fonts/mojikyo/Mojikm0D.TTF
-        - asset: assets/fonts/mojikyo/Mojikm0E.TTF
-        - asset: assets/fonts/mojikyo/Mojikm0F.TTF
-        - asset: assets/fonts/mojikyo/Mojikm10.TTF
-        - asset: assets/fonts/mojikyo/Mojikm11.TTF
-        - asset: assets/fonts/mojikyo/Mojikm12.TTF
-        - asset: assets/fonts/mojikyo/Mojikm13.TTF
-        - asset: assets/fonts/mojikyo/Mojikm14.TTF
-        - asset: assets/fonts/mojikyo/Mojikm15.TTF
-        - asset: assets/fonts/mojikyo/Mojikm21.TTF
-        - asset: assets/fonts/mojikyo/Mojikm22.TTF
-        - asset: assets/fonts/mojikyo/Mojikm23.TTF
-        - asset: assets/fonts/mojikyo/Mojikm24.TTF
-        - asset: assets/fonts/mojikyo/Mojikm25.TTF
-        - asset: assets/fonts/mojikyo/Mojikm26.TTF
-        - asset: assets/fonts/mojikyo/Mojikm27.TTF
-        - asset: assets/fonts/mojikyo/Mojikm28.TTF
-        - asset: assets/fonts/mojikyo/Mojikm29.TTF
-        - asset: assets/fonts/mojikyo/Mojikm2A.TTF
-        - asset: assets/fonts/mojikyo/Mojikm56.TTF
-        - asset: assets/fonts/mojikyo/Mojikm57.TTF
-        - asset: assets/fonts/mojikyo/Mojikm58.TTF
-        - asset: assets/fonts/mojikyo/Mojikm59.TTF
-        - asset: assets/fonts/mojikyo/Mojikm5A.TTF
-        - asset: assets/fonts/mojikyo/Mojikm5B.TTF
-        - asset: assets/fonts/mojikyo/Mojikm5C.TTF
-        - asset: assets/fonts/mojikyo/Mojikm5D.TTF
-        - asset: assets/fonts/mojikyo/Mojikm5E.TTF
-        - asset: assets/fonts/mojikyo/Mojikm5F.TTF
-        - asset: assets/fonts/mojikyo/Mojikm60.TTF
-        - asset: assets/fonts/mojikyo/Mojikm61.TTF
-        - asset: assets/fonts/mojikyo/Mojikm62.TTF
-        - asset: assets/fonts/mojikyo/Mojikm63.TTF
-        - asset: assets/fonts/mojikyo/Mojikm64.TTF
-        - asset: assets/fonts/mojikyo/Mojikm65.TTF
-        - asset: assets/fonts/mojikyo/Mojikm66.TTF
-        - asset: assets/fonts/mojikyo/Mojikm67.TTF
-
+    # - family: Mojikyo
+    #   fonts:
+    #     - asset: assets/fonts/mojikyo/Mojikm01.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm02.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm03.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm04.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm05.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm06.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm07.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm08.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm09.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm0A.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm0B.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm0C.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm0D.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm0E.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm0F.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm10.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm11.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm12.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm13.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm14.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm15.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm21.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm22.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm23.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm24.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm25.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm26.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm27.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm28.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm29.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm2A.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm56.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm57.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm58.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm59.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm5A.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm5B.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm5C.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm5D.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm5E.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm5F.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm60.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm61.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm62.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm63.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm64.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm65.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm66.TTF
+    #     - asset: assets/fonts/mojikyo/Mojikm67.TTF
 flutter_intl:
   enabled: true

@@ -26,9 +26,11 @@ const String DATE_FORMAT = 'yyyy-MM-dd,H时:m分';
 
 class _QiMenContentState extends State<QiMenContent>
     with SingleTickerProviderStateMixin {
-  final TextEditingController _solarTextEditingController = TextEditingController(),
+  final TextEditingController _solarTextEditingController =
+          TextEditingController(),
       _lunarTextEditingController = TextEditingController();
-  final TextEditingController _timesetTextEditingController = TextEditingController();
+  final TextEditingController _timesetTextEditingController =
+      TextEditingController();
 
   TextEditingController dateController = TextEditingController();
   TextEditingController timeController = TextEditingController();
@@ -76,12 +78,14 @@ class _QiMenContentState extends State<QiMenContent>
             IconButton(
               icon: const Icon(Icons.share),
               onPressed: () async {
-                final Uint8List? imageInUnit8List = await screenshotController.capture();
-                XFile file = XFile.fromData(imageInUnit8List!,name: "image.jpg",mimeType: "image/jpeg");
+                final Uint8List? imageInUnit8List =
+                    await screenshotController.capture();
+                XFile file = XFile.fromData(imageInUnit8List!,
+                    name: "image.jpg", mimeType: "image/jpeg");
                 await Share.shareXFiles([file], text: "奇门排盘");
               },
             ),
-            ],
+          ],
         ),
         body: SingleChildScrollView(
           child: Screenshot(
@@ -108,7 +112,8 @@ class _QiMenContentState extends State<QiMenContent>
                               DateTime? pickedDate = await showDatePicker(
                                   locale: locale,
                                   context: context,
-                                  initialDate: DateTime.parse(solar.toYmd()), //get today's date
+                                  initialDate: DateTime.parse(
+                                      solar.toYmd()), //get today's date
                                   firstDate: DateTime(
                                       1900), //DateTime.now() - not to allow to choose before today.
                                   lastDate: DateTime(2301));
@@ -138,8 +143,7 @@ class _QiMenContentState extends State<QiMenContent>
                               TimeOfDay? pickedTime = await showTimePicker(
                                 context: context,
                                 initialTime: TimeOfDay.fromDateTime(
-                                  DateTime.parse(solar.toYmdHms())
-                                ),
+                                    DateTime.parse(solar.toYmdHms())),
                               );
                               if (pickedTime != null) {
                                 timeController.text =
@@ -278,9 +282,10 @@ class _QiMenContentState extends State<QiMenContent>
                 ),
                 Text(
                   (qimen.jiuxing()[palace] == "天芮")
-                      ? "${qimen.jiuxing()[palace]}-禽"
-                      : qimen.jiuxing()[palace],
-                  style: boxTextStyle,
+                      ? "${jiuXingString(qimen.jiuxing()[palace])}-禽"
+                      : jiuXingString(qimen.jiuxing()[palace]),
+                  style: boxTextStyle?.copyWith(
+                      color: Colors.blueAccent, fontFamily: 'BabelStone'),
                 ),
               ],
             ),
@@ -319,13 +324,13 @@ class _QiMenContentState extends State<QiMenContent>
               children: [
                 Text(
                   (qimen.dipan()[palace] == qimen.dipan()[1])
-                  ? "${qimen.dipan()[palace]}-${qimen.dipan()[4]}"
-                  : qimen.dipan()[palace],
+                      ? "${qimen.dipan()[palace]}-${qimen.dipan()[4]}"
+                      : qimen.dipan()[palace],
                   style: boxTextStyle,
                 ),
                 Text(
                   palaceName[palace],
-                  style: boxTextStyle,
+                  style: boxTextStyle?.copyWith(color: Colors.orangeAccent),
                 ),
               ],
             ),
@@ -333,6 +338,29 @@ class _QiMenContentState extends State<QiMenContent>
         ),
       ),
     );
+  }
+
+  jiuXingString(String jiuxing) {
+    switch (jiuxing) {
+      case "天蓬":
+        return "\uE08F天蓬";
+      case "天芮":
+        return "\uE100天芮";
+      case "天冲":
+        return "\uE1C9天冲";
+      case "天辅":
+        return "\uE04B天辅";
+      case "天禽":
+        return "\uE1C0天禽";
+      case "天心":
+        return "\uE052天心";
+      case "天柱":
+        return "\uE01E天柱";
+      case "天任":
+        return "\uE014天任";
+      case "天英":
+        return "\uE000天英";
+    }
   }
 }
 
