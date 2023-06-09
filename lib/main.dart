@@ -123,7 +123,7 @@ class MyApp extends StatelessWidget {
               builder: (BuildContext context, GoRouterState state) {
                 final Person person = Person(
                     name: '临时局',
-                    gender: state.queryParameters['gender'] != 'false',
+                    gender: true,
                     birthTime: DateTime.now());
                 return ShowTimeset(person: person);
               },

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:lunar/calendar/EightChar.dart';
@@ -62,9 +60,7 @@ class _ShowTimesetState extends State<ShowTimeset> {
         title: Text(S.of(context).timesetTitle),
         actions: [
           IconButton(
-            icon: Platform.isAndroid
-                ? const Icon(Icons.share)
-                : const Icon(Icons.ios_share),
+            icon: const Icon(Icons.ios_share),
             onPressed: () async {
               final Uint8List? imageInUnit8List =
                   await screenshotController.capture();
