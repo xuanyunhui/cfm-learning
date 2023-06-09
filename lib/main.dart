@@ -119,6 +119,16 @@ class MyApp extends StatelessWidget {
               },
             ),
             GoRoute(
+              path: '/timeset',
+              builder: (BuildContext context, GoRouterState state) {
+                final Person person = Person(
+                    name: '临时局',
+                    gender: state.queryParameters['gender'] != 'false',
+                    birthTime: DateTime.now());
+                return ShowTimeset(person: person);
+              },
+            ),
+            GoRoute(
               path: '/lifepalace',
               builder: (BuildContext context, GoRouterState state) {
                 return const Palace();
