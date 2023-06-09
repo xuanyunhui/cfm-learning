@@ -35,6 +35,8 @@
     "dayRootText": "Day Root",
     "hourStemText": "Time Stem",
     "hourRootText": "Time Root",
-    "gongliText": "Date"
-
+    "gongliText": "Date",
+    "summaryText": "Summary",
+    "detilText": "Detail",
+    "timesetTipsText": "【Timesets Tips】"
 }

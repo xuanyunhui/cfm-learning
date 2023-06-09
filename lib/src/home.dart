@@ -47,7 +47,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text('\uE000',
+            Text('\ue0fe',
                 style: TextStyle(fontFamily: 'BabelStone')),
             Text(
                 '${Localizations.of<MaterialLocalizations>(context, MaterialLocalizations)!.formatFullDate(DateTime.now())}.'),

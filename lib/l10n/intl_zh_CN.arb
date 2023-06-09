@@ -35,5 +35,8 @@
     "dayRootText": "日支",
     "hourStemText": "时干",
     "hourRootText": "时支",
-    "gongliText": "公历"
+    "gongliText": "公历",
+    "summaryText": "总览",
+    "detilText": "详细",
+    "timesetTipsText": "【时间局提示】"
 }

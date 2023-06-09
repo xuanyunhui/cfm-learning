@@ -26,16 +26,16 @@ class NavigationDrawerBuilder extends StatelessWidget {
       removeRight: true,
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.618,
-        child: ChangeNotifierProvider<SelectedIndex>(
-            create: (context) => SelectedIndex(),
+        child: ChangeNotifierProvider<SelectedValue<int>>(
+            create: (context) => SelectedValue(0),
             builder: (context, snapshot) {
-              return Consumer<SelectedIndex>(
+              return Consumer<SelectedValue<int>>(
                 builder: (context, selected, child) {
                   return NavigationDrawer(
-                    selectedIndex: selected.index,
+                    selectedIndex: selected.value,
                     onDestinationSelected: (int value) {
                       tapAction(context, value);
-                      selected.index = value;
+                      selected.value = value;
                     },
                     children: <Widget>[
                       const SizedBox(height: 16),

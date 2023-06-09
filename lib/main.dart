@@ -1,5 +1,7 @@
+import 'package:cfm_learning/src/models/person.dart';
 import 'package:cfm_learning/src/provider/selected_index.dart';
 import 'package:cfm_learning/src/screens/theme_setting_screen.dart';
+import 'package:cfm_learning/src/screens/timesets/show_timeset.dart';
 import 'package:cfm_learning/src/shared/services/theme_service_prefs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -79,8 +81,22 @@ class MyApp extends StatelessWidget {
                   parentNavigatorKey: _rootNavigatorKey,
                   path: 'qimen/:date',
                   builder: (BuildContext context, GoRouterState state) {
-                    final DateTime date = DateTime.parse(state.pathParameters['date']!);
+                    final DateTime date =
+                        DateTime.parse(state.pathParameters['date']!);
                     return QiMenContent(date: date);
+                  },
+                ),
+                GoRoute(
+                  parentNavigatorKey: _rootNavigatorKey,
+                  path: 'timeset/:date',
+                  builder: (BuildContext context, GoRouterState state) {
+                    final DateTime date =
+                        DateTime.parse(state.pathParameters['date']!);
+                    final Person person = Person(
+                        name: '临时局',
+                        gender: state.queryParameters['gender'] != 'false',
+                        birthTime: date);
+                    return ShowTimeset(person: person);
                   },
                 ),
                 GoRoute(
@@ -122,8 +138,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
-          ChangeNotifierProvider<SelectedIndex>(
-              create: (context) => SelectedIndex()),
+          ChangeNotifierProvider<SelectedValue<int>>(
+              create: (context) => SelectedValue(0)),
         ],
         child:
             Selector<ThemeController, Tuple3<ThemeData, ThemeData, ThemeMode>>(
@@ -165,18 +181,18 @@ class ScaffoldWithNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future.delayed(Duration.zero, () async {
-      Provider.of<SelectedIndex>(context, listen: false).index =
+      Provider.of<SelectedValue<int>>(context, listen: false).value =
           _calculateSelectedIndex(context);
     });
 
     return Scaffold(
       body: child,
       bottomNavigationBar:
-          Consumer<SelectedIndex>(builder: (context, selected, child) {
+          Consumer<SelectedValue<int>>(builder: (context, selected, child) {
         return NavigationBar(
-          selectedIndex: selected.index,
+          selectedIndex: selected.value,
           onDestinationSelected: (int idx) {
-            selected.index = idx;
+            selected.value = idx;
             _onItemTapped(idx, context);
           },
           destinations: [

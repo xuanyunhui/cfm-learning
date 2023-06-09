@@ -377,6 +377,11 @@ class _SolarTimeState extends State<SolarTimeScreen> {
                       return Column(
                         children: [
                           ListTile(
+                            onTap: () {
+                              context.push(
+                                "/timeset/${value!.localSolarTime.toIso8601String()}",
+                              );
+                            },
                             title: Text("${S.of(context).timesetText}:"),
                             subtitle: timeset != null
                                 ? TimesetWidget(timeset: timeset)

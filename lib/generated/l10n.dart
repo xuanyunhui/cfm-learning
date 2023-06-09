@@ -419,6 +419,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Summary`
+  String get summaryText {
+    return Intl.message(
+      'Summary',
+      name: 'summaryText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Detail`
+  String get detilText {
+    return Intl.message(
+      'Detail',
+      name: 'detilText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `【Timesets Tips】`
+  String get timesetTipsText {
+    return Intl.message(
+      '【Timesets Tips】',
+      name: 'timesetTipsText',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

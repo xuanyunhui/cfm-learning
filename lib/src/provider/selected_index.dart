@@ -1,12 +1,15 @@
-import 'package:flutter/material.dart';
 
-class SelectedIndex extends ChangeNotifier {
-  int _index = 0;
+import 'package:flutter/foundation.dart';
 
-  int get index => _index;
-  
-  set index(int index) {
-    _index = index;
+class SelectedValue<T> extends ChangeNotifier {
+  SelectedValue(this._value);
+
+  T _value;
+
+  T get value => _value;
+
+  set value(T value) {
+    _value = value;
     notifyListeners();
   }
 }

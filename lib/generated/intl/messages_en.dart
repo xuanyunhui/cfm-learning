@@ -30,6 +30,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "date": MessageLookupByLibrary.simpleMessage("Date"),
         "dayRootText": MessageLookupByLibrary.simpleMessage("Day Root"),
         "dayStemText": MessageLookupByLibrary.simpleMessage("Day Stem"),
+        "detilText": MessageLookupByLibrary.simpleMessage("Detail"),
         "equationOfTimeText": MessageLookupByLibrary.simpleMessage("EOT"),
         "geographicalTimeDifferenceText":
             MessageLookupByLibrary.simpleMessage("GTD"),
@@ -57,10 +58,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "solarTimeTitle":
             MessageLookupByLibrary.simpleMessage("TRUE SOLAR TIME"),
         "stem": MessageLookupByLibrary.simpleMessage("Stem"),
+        "summaryText": MessageLookupByLibrary.simpleMessage("Summary"),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "time": MessageLookupByLibrary.simpleMessage("Time"),
         "timeZoneLabel": MessageLookupByLibrary.simpleMessage("Time Zone"),
         "timesetText": MessageLookupByLibrary.simpleMessage("Timeset"),
+        "timesetTipsText":
+            MessageLookupByLibrary.simpleMessage("【Timesets Tips】"),
         "timesetTitle": MessageLookupByLibrary.simpleMessage("STEM AND ROOT"),
         "tooltipGetLocation":
             MessageLookupByLibrary.simpleMessage("Get current location"),
