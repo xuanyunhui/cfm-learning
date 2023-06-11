@@ -425,8 +425,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: d1e6558aa609ce1a36542eda2a368dddef7afbef
-      resolved-ref: d1e6558aa609ce1a36542eda2a368dddef7afbef
+      ref: b78af430e6cd16314976fb259044b0ab60735757
+      resolved-ref: b78af430e6cd16314976fb259044b0ab60735757
       url: "https://github.com/bestheme/qimen-dart.git"
     source: git
     version: "1.0.0"
