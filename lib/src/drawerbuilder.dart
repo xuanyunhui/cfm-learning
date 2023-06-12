@@ -47,10 +47,38 @@ class NavigationDrawerBuilder extends StatelessWidget {
                         ),
                       ),
                       const Divider(),
+                       NavigationDrawerDestination(
+                        icon: const Icon(Icons.timelapse_outlined),
+                        label: Text(
+                          S.of(context).solarTimeTitle,
+                          style: denseBody,
+                        ),
+                      ),
                       NavigationDrawerDestination(
-                        icon: const Icon(Icons.beenhere),
+                        icon: const Icon(Icons.grid_on_outlined),
+                        label: Text(
+                          S.of(context).qimenTitle,
+                          style: denseBody,
+                        ),
+                      ),
+                      NavigationDrawerDestination(
+                        icon: const Icon(Icons.route_outlined),
+                        label: Text(
+                          S.of(context).lifePalaceTitle,
+                          style: denseBody,
+                        ),
+                      ),
+                      NavigationDrawerDestination(
+                        icon: const Icon(Icons.cyclone_outlined),
                         label: Text(
                           S.of(context).cycleTitle,
+                          style: denseBody,
+                        ),
+                      ),
+                      NavigationDrawerDestination(
+                        icon: const Icon(Icons.calendar_today_outlined),
+                        label: Text(
+                          S.of(context).timesetTitle,
                           style: denseBody,
                         ),
                       ),
@@ -113,26 +141,26 @@ class NavigationDrawerBuilder extends StatelessWidget {
                   leading: const Icon(Icons.home_outlined),
                   title: Text(S.of(context).homeTitle),
                   onTap: () => context.go('/')),
-              // const Divider(),
-              // ListTile(
-              //     leading: const Icon(Icons.looks_one),
-              //     title: Text(S.of(context).qimenTitle),
-              //     onTap: () {
-              //       if (Scaffold.of(context).isDrawerOpen) {
-              //         Navigator.pop(context);
-              //       }
-              //       context.go('/qimen');
-              //     }),
-              // const Divider(),
-              // ListTile(
-              //     leading: const Icon(Icons.looks_two),
-              //     title: Text(S.of(context).lifePalaceTitle),
-              //     onTap: () {
-              //       if (Scaffold.of(context).isDrawerOpen) {
-              //         Navigator.pop(context);
-              //       }
-              //       context.go('/lifePalace');
-              //     }),
+              const Divider(),
+              ListTile(
+                  leading: const Icon(Icons.looks_one),
+                  title: Text(S.of(context).qimenTitle),
+                  onTap: () {
+                    if (Scaffold.of(context).isDrawerOpen) {
+                      Navigator.pop(context);
+                    }
+                    context.go('/qimen');
+                  }),
+              const Divider(),
+              ListTile(
+                  leading: const Icon(Icons.looks_two),
+                  title: Text(S.of(context).lifePalaceTitle),
+                  onTap: () {
+                    if (Scaffold.of(context).isDrawerOpen) {
+                      Navigator.pop(context);
+                    }
+                    context.go('/lifePalace');
+                  }),
               const Divider(),
               ListTile(
                   leading: const Icon(Icons.looks_3),
@@ -143,26 +171,26 @@ class NavigationDrawerBuilder extends StatelessWidget {
                     }
                     context.push('/cyclehexdecades');
                   }),
-              // const Divider(),
-              // ListTile(
-              //     leading: const Icon(Icons.looks_4),
-              //     title: Text(S.of(context).solarTimeTitle),
-              //     onTap: () {
-              //       if (Scaffold.of(context).isDrawerOpen) {
-              //         Navigator.pop(context);
-              //       }
-              //       context.go('/person');
-              //     }),
-              // const Divider(),
-              // ListTile(
-              //     leading: const Icon(Icons.looks_5),
-              //     title: Text(S.of(context).timesetTitle),
-              //     onTap: () {
-              //       if (Scaffold.of(context).isDrawerOpen) {
-              //         Navigator.pop(context);
-              //       }
-              //       context.go('/timesetcalendar');
-              //     }),
+              const Divider(),
+              ListTile(
+                  leading: const Icon(Icons.looks_4),
+                  title: Text(S.of(context).solarTimeTitle),
+                  onTap: () {
+                    if (Scaffold.of(context).isDrawerOpen) {
+                      Navigator.pop(context);
+                    }
+                    context.go('/person');
+                  }),
+              const Divider(),
+              ListTile(
+                  leading: const Icon(Icons.looks_5),
+                  title: Text(S.of(context).timesetTitle),
+                  onTap: () {
+                    if (Scaffold.of(context).isDrawerOpen) {
+                      Navigator.pop(context);
+                    }
+                    context.go('/timesetcalendar');
+                  }),
               const Divider(),
               ListTile(
                   leading: const Icon(Icons.settings_outlined),
@@ -204,12 +232,24 @@ class NavigationDrawerBuilder extends StatelessWidget {
         context.go('/');
         break;
       case 1:
-        context.go('/cyclehexdecades');
+        context.go('/solartime');
         break;
       case 2:
-        context.go('/settings');
+        context.go('/qimen');
         break;
       case 3:
+        context.go('/lifePalace');
+        break;
+      case 4:
+        context.go('/cyclehexdecades');
+        break;
+      case 5:
+        context.go('/timesetcalendar');
+        break;
+      case 6:
+        context.go('/settings');
+        break;
+      case 7:
         showAppAboutDialog(context);
     }
   }

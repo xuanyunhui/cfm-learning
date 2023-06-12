@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import 'data/icon_data.dart';
 import '../generated/l10n.dart';
+import 'drawerbuilder.dart';
 import 'models/exam.dart';
 
 class TimesetCalendar extends StatefulWidget {
@@ -67,7 +68,7 @@ class _TimesetCalendarState extends State<TimesetCalendar> {
         title: Text(S.of(context).timesetTitle),
         centerTitle: true,
       ),
-      // drawer: const NavigationDrawerBuilder(),
+      drawer: context.canPop() ? null : const NavigationDrawerBuilder(),
       body: SafeArea(
           child: Padding(
         padding: const EdgeInsets.all(12.0),

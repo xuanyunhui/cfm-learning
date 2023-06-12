@@ -116,7 +116,7 @@ class _SolarTimeState extends State<SolarTimeScreen> {
             ),
             ]
         ),
-        drawer: const NavigationDrawerBuilder(),
+        drawer: context.canPop() ? null : const NavigationDrawerBuilder(),
         floatingActionButton: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.end,

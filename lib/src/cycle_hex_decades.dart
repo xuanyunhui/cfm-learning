@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lunar/calendar/util/LunarUtil.dart';
 
 import '../generated/l10n.dart';
+import 'drawerbuilder.dart';
 
 class CycleHexDecades extends StatefulWidget {
   const CycleHexDecades({super.key});
@@ -45,7 +47,7 @@ class _CycleHexDecades extends State<CycleHexDecades> {
         title: Text(S.of(context).cycleTitle),
         centerTitle: true,
       ),
-      // drawer: const NavigationDrawerBuilder(),
+      drawer: context.canPop() ? null : const NavigationDrawerBuilder(),
       body: SafeArea(
           child: Padding(
         padding: const EdgeInsets.all(12.0),

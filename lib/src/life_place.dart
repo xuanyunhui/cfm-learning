@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import 'drawerbuilder.dart';
 import '../generated/l10n.dart';
@@ -47,7 +48,7 @@ class _PalaceState extends State<Palace> {
         title: Text(S.of(context).lifePalaceTitle),
         centerTitle: true,
       ),
-      drawer: const NavigationDrawerBuilder(),
+      drawer: context.canPop() ? null : const NavigationDrawerBuilder(),
       body: SafeArea(
           child: Padding(
         padding: const EdgeInsets.all(12.0),

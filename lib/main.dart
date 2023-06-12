@@ -52,97 +52,88 @@ class MyApp extends StatelessWidget {
   MyApp({super.key});
 
   final GoRouter _router = GoRouter(
-      navigatorKey: _rootNavigatorKey,
-      initialLocation: '/',
-      routes: <RouteBase>[
-        ShellRoute(
-          navigatorKey: _shellNavigatorKey,
-          builder: (BuildContext context, GoRouterState state, Widget child) {
-            return ScaffoldWithNavBar(child: child);
-          },
-          routes: <RouteBase>[
-            GoRoute(
-              path: '/',
-              builder: (BuildContext context, GoRouterState state) {
-                return const Home();
-              },
-              routes: <RouteBase>[
-                GoRoute(
-                  parentNavigatorKey: _rootNavigatorKey,
-                  path: 'settings',
-                  builder: (context, state) => const Settings(),
-                ),
-                GoRoute(
-                  parentNavigatorKey: _rootNavigatorKey,
-                  path: 'cyclehexdecades',
-                  builder: (context, state) => const CycleHexDecades(),
-                ),
-                GoRoute(
-                  parentNavigatorKey: _rootNavigatorKey,
-                  path: 'qimen/:date',
-                  builder: (BuildContext context, GoRouterState state) {
-                    final DateTime date =
-                        DateTime.parse(state.pathParameters['date']!);
-                    return QiMenContent(date: date);
-                  },
-                ),
-                GoRoute(
-                  parentNavigatorKey: _rootNavigatorKey,
-                  path: 'timeset/:date',
-                  builder: (BuildContext context, GoRouterState state) {
-                    final DateTime date =
-                        DateTime.parse(state.pathParameters['date']!);
-                    final Person person = Person(
-                        name: '临时局',
-                        gender: state.queryParameters['gender'] != 'false',
-                        birthTime: date);
-                    return ShowTimeset(person: person);
-                  },
-                ),
-                GoRoute(
-                  parentNavigatorKey: _rootNavigatorKey,
-                  path: 'person',
-                  builder: (context, state) => const PersonEditor(),
-                )
-              ],
-            ),
-            GoRoute(
-              path: '/solartime',
-              builder: (BuildContext context, GoRouterState state) {
-                return const SolarTimeScreen();
-              },
-            ),
-            GoRoute(
-              path: '/qimen',
-              builder: (BuildContext context, GoRouterState state) {
-                return const QiMenContent();
-              },
-            ),
-            GoRoute(
-              path: '/timeset',
-              builder: (BuildContext context, GoRouterState state) {
-                final Person person = Person(
-                    name: '临时局',
-                    gender: true,
-                    birthTime: DateTime.now());
-                return ShowTimeset(person: person);
-              },
-            ),
-            GoRoute(
-              path: '/lifepalace',
-              builder: (BuildContext context, GoRouterState state) {
-                return const Palace();
-              },
-            ),
-            GoRoute(
-              path: '/timesetcalendar',
-              builder: (BuildContext context, GoRouterState state) {
-                return const TimesetCalendar();
-              },
-            ),
-          ],
-        ),
-      ]);
+    navigatorKey: _rootNavigatorKey,
+    initialLocation: '/',
+    routes: <RouteBase>[
+      GoRoute(
+        path: '/',
+        builder: (BuildContext context, GoRouterState state) {
+          return const Home();
+        },
+        routes: <RouteBase>[
+          GoRoute(
+            parentNavigatorKey: _rootNavigatorKey,
+            path: 'settings',
+            builder: (context, state) => const Settings(),
+          ),
+          GoRoute(
+            parentNavigatorKey: _rootNavigatorKey,
+            path: 'qimen/:date',
+            builder: (BuildContext context, GoRouterState state) {
+              final DateTime date =
+                  DateTime.parse(state.pathParameters['date']!);
+              return QiMenContent(date: date);
+            },
+          ),
+          GoRoute(
+            parentNavigatorKey: _rootNavigatorKey,
+            path: 'timeset/:date',
+            builder: (BuildContext context, GoRouterState state) {
+              final DateTime date =
+                  DateTime.parse(state.pathParameters['date']!);
+              final Person person = Person(
+                  name: '临时局',
+                  gender: state.queryParameters['gender'] != 'false',
+                  birthTime: date);
+              return ShowTimeset(person: person);
+            },
+          ),
+          GoRoute(
+            parentNavigatorKey: _rootNavigatorKey,
+            path: 'person',
+            builder: (context, state) => const PersonEditor(),
+          )
+        ],
+      ),
+      GoRoute(
+        parentNavigatorKey: _rootNavigatorKey,
+        path: '/cyclehexdecades',
+        builder: (context, state) => const CycleHexDecades(),
+      ),
+      GoRoute(
+        path: '/solartime',
+        builder: (BuildContext context, GoRouterState state) {
+          return const SolarTimeScreen();
+        },
+      ),
+      GoRoute(
+        path: '/qimen',
+        builder: (BuildContext context, GoRouterState state) {
+          return const QiMenContent();
+        },
+      ),
+      GoRoute(
+        path: '/timeset',
+        builder: (BuildContext context, GoRouterState state) {
+          final Person person =
+              Person(name: '临时局', gender: true, birthTime: DateTime.now());
+          return ShowTimeset(person: person);
+        },
+      ),
+      GoRoute(
+        path: '/lifepalace',
+        builder: (BuildContext context, GoRouterState state) {
+          return const Palace();
+        },
+      ),
+      GoRoute(
+        path: '/timesetcalendar',
+        builder: (BuildContext context, GoRouterState state) {
+          return const TimesetCalendar();
+        },
+      ),
+    ],
+  );
 
   @override
   Widget build(BuildContext context) {
