@@ -449,6 +449,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Xun Shou`
+  String get SOATDP {
+    return Intl.message(
+      'Xun Shou',
+      name: 'SOATDP',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

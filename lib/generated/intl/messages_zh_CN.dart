@@ -22,6 +22,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "SOATDP": MessageLookupByLibrary.simpleMessage("旬首"),
         "aboutTitle": MessageLookupByLibrary.simpleMessage("关于"),
         "appTitle": MessageLookupByLibrary.simpleMessage("晨植五行学习工具"),
         "calculateButton": MessageLookupByLibrary.simpleMessage("计算"),
