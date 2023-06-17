@@ -252,7 +252,7 @@ class _TimesetCalendarState extends State<TimesetCalendar> {
                         for (final solar in solars)
                           ListTile(
                             leading: Text('${S.of(context).gongliText}:'),
-                            title: Text(solar.toYmdHms()),
+                            title: SelectableText(solar.toYmdHms()),
                             trailing: IconButton(
                               alignment: Alignment.topCenter,
                               padding: EdgeInsets.zero,
