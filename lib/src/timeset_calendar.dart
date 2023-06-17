@@ -1,4 +1,6 @@
+import 'package:cfm_learning/src/extensions/datetime_extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lunar/lunar.dart';
 import 'package:provider/provider.dart';
@@ -282,6 +284,9 @@ class _TimesetCalendarState extends State<TimesetCalendar> {
                                     .withOpacity(0.12),
                               ),
                             ),
+                            onLongPress: () {
+                              Clipboard.setData(ClipboardData(text: solar.getDateTime().toIso8601String()));
+                            },
                           ),
                       ],
                     );
