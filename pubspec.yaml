@@ -41,7 +41,7 @@ dependencies:
   qimen:
     git:
       url: https://github.com/bestheme/qimen-dart.git
-      ref: b78af430e6cd16314976fb259044b0ab60735757
+      ref: e5b452497591eabfbc330dbc7cdd933ec679e0f1
   timezone: ^0.9.1
   geolocator: ^9.0.2
   flutter_native_timezone: ^2.0.0
