@@ -7,17 +7,17 @@ import '../../models/person.dart';
 const bool _debug = !kReleaseMode && true;
 
 class HeaderPanal extends StatefulWidget {
-  HeaderPanal({Key? key, required this.person, required this.lunar})
+  const HeaderPanal({Key? key, required this.person, required this.lunar})
       : super(key: key);
 
   final Person person;
   final Lunar lunar;
 
   @override
-  _HeaderPanelState createState() => _HeaderPanelState();
+  HeaderPanelState createState() => HeaderPanelState();
 }
 
-class _HeaderPanelState extends State<HeaderPanal> {
+class HeaderPanelState extends State<HeaderPanal> {
   String _whichCreate = "乾造";
 
   @override

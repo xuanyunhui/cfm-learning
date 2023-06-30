@@ -7,7 +7,7 @@ import 'package:mongol/mongol.dart' show MongolText;
 import '../../extensions/lunar_util_extensions.dart';
 
 class TimesetDetail extends StatefulWidget {
-  TimesetDetail(
+  const TimesetDetail(
       {Key? key,
       required this.lunar,
       required this.timeset,
@@ -19,10 +19,10 @@ class TimesetDetail extends StatefulWidget {
   final bool gender;
 
   @override
-  _TimesetDetailState createState() => _TimesetDetailState();
+  TimesetDetailState createState() => TimesetDetailState();
 }
 
-class _TimesetDetailState extends State<TimesetDetail> {
+class TimesetDetailState extends State<TimesetDetail> {
   final List<DaYun> _episodes = <DaYun>[];
   int _runningyearindex = 0;
   int _episodeindex = 0;
@@ -47,7 +47,7 @@ class _TimesetDetailState extends State<TimesetDetail> {
   int _getCurrentEpidodeIndex() {
     int index = 1;
     final year = DateTime.now().year;
-    for (var episode in this._getEpisodes()) {
+    for (var episode in _getEpisodes()) {
       if (episode.getStartYear() <= year && year <= episode.getEndYear()) {
         index = episode.getIndex();
       }
@@ -58,7 +58,7 @@ class _TimesetDetailState extends State<TimesetDetail> {
   int _getCurrentRunningYearIndex() {
     int index = 0;
     final year = DateTime.now().year;
-    for (var runningyear in this._runningyears) {
+    for (var runningyear in _runningyears) {
       if (runningyear.getYear() == year) {
         index = runningyear.getIndex();
       }
@@ -94,7 +94,7 @@ class _TimesetDetailState extends State<TimesetDetail> {
   }
 
   bool _isStem(String char) {
-    if (LunarUtil.GAN.indexOf(char) < 0) {
+    if (!LunarUtil.GAN.contains(char)) {
       return false;
     }
     return true;
@@ -134,7 +134,7 @@ class _TimesetDetailState extends State<TimesetDetail> {
                         // style: TextStyle(color: secondaryColor),
                       ),
                       Text(
-                        "${_runningyears[_runningyearindex].getYear().toString()}",
+                        _runningyears[_runningyearindex].getYear().toString(),
                         // style: TextStyle(color: secondaryColor),
                       ),
                     ],
@@ -154,7 +154,7 @@ class _TimesetDetailState extends State<TimesetDetail> {
                       )
                     ],
                   ),
-                  VerticalDivider(
+                  const VerticalDivider(
                     width: 0,
                     thickness: 1,
                   ),
@@ -164,13 +164,13 @@ class _TimesetDetailState extends State<TimesetDetail> {
                       Text("年柱", style: theme.textTheme.bodyMedium),
                       Text(
                         solar.getYear().toString(),
-                        style: TextStyle(
+                        style: const TextStyle(
                             // color: secondaryColor,
                             ),
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 0,
                   ),
                   Column(
@@ -179,13 +179,13 @@ class _TimesetDetailState extends State<TimesetDetail> {
                       Text("月柱", style: theme.textTheme.bodyMedium),
                       Text(
                         solar.getMonth().toString(),
-                        style: TextStyle(
+                        style: const TextStyle(
                             // color: secondaryColor,
                             ),
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 0,
                   ),
                   Column(
@@ -194,13 +194,13 @@ class _TimesetDetailState extends State<TimesetDetail> {
                       Text("日柱", style: theme.textTheme.bodyMedium),
                       Text(
                         solar.getDay().toString(),
-                        style: TextStyle(
+                        style: const TextStyle(
                             // color: secondaryColor,
                             ),
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 0,
                   ),
                   Column(
@@ -209,7 +209,7 @@ class _TimesetDetailState extends State<TimesetDetail> {
                       Text("时柱", style: theme.textTheme.bodyMedium),
                       Text(
                         solar.toHM(),
-                        style: TextStyle(
+                        style: const TextStyle(
                             // color: secondaryColor,
                             ),
                       ),
@@ -289,7 +289,7 @@ class _TimesetDetailState extends State<TimesetDetail> {
                               )
                               .toList(),
                         ),
-                  VerticalDivider(
+                  const VerticalDivider(
                     width: 0,
                     thickness: 1,
                   ),
@@ -526,7 +526,7 @@ class _TimesetDetailState extends State<TimesetDetail> {
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: ListTile(
-              leading: Text(
+              leading: const Text(
                 "大运",
                 // style: TextStyle(color: textColor),
               ),
@@ -538,14 +538,14 @@ class _TimesetDetailState extends State<TimesetDetail> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            '${(spisode.getIndex() == 0) ? spisode.getStartAge().toString() + "-" + spisode.getEndAge().toString() : spisode.getStartAge().toString() + "岁"}',
-                            style: TextStyle(
+                            (spisode.getIndex() == 0) ? "${spisode.getStartAge()}-${spisode.getEndAge()}" : "${spisode.getStartAge()}岁",
+                            style: const TextStyle(
                               fontSize: 10,
                             ),
                           ),
                           Text(
-                            '${(spisode.getIndex() == 0) ? "" : spisode.getStartYear().toString()}',
-                            style: TextStyle(
+                            (spisode.getIndex() == 0) ? "" : spisode.getStartYear().toString(),
+                            style: const TextStyle(
                               fontSize: 10,
                             ),
                           ),
@@ -559,12 +559,12 @@ class _TimesetDetailState extends State<TimesetDetail> {
                                         .withOpacity(0.38)
                                     : Colors.transparent,
                                 borderRadius: BorderRadius.circular(10)),
-                            padding: EdgeInsets.all(3),
+                            padding: const EdgeInsets.all(3),
                             child: InkWell(
                               onTap: () =>
                                   _handleEposodeChange(spisode.getIndex()),
                               child: MongolText(
-                                '${(spisode.getIndex() == 0) ? "小运" : spisode.getGanZhi()}',
+                                (spisode.getIndex() == 0) ? "小运" : spisode.getGanZhi(),
                                 style: TextStyle(
                                     color: (spisode.getIndex() == _episodeindex)
                                         ? Colors.white
@@ -587,7 +587,7 @@ class _TimesetDetailState extends State<TimesetDetail> {
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 8),
             child: ListTile(
-              leading: Text(
+              leading: const Text(
                 "流年",
                 // style: TextStyle(color: textColor),
               ),
@@ -606,11 +606,11 @@ class _TimesetDetailState extends State<TimesetDetail> {
         Card(
           margin: EdgeInsets.zero,
           child: ListTile(
-            leading: Text(
+            leading: const Text(
               '起运时间:',
             ),
             title: Text(
-              '${widget.timeset.getYun(widget.gender ? 1 : 0, 1).getStartSolar().toYmdHms()}',
+              widget.timeset.getYun(widget.gender ? 1 : 0, 1).getStartSolar().toYmdHms(),
             ),
           ),
         ),
@@ -640,7 +640,7 @@ class _TimesetDetailState extends State<TimesetDetail> {
                       : Colors.transparent,
                   borderRadius: BorderRadius.circular(10),
                 ),
-                padding: EdgeInsets.all(3),
+                padding: const EdgeInsets.all(3),
                 alignment: Alignment.center,
                 child: InkWell(
                   onTap: () {
@@ -651,7 +651,7 @@ class _TimesetDetailState extends State<TimesetDetail> {
                     });
                   },
                   child: MongolText(
-                    '${runningyear.getGanZhi()}',
+                    runningyear.getGanZhi(),
                     style: TextStyle(
                         color: (runningyear.getIndex() == _runningyearindex)
                             ? Colors.white
@@ -668,7 +668,7 @@ class _TimesetDetailState extends State<TimesetDetail> {
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Text(
+            const Text(
               '',
               style: TextStyle(
                 fontSize: 10,
@@ -679,9 +679,9 @@ class _TimesetDetailState extends State<TimesetDetail> {
               decoration: BoxDecoration(
                   color: Colors.transparent,
                   borderRadius: BorderRadius.circular(10)),
-              padding: EdgeInsets.all(2),
+              padding: const EdgeInsets.all(2),
               alignment: Alignment.center,
-              child: MongolText(''),
+              child: const MongolText(''),
             ),
           ],
         ),
@@ -703,23 +703,23 @@ class RunningYearText extends StatelessWidget {
     switch (char) {
       case "木":
         {
-          return Color.fromRGBO(107, 172, 68, 1);
+          return const Color.fromRGBO(107, 172, 68, 1);
         }
       case "火":
         {
-          return Color.fromRGBO(217, 2, 28, 1);
+          return const Color.fromRGBO(217, 2, 28, 1);
         }
       case "土":
         {
-          return Color.fromRGBO(138, 88, 27, 1);
+          return const Color.fromRGBO(138, 88, 27, 1);
         }
       case "金":
         {
-          return Color.fromRGBO(219, 131, 59, 1);
+          return const Color.fromRGBO(219, 131, 59, 1);
         }
       case "水":
         {
-          return Color.fromRGBO(0, 0, 176, 1);
+          return const Color.fromRGBO(0, 0, 176, 1);
         }
       default:
         {
@@ -740,7 +740,7 @@ class RunningYearText extends StatelessWidget {
 }
 
 class ChatWithRelatives extends StatelessWidget {
-  ChatWithRelatives({
+  const ChatWithRelatives({
     Key? key,
     required this.char,
     required this.timeset,
@@ -757,23 +757,23 @@ class ChatWithRelatives extends StatelessWidget {
     switch (char) {
       case "木":
         {
-          return Color.fromRGBO(107, 172, 68, 1);
+          return const Color.fromRGBO(107, 172, 68, 1);
         }
       case "火":
         {
-          return Color.fromRGBO(217, 2, 28, 1);
+          return const Color.fromRGBO(217, 2, 28, 1);
         }
       case "土":
         {
-          return Color.fromRGBO(138, 88, 27, 1);
+          return const Color.fromRGBO(138, 88, 27, 1);
         }
       case "金":
         {
-          return Color.fromRGBO(219, 131, 59, 1);
+          return const Color.fromRGBO(219, 131, 59, 1);
         }
       case "水":
         {
-          return Color.fromRGBO(0, 0, 176, 1);
+          return const Color.fromRGBO(0, 0, 176, 1);
         }
       default:
         {
@@ -823,7 +823,7 @@ class ChatWithRelatives extends StatelessWidget {
                           ? LunarUtil.WU_XING_GAN[char]!
                           : LunarUtil.WU_XING_ZHI[char]!),
                     ))
-                : Text(" "),
+                : const Text(" "),
             Text(
               char,
               style: TextStyle(
@@ -843,7 +843,7 @@ class ChatWithRelatives extends StatelessWidget {
                           ? LunarUtil.WU_XING_GAN[char]!
                           : LunarUtil.WU_XING_ZHI[char]!),
                     ))
-                : Text(" "),
+                : const Text(" "),
             (isStem)
                 ? Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -851,7 +851,7 @@ class ChatWithRelatives extends StatelessWidget {
                       Text(
                         LunarUtilExt
                             .SHI_SHEN_GAN_SHORT['${timeset.getDayGan()}$char']!,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 10,
                           // color: buttonColor,
                         ),
@@ -864,7 +864,7 @@ class ChatWithRelatives extends StatelessWidget {
                         .map(
                           (e) => Text(
                             e,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 10,
                               // color: buttonColor,
                             ),

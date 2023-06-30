@@ -18,15 +18,15 @@ import 'timeset_summary.dart';
 // import '../models/tao_of_life.dart';
 
 class ShowTimeset extends StatefulWidget {
-  ShowTimeset({Key? key, required this.person}) : super(key: key);
+  const ShowTimeset({Key? key, required this.person}) : super(key: key);
 
   final Person person;
 
   @override
-  _ShowTimesetState createState() => _ShowTimesetState();
+  ShowTimesetState createState() => ShowTimesetState();
 }
 
-class _ShowTimesetState extends State<ShowTimeset> {
+class ShowTimesetState extends State<ShowTimeset> {
   Solar _getSolar(DateTime date) {
     return Solar.fromDate(date);
   }
@@ -136,7 +136,7 @@ class _ShowTimesetState extends State<ShowTimeset> {
                                         theme.textTheme.titleMedium!.fontSize,
                                   ),
                                 ),
-                                icon: Icon(Icons.details_outlined)),
+                                icon: const Icon(Icons.details_outlined)),
                           ],
                           selected: <DetailType>{selectedType},
                           onSelectionChanged: (Set<DetailType> newSelection) {

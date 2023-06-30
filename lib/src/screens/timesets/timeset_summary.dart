@@ -25,23 +25,23 @@ class TimesetSummary extends StatelessWidget {
     switch (char) {
       case "木":
         {
-          return Color.fromRGBO(107, 172, 68, 1);
+          return const Color.fromRGBO(107, 172, 68, 1);
         }
       case "火":
         {
-          return Color.fromRGBO(217, 2, 28, 1);
+          return const Color.fromRGBO(217, 2, 28, 1);
         }
       case "土":
         {
-          return Color.fromRGBO(138, 88, 27, 1);
+          return const Color.fromRGBO(138, 88, 27, 1);
         }
       case "金":
         {
-          return Color.fromRGBO(219, 131, 59, 1);
+          return const Color.fromRGBO(219, 131, 59, 1);
         }
       case "水":
         {
-          return Color.fromRGBO(0, 0, 176, 1);
+          return const Color.fromRGBO(0, 0, 176, 1);
         }
       default:
         {
@@ -62,7 +62,7 @@ class TimesetSummary extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
@@ -85,33 +85,33 @@ class TimesetSummary extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Text(
+                    const Text(
                       "主星",
                       style: TextStyle(
                           // color: textColor,
                           ),
                     ),
                     Text(
-                      '${timeset.getYearShiShenGan()}',
-                      style: TextStyle(
+                      timeset.getYearShiShenGan(),
+                      style: const TextStyle(
                           // color: secondaryColor,
                           ),
                     ),
                     Text(
-                      '${timeset.getMonthShiShenGan()}',
-                      style: TextStyle(
+                      timeset.getMonthShiShenGan(),
+                      style: const TextStyle(
                           // color: secondaryColor,
                           ),
                     ),
                     Text(
-                      '${timeset.getDayShiShenGan()}',
-                      style: TextStyle(
+                      timeset.getDayShiShenGan(),
+                      style: const TextStyle(
                           // color: secondaryColor,
                           ),
                     ),
                     Text(
-                      '${timeset.getTimeShiShenGan()}',
-                      style: TextStyle(
+                      timeset.getTimeShiShenGan(),
+                      style: const TextStyle(
                           // color: secondaryColor,
                           ),
                     ),
@@ -131,14 +131,14 @@ class TimesetSummary extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Text(
+                    const Text(
                       "天干",
                       style: TextStyle(
                           // color: textColor,
                           ),
                     ),
                     Text(
-                      '${timeset.getYearGan()}',
+                      timeset.getYearGan(),
                       style: TextStyle(
                         fontSize: mainFontSize,
                         fontWeight: mainFontWeight,
@@ -147,7 +147,7 @@ class TimesetSummary extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '${timeset.getMonthGan()}',
+                      timeset.getMonthGan(),
                       style: TextStyle(
                         fontSize: mainFontSize,
                         fontWeight: mainFontWeight,
@@ -156,7 +156,7 @@ class TimesetSummary extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '${timeset.getDayGan()}',
+                      timeset.getDayGan(),
                       style: TextStyle(
                         fontSize: mainFontSize,
                         fontWeight: mainFontWeight,
@@ -165,7 +165,7 @@ class TimesetSummary extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '${timeset.getTimeGan()}',
+                      timeset.getTimeGan(),
                       style: TextStyle(
                         fontSize: mainFontSize,
                         fontWeight: mainFontWeight,
@@ -178,14 +178,14 @@ class TimesetSummary extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Text(
+                    const Text(
                       "地支",
                       style: TextStyle(
                           // color: textColor,
                           ),
                     ),
                     Text(
-                      '${timeset.getYearZhi()}',
+                      timeset.getYearZhi(),
                       style: TextStyle(
                         fontSize: mainFontSize,
                         fontWeight: mainFontWeight,
@@ -194,7 +194,7 @@ class TimesetSummary extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '${timeset.getMonthZhi()}',
+                      timeset.getMonthZhi(),
                       style: TextStyle(
                         fontSize: mainFontSize,
                         fontWeight: mainFontWeight,
@@ -203,7 +203,7 @@ class TimesetSummary extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '${timeset.getDayZhi()}',
+                      timeset.getDayZhi(),
                       style: TextStyle(
                         fontSize: mainFontSize,
                         fontWeight: mainFontWeight,
@@ -212,7 +212,7 @@ class TimesetSummary extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '${timeset.getTimeZhi()}',
+                      timeset.getTimeZhi(),
                       style: TextStyle(
                         fontSize: mainFontSize,
                         fontWeight: mainFontWeight,
@@ -233,7 +233,7 @@ class TimesetSummary extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Text(
+                const Text(
                   "藏干",
                   // style: TextStyle(
                   //   color: textColor,
@@ -244,7 +244,7 @@ class TimesetSummary extends StatelessWidget {
                       .getYearHiddenStems()
                       .map((stem) => Text(
                             '$stem${LunarUtil.WU_XING_GAN[stem]}',
-                            style: TextStyle(
+                            style: const TextStyle(
                                 // color: secondaryColor,
                                 ),
                           ))
@@ -255,7 +255,7 @@ class TimesetSummary extends StatelessWidget {
                       .getMonthHiddenStems()
                       .map((stem) => Text(
                             '$stem${LunarUtil.WU_XING_GAN[stem]}',
-                            style: TextStyle(
+                            style: const TextStyle(
                               // color: secondaryColor,
                             ),
                           ))
@@ -266,7 +266,7 @@ class TimesetSummary extends StatelessWidget {
                       .getDayHiddenStems()
                       .map((stem) => Text(
                             '$stem${LunarUtil.WU_XING_GAN[stem]}',
-                            style: TextStyle(
+                            style: const TextStyle(
                               // color: secondaryColor,
                             ),
                           ))
@@ -277,7 +277,7 @@ class TimesetSummary extends StatelessWidget {
                       .getHourHiddenStems()
                       .map((stem) => Text(
                             '$stem${LunarUtil.WU_XING_GAN[stem]}',
-                            style: TextStyle(
+                            style: const TextStyle(
                               // color: secondaryColor,
                             ),
                           ))
@@ -294,7 +294,7 @@ class TimesetSummary extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Text(
+                const Text(
                   "副星",
                   // style: TextStyle(color: textColor,),
                 ),
@@ -345,7 +345,7 @@ class TimesetSummary extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Text(
+                const Text(
                   "节气",
                   // style: TextStyle(color: textColor),
                 ),

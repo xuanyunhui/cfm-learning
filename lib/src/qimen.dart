@@ -403,7 +403,7 @@ class _QiMenContentState extends State<QiMenContent>
                       ? Row(
                           children: [
                             Text(
-                              qimen.tianpan()[palace],
+                              stemString(qimen.tianpan()[palace]),
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyLarge
@@ -411,7 +411,7 @@ class _QiMenContentState extends State<QiMenContent>
                                     color: colorOfElement(
                                       context,
                                       qimen.tianpan()[palace],
-                                    ),
+                                    ),fontFamily: 'BabelStone'
                                   ),
                             ),
                             Text(
@@ -419,7 +419,7 @@ class _QiMenContentState extends State<QiMenContent>
                               style: Theme.of(context).textTheme.bodyLarge,
                             ),
                             Text(
-                              qimen.dipan()[4],
+                              stemString(qimen.dipan()[4]),
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyLarge
@@ -427,19 +427,19 @@ class _QiMenContentState extends State<QiMenContent>
                                     color: colorOfElement(
                                       context,
                                       qimen.dipan()[4],
-                                    ),
+                                    ),fontFamily: 'BabelStone'
                                   ),
                             )
                           ],
                         )
                       : Text(
-                          qimen.tianpan()[palace],
+                          stemString(qimen.tianpan()[palace]),
                           style:
                               Theme.of(context).textTheme.bodyLarge?.copyWith(
                                     color: colorOfElement(
                                       context,
                                       qimen.tianpan()[palace],
-                                    ),
+                                    ),fontFamily: 'BabelStone'
                                   ),
                         ),
                 Text(
@@ -468,13 +468,13 @@ class _QiMenContentState extends State<QiMenContent>
                     ? Row(
                         children: [
                           Text(
-                            qimen.dipan()[palace],
+                            stemString(qimen.dipan()[palace]),
                             style:
                                 Theme.of(context).textTheme.bodyLarge?.copyWith(
                                       color: colorOfElement(
                                         context,
                                         qimen.dipan()[palace],
-                                      ),
+                                      ),fontFamily: 'BabelStone'
                                     ),
                           ),
                           Text(
@@ -482,24 +482,24 @@ class _QiMenContentState extends State<QiMenContent>
                             style: Theme.of(context).textTheme.bodyLarge,
                           ),
                           Text(
-                            qimen.dipan()[4],
+                            stemString(qimen.dipan()[4]),
                             style:
                                 Theme.of(context).textTheme.bodyLarge?.copyWith(
                                       color: colorOfElement(
                                         context,
                                         qimen.dipan()[4],
-                                      ),
+                                      ),fontFamily: 'BabelStone'
                                     ),
                           )
                         ],
                       )
                     : Text(
-                        qimen.dipan()[palace],
+                        stemString(qimen.dipan()[palace]),
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                               color: colorOfElement(
                                 context,
                                 qimen.dipan()[palace],
-                              ),
+                              ),fontFamily: 'BabelStone'
                             ),
                       ),
                 Text(
@@ -536,6 +536,60 @@ class _QiMenContentState extends State<QiMenContent>
         return "\uE014天任";
       case "天英":
         return "\uE000天英";
+    }
+  }
+
+  stemString(String stem) {
+    switch (stem) {
+      case "甲":
+        return "\uE0FE";
+      case "乙":
+        return "\uE141";
+      case "丙":
+        return "";
+      case "丁":
+        return "\uE1AF";
+      case "戊":
+        return "\uE037";
+      case "己":
+        return "\uE0F7";
+      case "庚":
+        return "\uE16C";
+      case "辛":
+        return "\uE134";
+      case "壬":
+        return "\uE118";
+      case "癸":
+        return "\uE109";
+    }
+  }
+
+  rootString(String root) {
+    switch (root) {
+      case "子":
+        return "\uE0EA";
+      case "丑":
+        return "\uE0E9";
+      case "寅":
+        return "\uE0CF";
+      case "卯":
+        return "\uE032";
+      case "辰":
+        return "\uE0F3";
+      case "巳":
+        return "\uE11E";
+      case "午":
+        return "\uE02E";
+      case "未":
+        return "\uE02B";
+      case "申":
+        return "\uE0F1";
+      case "酉":
+        return "\uE0F8";
+      case "戌":
+        return "\uE028";
+      case "亥":
+        return "\uE0D1";
     }
   }
 }

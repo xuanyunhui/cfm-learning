@@ -8,7 +8,7 @@ class SolarTerms {
   Solar get solar => lunar.getSolar();
 
   Map<String, Solar> currentSolarTerms() {
-    final _terms = this.lunar.getJieQiTable();
+    final _terms = lunar.getJieQiTable();
     final _keys = _terms.keys;
     var _name = "";
     Map<String, Solar> currentRelated = {};
