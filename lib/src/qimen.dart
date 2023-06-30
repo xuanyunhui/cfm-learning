@@ -365,7 +365,7 @@ class _QiMenContentState extends State<QiMenContent>
 
   Widget magicSquareUnit(BuildContext context, int palace) {
     TextStyle? boxTextStyle = Theme.of(context).textTheme.bodyLarge;
-    const palaceName = ["☵坎", "☷坤", "☳震", "☴巽", "中宫", "☰乾", "☱兑", "☶艮8", "☲离"];
+    const palaceName = ["☵", "☷", "☳", "☴", "中宫", "☰", "☱", "☶", "☲"];
 
     return Card(
       margin: EdgeInsets.zero,
@@ -383,7 +383,7 @@ class _QiMenContentState extends State<QiMenContent>
                 ),
                 Text(
                   (qimen.jiuxing()[palace] == "天芮")
-                      ? "${jiuXingString(qimen.jiuxing()[palace])}-禽"
+                      ? "${jiuXingString(qimen.jiuxing()[palace])}-\uE1C0"
                       : jiuXingString(qimen.jiuxing()[palace]),
                   style: boxTextStyle?.copyWith(
                       color: Colors.blueAccent, fontFamily: 'BabelStone'),
@@ -519,23 +519,23 @@ class _QiMenContentState extends State<QiMenContent>
   jiuXingString(String jiuxing) {
     switch (jiuxing) {
       case "天蓬":
-        return "\uE08F天蓬";
+        return "\uE08F";
       case "天芮":
-        return "\uE100天芮";
+        return "\uE100";
       case "天冲":
-        return "\uE1C9天冲";
+        return "\uE1C9";
       case "天辅":
-        return "\uE04B天辅";
+        return "\uE04B";
       case "天禽":
-        return "\uE1C0天禽";
+        return "\uE1C0";
       case "天心":
-        return "\uE052天心";
+        return "\uE052";
       case "天柱":
-        return "\uE01E天柱";
+        return "\uE01E";
       case "天任":
-        return "\uE014天任";
+        return "\uE014";
       case "天英":
-        return "\uE000天英";
+        return "\uE000";
     }
   }
 
